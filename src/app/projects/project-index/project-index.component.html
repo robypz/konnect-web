@@ -10,7 +10,7 @@
       </div>
     </div>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-3 mt-4 md:space-x-4 mb-4">
+  <div class="grid grid-cols-1 md:grid-cols-3 mt-4  mb-4">
     <div>
       <form class="md:max-w-sm mx-auto mb-5 static">
         <div class="relative">
@@ -56,8 +56,7 @@
     <div class="col-span-4">
       showing 12 projects
     </div>
-    <div class="grid grid-cols-2 gap-4 items-center justify-items-end">
-      <!--view options buttoms grid or list-->
+    <!--<div class="grid grid-cols-2 gap-4 items-center justify-items-end">
       <div>
         <button>
           Grid
@@ -68,9 +67,26 @@
           List
         </button>
       </div>
-    </div>
+    </div>-->
+    <ul class="grid grid-cols-2  items-center justify-end">
+      <li>
+        <input type="radio" id="hosting-small" name="hosting" value="hosting-small" class="hidden peer" required />
+        <label for="hosting-small"
+          class="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 dark:peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+          Grid
+        </label>
+      </li>
+      <li>
+        <input type="radio" id="hosting-big" name="hosting" value="hosting-big" class="hidden peer">
+        <label for="hosting-big"
+          class="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 dark:peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+          List
+        </label>
+      </li>
+    </ul>
+
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-3 mt-4">
+  <div class="grid grid-cols-1 md:grid-cols-2 mt-4">
     <app-project></app-project>
   </div>
 </div>
