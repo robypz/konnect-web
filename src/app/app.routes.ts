@@ -5,6 +5,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { EventsComponent } from './events/events.component';
 import { ProjectIndexComponent } from './projects/project-index/project-index.component';
+import { ProjectShowComponent } from './projects/project-show/project-show.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -12,6 +13,7 @@ export const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent,
     children:[
       {path: 'projects', component: ProjectIndexComponent},
+      {path: 'projects/:id', component: ProjectShowComponent},
     ],
   },
 
