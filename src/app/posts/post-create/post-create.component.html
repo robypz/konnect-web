@@ -23,7 +23,7 @@
         <div
           class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
           <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-            Create New Product
+            Create New Post
           </h3>
           <button type="button" (click)="closeModal()"
             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -36,61 +36,58 @@
           </button>
         </div>
         <!-- Modal body -->
-        <form class="p-4 md:p-5">
+        <div class="flex p-4">
+          <div class="me-2">
+            <img class="w-10 h-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+              alt="Rounded avatar">
+          </div>
+          <div>
+            <p class="text-sm">Jhon Doe</p>
+            <p class="text-xs text-gray-400">Position</p>
+          </div>
+        </div>
+        <form class="p-4 md:p-5" enctype="multipart/form-data">
           <div class="grid gap-4 mb-4 grid-cols-2">
             <div class="col-span-2">
-              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project
-                Name</label>
-              <input type="text" name="name" id="name"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="Type project name" required="">
-            </div>
-            <div class="col-span-2">
-              <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Description</label>
               <textarea id="description" rows="4"
                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Write project description here"></textarea>
+                placeholder="Write a post..."></textarea>
             </div>
+          </div>
+          <div class="flex justify-end">
+            <div>
+              <div class="col-span-2 sm:col-span-1">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="media">
 
-            <div class="col-span-2 sm:col-span-1">
-              <label for="category"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
-              <select id="category"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                <option selected="">Select department</option>
-                <option value="TV">TV/Monitors</option>
-                <option value="PC">PC</option>
-                <option value="GA">Gaming/Console</option>
-                <option value="PH">Phones</option>
-              </select>
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                      <path fill-rule="evenodd" d="M19.003 3A2 2 0 0 1 21 5v2h-2V5.414L17.414 7h-2.828l2-2h-2.172l-2 2H9.586l2-2H9.414l-2 2H3V5a2 2 0 0 1 2-2h14.003ZM3 9v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9H3Zm2-2.414L6.586 5H5v1.586Zm4.553 4.52a1 1 0 0 1 1.047.094l4 3a1 1 0 0 1 0 1.6l-4 3A1 1 0 0 1 9 18v-6a1 1 0 0 1 .553-.894Z" clip-rule="evenodd"/>
+                    </svg>
+
+                </label>
+                <input
+                  class="hidden w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                  id="media" type="file" multiple >
+              </div>
             </div>
-            <div class="col-span-2 sm:col-span-1">
-              <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
-              <select id="category"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                <option selected="">Select status</option>
-                <option value="TV">TV/Monitors</option>
-                <option value="PC">PC</option>
-                <option value="GA">Gaming/Console</option>
-                <option value="PH">Phones</option>
-              </select>
-            </div>
-            <div class="col-span-2 sm:col-span-1">
-              <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deadline</label>
-              <input type="date" name="price" id="price"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="$2999" required="">
+            <div>
+              <div class="col-span-2 sm:col-span-1">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="attachments">
+
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8v8a5 5 0 1 0 10 0V6.5a3.5 3.5 0 1 0-7 0V15a2 2 0 0 0 4 0V8"/>
+                    </svg>
+
+                </label>
+                <input
+                  class="hidden w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                  id="attachments" type="file" multiple >
+              </div>
             </div>
           </div>
           <div>
             <button type="submit"
               class="text-white mb-1 w-1/1 inline-flex items-center justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Add new Project
-            </button>
-            <button type="submit"
-              class="text-gray w-1/1 inline-flex items-center justify-center bg-gray-100 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Cancel
+              Publish
             </button>
           </div>
 

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { afterNextRender, Component } from '@angular/core';
+import { Carousel } from 'flowbite';
 
 @Component({
   selector: 'app-post',
@@ -7,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './post.component.scss'
 })
 export class PostComponent {
-
+  carousel : Carousel | null = null;
+  constructor() {
+    afterNextRender(() => {
+      this.carousel = new Carousel(document.getElementById('animation-carousel') as HTMLElement);
+    });
+  }
 }
