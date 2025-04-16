@@ -1,9 +1,10 @@
 import { afterNextRender, Component } from '@angular/core';
 import { Carousel } from 'flowbite';
+import { CommentsComponent } from "../../comments/comments.component";
 
 @Component({
   selector: 'app-post',
-  imports: [],
+  imports: [CommentsComponent],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
 })
