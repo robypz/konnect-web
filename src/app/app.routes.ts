@@ -14,6 +14,7 @@ import { ProjectPostsComponent } from './projects/project-posts/project-posts.co
 import { ProjectTasksComponent } from './projects/project-tasks/project-tasks.component';
 import { ProjectTeamComponent } from './projects/project-team/project-team.component';
 import { ProjectFilesComponent } from './projects/project-files/project-files.component';
+import { MessagesComponent } from './messages/messages.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -29,6 +30,7 @@ export const routes: Routes = [
           {path: 'files', component: ProjectFilesComponent},
         ],
       },
+      {path:'messages', component: MessagesComponent},
     ],
   },
 ];
