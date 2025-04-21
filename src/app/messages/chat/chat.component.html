@@ -1,4 +1,4 @@
-<div class="bg-white shadow-md rounded-md p-4 h-screen overflow-y-auto border border-gray-200 dark:border-gray-700">
+<div class="bg-white shadow-md rounded-md p-4 min-h-[82dvh] overflow-y-auto border border-gray-200 dark:border-gray-700 relative">
   <div class="flex border-b border-gray-200 dark:border-gray-700 pb-4 mb-4">
     <div class="flex w-1/1 items-center p-2 space-x-2 bg-white rounded-md  hover:bg-gray-100 cursor-pointer">
       <img class="w-10 h-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
@@ -9,29 +9,29 @@
       </div>
     </div>
   </div>
-  <div>
+  <div class="overflow-y-scroll h-[65dvh]">
     <app-message></app-message>
   </div>
-  <div class="flex border-t border-gray-200 dark:border-gray-700 pb-4 mt-4 w-full">
-    <form class="flex w-1/1 items-center space-x-1">
-      <div class="flex items-center justify-start w-1/8">
+  <div class="flex border-t border-gray-200 dark:border-gray-700 py-1.5  w-[95%]  absolute bottom-0 left-4 right-0">
+    <form class="flex w-1/1 items-center space-x-3.5">
+      <div class="flex items-center justify-start">
         <button>
           <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8v8a5 5 0 1 0 10 0V6.5a3.5 3.5 0 1 0-7 0V15a2 2 0 0 0 4 0V8"/>
           </svg>
         </button>
       </div>
-      <div class="flex items-center w-5/8">
+      <div class="flex items-center w-1/1">
         <input type="text" placeholder="Type a message" class="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" />
       </div>
-      <div class="flex items-center justify-center w-1/8">
+      <div class="flex items-center justify-center">
         <button>
           <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.99 9H15M8.99 9H9m12 3a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM7 13c0 1 .507 2.397 1.494 3.216a5.5 5.5 0 0 0 7.022 0C16.503 15.397 17 14 17 13c0 0-1.99 1-4.995 1S7 13 7 13Z"/>
           </svg>
         </button>
       </div>
-      <div class="flex items-center w-1/8 justify-end">
+      <div class="flex items-center justify-end">
         <button>
           <svg class="w-6 h-6 rotate-45 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 18-7 3 7-18 7 18-7-3Zm0 0v-5"/>
