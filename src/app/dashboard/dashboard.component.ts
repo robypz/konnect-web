@@ -1,14 +1,43 @@
-import { Component } from '@angular/core';
-import { SidebarComponent } from '../shared/sidebar/sidebar.component';
-import { HeaderComponent } from "../shared/header/header.component";
-import { RouterOutlet } from '@angular/router';
-
+import { afterNextRender, Component } from '@angular/core';
+import { Tabs } from 'flowbite';
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterOutlet,SidebarComponent, HeaderComponent],
+  imports: [],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
 
+  constructor() {
+    afterNextRender(() => {
+      const tabElement = document.getElementById('default-styled-tab') as HTMLElement;
+      const tabElements = [
+        {
+          id: 'profile',
+          triggerEl: document.getElementById('profile-styled-tab') as HTMLElement,
+          targetEl: document.getElementById('styled-profile') as HTMLElement,
+        },
+        {
+          id: 'dashboard',
+          triggerEl: document.getElementById('dashboard-styled-tab') as HTMLElement,
+          targetEl: document.getElementById('styled-dashboard') as HTMLElement,
+        },
+        {
+          id: 'settings',
+          triggerEl: document.getElementById('settings-styled-tab') as HTMLElement,
+          targetEl: document.getElementById('styled-settings') as HTMLElement,
+        },
+        {
+          id: 'contacts',
+          triggerEl: document.getElementById('contacts-styled-tab') as HTMLElement,
+          targetEl: document.getElementById('styled-contacts') as HTMLElement,
+        },
+      ];
+
+      const tab = new Tabs(tabElement, tabElements);
+    }
+    );
+
+
+  }
 }
