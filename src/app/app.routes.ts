@@ -15,12 +15,14 @@ import { ProjectTasksComponent } from './projects/project-tasks/project-tasks.co
 import { ProjectTeamComponent } from './projects/project-team/project-team.component';
 import { ProjectFilesComponent } from './projects/project-files/project-files.component';
 import { MessagesComponent } from './messages/messages.component';
+import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
 
-  {path: 'dashboard', component: DashboardComponent,
+  {path: 'dashboard', component: DashboardLayoutComponent,
     children:[
+      {path: '', component: DashboardComponent},
       {path: 'projects', component: ProjectIndexComponent},
       {path: 'projects/:id', component: ProjectShowComponent,
         children:[
