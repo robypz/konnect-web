@@ -30,7 +30,10 @@ export const routes: Routes = [
           {path: 'files', component: ProjectFilesComponent},
         ],
       },
+
       {path:'messages', component: MessagesComponent},
+      {path: 'task', component: TaskIndexComponent},
+
     ],
   },
 ];
