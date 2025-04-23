@@ -11,6 +11,8 @@ import { ProjectFilesComponent } from './projects/project-files/project-files.co
 import { MessagesComponent } from './messages/messages.component';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { EventIndexComponent } from './events/event-index/event-index.component';
+import { EmployeeIndexComponent } from './employees/employee-index/employee-index.component';
+import { EmployeeShowComponent } from './employees/employee-show/employee-show.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -31,7 +33,9 @@ export const routes: Routes = [
       {path:'messages', component: MessagesComponent},
       {path: 'tasks', component: TaskIndexComponent},
       {path: 'events', component: EventIndexComponent},
-
+      {path: 'employees', component: EmployeeIndexComponent, children:[
+        {path: ':id', component: EmployeeShowComponent},
+      ]},
     ],
   },
 ];
