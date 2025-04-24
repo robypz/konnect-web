@@ -5,15 +5,17 @@
   <button data-modal-target="create-employee-modal" data-modal-toggle="create-employee-modal" (click)="openModal()"
     class="flex justify-center w-full md:w-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
     type="button">
-    <svg class="w-5 h-5 me-3 text-white-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+    <svg class="w-5 h-5 me-3 text-white-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+      width="24" height="24" fill="none" viewBox="0 0 24 24">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
     </svg>
     New Employee
   </button>
 
   <!-- Main modal -->
   <div id="create-employee-modal" tabindex="-1" aria-hidden="true" showing="true"
-    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md max-h-full">
       <!-- Modal content -->
       <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
@@ -34,26 +36,98 @@
           </button>
         </div>
         <!-- Modal body -->
-        <form class="p-4 md:p-5">
+        <form class="p-4 md:p-5" [formGroup]="createEmployeeForm" (ngSubmit)="createEmployee()" enctype="multipart/form-data">
           <div class="grid gap-4 mb-4 grid-cols-2">
             <div class="col-span-2">
-              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project Name</label>
-              <input type="text" name="name" id="name"
+              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+              <input type="text" name="name" id="name" formControlName="name"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="Type project name" required="">
+                placeholder="Jhon" required appForbiddenName="Jhon">
+                @if (createEmployeeForm.get('name')?.invalid && (createEmployeeForm.get('name')?.dirty || createEmployeeForm.get('name')?.touched)) {
+                  <div class="text-red-500 text-sm mt-1">
+                    @if (createEmployeeForm.get('name')?.hasError('required')) {
+                      <div>
+                        Name is required.
+                      </div>
+                    }
+                  </div>
+                }
             </div>
             <div class="col-span-2">
-              <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Description</label>
-              <textarea id="description" rows="4"
-                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Write project description here"></textarea>
+              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
+              <input type="text" name="last_name" id="last_name" formControlName="last_name"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Doe" required="">
+                @if (createEmployeeForm.get('last_name')?.invalid && (createEmployeeForm.get('last_name')?.dirty || createEmployeeForm.get('last_name')?.touched)) {
+                  <div class="text-red-500 text-sm mt-1">
+                    @if (createEmployeeForm.get('last_name')?.hasError('required')) {
+                      <div>
+                        Last Name is required.
+                      </div>
+                    }
+                  </div>
+                }
             </div>
-
-            <div class="col-span-2 sm:col-span-1">
+            <div class="col-span-2">
+              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+              <input type="email" name="email" id="email" formControlName="email" autocomplete="off"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="jhon@domain.com" >
+                @if (createEmployeeForm.get('email')?.invalid && (createEmployeeForm.get('email')?.dirty || createEmployeeForm.get('email')?.touched)) {
+                  <div class="text-red-500 text-sm mt-1">
+                    @if (createEmployeeForm.get('email')?.hasError('required')) {
+                      <div>
+                        Email is required.
+                      </div>
+                    }
+                    @if (createEmployeeForm.get('email')?.hasError('email')) {
+                      <div>
+                        Most be a valid email address.
+                      </div>
+                    }
+                  </div>
+                }
+            </div>
+            <div class="col-span-2">
+              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+              <input type="password" name="password" id="password" formControlName="password"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="********">
+                @if (createEmployeeForm.get('password')?.invalid && (createEmployeeForm.get('password')?.dirty || createEmployeeForm.get('password')?.touched)) {
+                  <div class="text-red-500 text-sm mt-1">
+                    @if (createEmployeeForm.get('password')?.hasError('required')) {
+                      <div>
+                        Password is required.
+                      </div>
+                    }
+                  </div>
+                }
+            </div>
+            <div class="col-span-2">
+              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password
+                Confirmation</label>
+              <input type="password" name="password_confirmation" id="password_confirmation" formControlName="password_confirmation"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="********">
+                @if (createEmployeeForm.get('password_confirmation')?.invalid && (createEmployeeForm.get('password_confirmation')?.dirty || createEmployeeForm.get('password_confirmation')?.touched)) {
+                  <div class="text-red-500 text-sm mt-1">
+                    @if (createEmployeeForm.get('password_confirmation')?.hasError('required')) {
+                      <div>
+                        Password is required.
+                      </div>
+                    }
+                    @if (createEmployeeForm.get('password_confirmation')?.hasError('pattern')) {
+                      <div>
+                        Invalid password. Your password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character (#$%^&+=!).
+                      </div>
+                    }
+                  </div>
+                }
+            </div>
+            <div class="col-span-2">
               <label for="category"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
-              <select id="category"
+              <select id="deparment_id" name="deparment_id" formControlName="deparment_id"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                 <option selected="">Select department</option>
                 <option value="TV">TV/Monitors</option>
@@ -61,44 +135,47 @@
                 <option value="GA">Gaming/Console</option>
                 <option value="PH">Phones</option>
               </select>
+              @if (createEmployeeForm.get('deparment_id')?.invalid && (createEmployeeForm.get('deparment_id')?.dirty || createEmployeeForm.get('deparment_id')?.touched)) {
+                <div class="text-red-500 text-sm mt-1">
+                  @if (createEmployeeForm.get('deparment_id')?.hasError('required')) {
+                    <div>
+                      Department is required.
+                    </div>
+                  }
+                </div>
+              }
             </div>
-            <div class="col-span-2 sm:col-span-1">
-              <label for="category"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
-              <select id="category"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                <option selected="">Select status</option>
-                <option value="TV">TV/Monitors</option>
-                <option value="PC">PC</option>
-                <option value="GA">Gaming/Console</option>
-                <option value="PH">Phones</option>
-              </select>
-            </div>
-            <div class="col-span-2 sm:col-span-1">
-              <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deadline</label>
-              <input type="date" name="price" id="price"
+            <div class="col-span-2">
+              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Job Title</label>
+              <input type="text" name="job" id="job" formControlName="job"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="$2999" required="">
+                placeholder="Project Manager" required="">
+                @if (createEmployeeForm.get('job')?.invalid && (createEmployeeForm.get('job')?.dirty || createEmployeeForm.get('job')?.touched)) {
+                  <div class="text-red-500 text-sm mt-1">
+                    @if (createEmployeeForm.get('job')?.hasError('required')) {
+                      <div>
+                        Job Title is required.
+                      </div>
+                    }
+                  </div>
+                }
             </div>
-            <div class="col-span-2 flex space-x-2 items-center">
-              <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Team</label>
-              <input type="search" name="price" id="price"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="Sarch employees..." required="">
-              <div>
-
-              </div>
+            <div class="col-span-2">
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="small_size">Profile Photo</label>
+              <input
+                class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                id="profile_photo" name="profile_photo" type="file" (change)="profilePhotoUpload($event)">
             </div>
           </div>
           <div>
             <button type="submit"
-            class="text-white mb-1 w-1/1 inline-flex items-center justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Add new Project
-          </button>
-          <button type="submit"
-            class="text-gray w-1/1 inline-flex items-center justify-center bg-gray-100 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Cancel
-          </button>
+              class="text-white mb-1 w-1/1 inline-flex items-center justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              Register
+            </button>
+            <button type="button" (click)="closeModal()"
+              class="text-gray w-1/1 inline-flex items-center justify-center bg-gray-100 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              Cancel
+            </button>
           </div>
 
         </form>

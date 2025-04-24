@@ -2,3 +2,28 @@
 @use "flowbite/src/themes/default";
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
+
+.ng-valid{
+  //@apply border-green-500 bg-green-50 text-green-700;
+}
+.ng-invalid {
+  //@apply border-red-500  text-red-700;
+}
+.ng-pending {
+  //@apply border-yellow-500 bg-yellow-50 text-yellow-700;
+}
+.ng-pristine {
+  //@apply border-gray-300 bg-gray-50 text-gray-700;
+}
+.ng-dirty {
+  //@apply border-blue-500 bg-blue-50 text-blue-700;
+}
+.ng-untouched {
+  //@apply bg-gray-50 border-gray-300 text-gray-900;
+}
+.ng-touched {
+  //@apply border-blue-500 bg-blue-50 text-blue-700;
+}
+.ng-submitted {
+  //@apply border-blue-500 bg-blue-50 text-blue-700;
+}
