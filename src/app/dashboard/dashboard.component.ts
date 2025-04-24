@@ -1,8 +1,12 @@
 import { afterNextRender, Component } from '@angular/core';
 import { Tabs } from 'flowbite';
+import { PostsComponent } from '../posts/posts.component';
+import { ProjectsComponent } from "../projects/projects.component";
+import { TasksComponent } from "../tasks/tasks.component";
+import { EventsComponent } from "../events/events.component";
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  imports: [PostsComponent, ProjectsComponent, TasksComponent, EventsComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
