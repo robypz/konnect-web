@@ -1,6 +1,7 @@
 import { afterNextRender, Component } from '@angular/core';
 import { Modal } from 'flowbite';
-import { EmailValidator, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { matchingPasswordsValidator } from '../../core/validators/passwordConfirmValidator';
 
 @Component({
   selector: 'app-employee-create',
@@ -14,13 +15,13 @@ export class EmployeeCreateComponent {
   createEmployeeForm = new FormGroup({
     name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     last_name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
-    password: new FormControl('', { nonNullable: true, validators: [Validators.required]}),
+    password: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[#@$!%*?&]).*')] }),
     password_confirmation: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     email: new FormControl('',{ nonNullable: true, validators: [Validators.required,Validators.email] }),
     deparment_id: new FormControl('',{ nonNullable: true, validators: [Validators.required] }),
     job: new FormControl('',{ nonNullable: true, validators: [Validators.required] }),
     profile_photo : new FormControl<File|null>(null, { nonNullable: true, validators: [Validators.required] }),
-  });
+  },{ validators: matchingPasswordsValidator });
 
   constructor() {
     afterNextRender(() => {
@@ -47,8 +48,9 @@ export class EmployeeCreateComponent {
       console.log(this.createEmployeeForm.value as FormData);
     }
     else{
-      console.log(this.createEmployeeForm.errors);
+      console.log(this.createEmployeeForm);
     }
 
   }
+
 }

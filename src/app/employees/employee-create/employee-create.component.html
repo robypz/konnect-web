@@ -100,6 +100,16 @@
                         Password is required.
                       </div>
                     }
+                    @if (createEmployeeForm.get('password')?.hasError('minLength')) {
+                      <div>
+                        Your password must be at least 8 characters long.
+                      </div>
+                    }
+                    @if (createEmployeeForm.get('password')?.hasError('pattern')) {
+                      <div>
+                        Invalid password. Your password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character (#$%^&+=!).
+                      </div>
+                    }
                   </div>
                 }
             </div>
@@ -116,9 +126,19 @@
                         Password is required.
                       </div>
                     }
+                    @if (createEmployeeForm.get('password_confirmation')?.hasError('minLength')) {
+                      <div>
+                        Your password must be at least 8 characters long.
+                      </div>
+                    }
                     @if (createEmployeeForm.get('password_confirmation')?.hasError('pattern')) {
                       <div>
                         Invalid password. Your password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character (#$%^&+=!).
+                      </div>
+                    }
+                    @if (createEmployeeForm.hasError('passwordsMismatch')) {
+                      <div>
+                        Passwords do not match.
                       </div>
                     }
                   </div>
