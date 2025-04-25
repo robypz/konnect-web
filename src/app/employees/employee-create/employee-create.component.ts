@@ -6,6 +6,7 @@ import { EmployeeService } from '../shared/employee.service';
 import { Employee } from '../shared/employee.model';
 import { Department } from '../../deparments/shared/department.model';
 import { DepartmentService } from '../../deparments/shared/department.service';
+import { FormGroupToFormDataService } from '../../core/libs/form-group-to-form-data.service';
 
 @Component({
   selector: 'app-employee-create',
@@ -31,7 +32,7 @@ export class EmployeeCreateComponent implements OnInit {
     email: new FormControl('',{ nonNullable: true, validators: [Validators.required,Validators.email] }),
     department_id: new FormControl('',{ nonNullable: true, validators: [Validators.required] }),
     job: new FormControl('',{ nonNullable: true, validators: [Validators.required] }),
-    profile_photo : new FormControl<File|null>(null, { nonNullable: true, validators: [Validators.required] }),
+    profile_photo : new FormControl<File|null>(null),
   },{ validators: matchingPasswordsValidator });
 
   constructor() {
@@ -62,18 +63,13 @@ export class EmployeeCreateComponent implements OnInit {
     this.modal?.hide();
   }
 
-  profilePhotoUpload(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-      this.createEmployeeForm.patchValue({ profile_photo: file });
-    }
+  profilePhotoUpload(event: any) {
+    this.createEmployeeForm.get('profile_photo')?.setValue(event.target.files[0]);
   }
 
   createEmployee(){
     if (this.createEmployeeForm.valid) {
-      this.employeeService.store(this.createEmployeeForm.value as FormData);
-      //console.log(this.createEmployeeForm.value as FormData);
+      this.employeeService.store(FormGroupToFormDataService.convert(this.createEmployeeForm));
     }
   }
 

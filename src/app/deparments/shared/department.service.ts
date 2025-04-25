@@ -8,24 +8,24 @@ import { config } from '../../../../config';
 })
 export class DepartmentService {
   private http = inject(HttpClient);
-  private _deparments = signal<Department[]>([]);
-  private _deparment = signal<Department | null>(null);
+  private _departments = signal<Department[]>([]);
+  private _department = signal<Department | null>(null);
   private apiUrl = config.API_URL+'/departments';
 
   departments() {
-    return this._deparments();
+    return this._departments();
   }
 
   department() {
-    return this._deparment;
+    return this._department;
   }
 
   constructor() { }
 
   index (){
     this.http.get<Department[]>(this.apiUrl).subscribe({
-      next: (deparments) => {
-        this._deparments.set(deparments);
+      next: (departments) => {
+        this._departments.set(departments);
       },
       error: (error) => {
         console.error('Error fetching deparments:', error);
