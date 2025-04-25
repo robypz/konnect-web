@@ -41,6 +41,7 @@ export class EmployeeCreateComponent implements OnInit {
     });
     effect(() => {
       if (this._employee() !== null) {
+        this.employee = this._employee();
         console.log(this.employee);
       }
       if (this._departments().length > 0) {
