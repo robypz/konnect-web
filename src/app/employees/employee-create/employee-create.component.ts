@@ -1,9 +1,11 @@
-import { afterNextRender, Component, computed, effect, inject } from '@angular/core';
+import { afterNextRender, Component, computed, effect, inject, OnInit } from '@angular/core';
 import { Modal } from 'flowbite';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { matchingPasswordsValidator } from '../../core/validators/passwordConfirmValidator';
 import { EmployeeService } from '../shared/employee.service';
 import { Employee } from '../shared/employee.model';
+import { DeparmentService } from '../../deparments/shared/deparment.service';
+import { Deparment } from '../../deparments/shared/deparment.model';
 
 @Component({
   selector: 'app-employee-create',
@@ -11,10 +13,13 @@ import { Employee } from '../shared/employee.model';
   templateUrl: './employee-create.component.html',
   styleUrl: './employee-create.component.scss'
 })
-export class EmployeeCreateComponent {
+export class EmployeeCreateComponent implements OnInit {
   private employeeService = inject(EmployeeService);
+  private deparmentService = inject(DeparmentService);
   private _employee = computed(() => this.employeeService.employee());
-  public employee : Employee |null = null;
+  private _deparments = computed(() => this.deparmentService.deparments());
+  public employee : Employee |null = this._employee();
+  public deparments : Deparment[] = this._deparments();
   modal : Modal | null = null;
 
   createEmployeeForm = new FormGroup({
@@ -34,10 +39,15 @@ export class EmployeeCreateComponent {
     });
     effect(() => {
       if (this._employee() !== null) {
-        this.employee = this._employee();
+        console.log(this.employee);
       }
     });
   }
+
+  ngOnInit(): void {
+    this.deparmentService.index();
+  }
+
   openModal(){
     this.modal?.show();
   }

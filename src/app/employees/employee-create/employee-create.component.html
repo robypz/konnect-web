@@ -148,10 +148,9 @@
               <select id="deparment_id" name="deparment_id" formControlName="deparment_id"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                 <option selected="">Select department</option>
-                <option value="TV">TV/Monitors</option>
-                <option value="PC">PC</option>
-                <option value="GA">Gaming/Console</option>
-                <option value="PH">Phones</option>
+                @for(deparment of deparments; track deparment.id){
+                  <option [value]="deparment.id">{{ deparment.name }}</option>
+                }
               </select>
               @if (createEmployeeForm.get('deparment_id')?.invalid && (createEmployeeForm.get('deparment_id')?.dirty || createEmployeeForm.get('deparment_id')?.touched)) {
                 <div class="text-red-500 text-sm mt-1">
