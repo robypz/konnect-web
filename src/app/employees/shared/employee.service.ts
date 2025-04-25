@@ -10,8 +10,8 @@ export class EmployeeService {
   private http = inject(HttpClient);
   private _employees = signal<Employee[]>([]);
   private _employee = signal<Employee | null>(null);
-  private errors = signal<string[]>([]);
-  private apiUrl = config.API_URL;
+  private _errors = signal<string[]>([]);
+  private apiUrl = config.API_URL+'/employees';
 
   get employees() : Signal<Employee[]> {
     return this._employees;
@@ -21,44 +21,48 @@ export class EmployeeService {
     return this._employee;
   }
 
+  get errors() {
+    return this._errors;
+  }
+
   constructor() { }
 
   index(){
-    this.http.get<Employee[]>(`${this.apiUrl}/employees`).subscribe({
+    this.http.get<Employee[]>(`${this.apiUrl}`).subscribe({
       next: (employees) => {
         this._employees.set(employees);
       },
       error: (error) => {
-        this.errors.set([error]);
+        this._errors.set([error]);
       }
     });
   }
 
   show(id: number){
-    this.http.get<Employee>(`${this.apiUrl}/employees/${id}`).subscribe({
+    this.http.get<Employee>(`${this.apiUrl}/${id}`).subscribe({
       next: (employee) => {
         this._employee.set(employee);
       },
       error: (error) => {
-        this.errors.set([error]);
+        this._errors.set([error]);
       }
     });
   }
 
   store(employee: FormData){
-    this.http.post<Employee>(`${this.apiUrl}/employees`, employee).subscribe({
+    this.http.post<Employee>(`${this.apiUrl}`, employee).subscribe({
       next: (employee) => {
         this._employee.set(employee);
         this._employees.update((employees) => [...employees, employee]);
       },
       error: (error) => {
-        this.errors.set([error]);
+        this._errors.set([error]);
       }
     });
   }
 
   update(employee: Employee){
-    this.http.put<Employee>(`${this.apiUrl}/employees/${employee.id}`, employee).subscribe({
+    this.http.put<Employee>(`${this.apiUrl}/${employee.id}`, employee).subscribe({
       next: (employee) => {
         this._employees.update((employees) => {
           const index = employees.findIndex(e => e.id === employee.id);
@@ -67,13 +71,13 @@ export class EmployeeService {
         });
       },
       error: (error) => {
-        this.errors.set([error]);
+        this._errors.set([error]);
       }
     });
   }
 
   destroy(id: string){
-    this.http.delete<Employee>(`${this.apiUrl}/employees/${id}`).subscribe({
+    this.http.delete<Employee>(`${this.apiUrl}/${id}`).subscribe({
       next: () => {
         this._employees.update((employees) => {
           const index = employees.findIndex(e => e.id === id);
@@ -82,7 +86,7 @@ export class EmployeeService {
         });
       },
       error: (error) => {
-        this.errors.set([error]);
+        this._errors.set([error]);
       }
     });
   }

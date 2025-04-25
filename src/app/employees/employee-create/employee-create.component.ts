@@ -4,8 +4,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { matchingPasswordsValidator } from '../../core/validators/passwordConfirmValidator';
 import { EmployeeService } from '../shared/employee.service';
 import { Employee } from '../shared/employee.model';
-import { DeparmentService } from '../../deparments/shared/deparment.service';
-import { Deparment } from '../../deparments/shared/deparment.model';
+import { Department } from '../../deparments/shared/department.model';
+import { DepartmentService } from '../../deparments/shared/department.service';
 
 @Component({
   selector: 'app-employee-create',
@@ -15,11 +15,12 @@ import { Deparment } from '../../deparments/shared/deparment.model';
 })
 export class EmployeeCreateComponent implements OnInit {
   private employeeService = inject(EmployeeService);
-  private deparmentService = inject(DeparmentService);
+  private departmentService = inject(DepartmentService);
   private _employee = computed(() => this.employeeService.employee());
-  private _deparments = computed(() => this.deparmentService.deparments());
-  public employee : Employee |null = this._employee();
-  public deparments : Deparment[] = this._deparments();
+  private _errors = computed(() => this.employeeService.errors());
+  private _departments = computed(() => this.departmentService.departments());
+  public employee : Employee |null = null;
+  public departments : Department[] = [];
   modal : Modal | null = null;
 
   createEmployeeForm = new FormGroup({
@@ -28,7 +29,7 @@ export class EmployeeCreateComponent implements OnInit {
     password: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[#@$!%*?&]).*')] }),
     password_confirmation: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     email: new FormControl('',{ nonNullable: true, validators: [Validators.required,Validators.email] }),
-    deparment_id: new FormControl('',{ nonNullable: true, validators: [Validators.required] }),
+    department_id: new FormControl('',{ nonNullable: true, validators: [Validators.required] }),
     job: new FormControl('',{ nonNullable: true, validators: [Validators.required] }),
     profile_photo : new FormControl<File|null>(null, { nonNullable: true, validators: [Validators.required] }),
   },{ validators: matchingPasswordsValidator });
@@ -41,11 +42,17 @@ export class EmployeeCreateComponent implements OnInit {
       if (this._employee() !== null) {
         console.log(this.employee);
       }
+      if (this._departments().length > 0) {
+        this.departments = this._departments();
+      }
+      if (this._errors().length > 0) {
+        console.log(this._errors());
+      }
     });
   }
 
   ngOnInit(): void {
-    this.deparmentService.index();
+    this.departmentService.index();
   }
 
   openModal(){
@@ -65,9 +72,9 @@ export class EmployeeCreateComponent implements OnInit {
 
   createEmployee(){
     if (this.createEmployeeForm.valid) {
-      console.log(this.createEmployeeForm.value as FormData);
+      this.employeeService.store(this.createEmployeeForm.value as FormData);
+      //console.log(this.createEmployeeForm.value as FormData);
     }
-
   }
 
 }

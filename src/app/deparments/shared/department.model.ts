@@ -1,4 +1,4 @@
-export interface Deparment {
+export interface Department {
   id: string; // Unique identifier for the department
   name: string; // Name of the department
   description: string; // Description of the department
