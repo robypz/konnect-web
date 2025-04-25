@@ -1,7 +1,9 @@
-import { afterNextRender, Component } from '@angular/core';
+import { afterNextRender, Component, computed, effect, inject } from '@angular/core';
 import { Modal } from 'flowbite';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { matchingPasswordsValidator } from '../../core/validators/passwordConfirmValidator';
+import { EmployeeService } from '../shared/employee.service';
+import { Employee } from '../shared/employee.model';
 
 @Component({
   selector: 'app-employee-create',
@@ -10,6 +12,9 @@ import { matchingPasswordsValidator } from '../../core/validators/passwordConfir
   styleUrl: './employee-create.component.scss'
 })
 export class EmployeeCreateComponent {
+  private employeeService = inject(EmployeeService);
+  private _employee = computed(() => this.employeeService.employee());
+  public employee : Employee |null = null;
   modal : Modal | null = null;
 
   createEmployeeForm = new FormGroup({
@@ -26,6 +31,11 @@ export class EmployeeCreateComponent {
   constructor() {
     afterNextRender(() => {
       this.modal = new Modal(document.getElementById('create-employee-modal') as HTMLElement);
+    });
+    effect(() => {
+      if (this._employee() !== null) {
+        this.employee = this._employee();
+      }
     });
   }
   openModal(){
@@ -46,9 +56,6 @@ export class EmployeeCreateComponent {
   createEmployee(){
     if (this.createEmployeeForm.valid) {
       console.log(this.createEmployeeForm.value as FormData);
-    }
-    else{
-      console.log(this.createEmployeeForm);
     }
 
   }
