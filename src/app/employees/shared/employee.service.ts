@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, Signal, signal } from '@angular/core';
 import { Employee } from './employee.model';
 import { config } from '../../../../config';
+import { Pagination } from '../../core/models/pagination.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,14 @@ export class EmployeeService {
   private _employees = signal<Employee[]>([]);
   private _employee = signal<Employee | null>(null);
   private _errors = signal<string[]>([]);
-  private apiUrl = config.API_URL+'/employees';
+  private _pagination = signal<Pagination | null>(null);
+  private apiUrl = config.API_URL + '/employees';
 
-  get employees() : Signal<Employee[]> {
+  get employees(): Signal<Employee[]> {
     return this._employees;
   }
 
-  get employee() : Signal<Employee|null>{
+  get employee(): Signal<Employee | null> {
     return this._employee;
   }
 
@@ -27,10 +29,11 @@ export class EmployeeService {
 
   constructor() { }
 
-  index(){
-    this.http.get<Employee[]>(`${this.apiUrl}`).subscribe({
-      next: (employees) => {
-        this._employees.set(employees);
+  index() {
+    this.http.get<any>(`${this.apiUrl}`).subscribe({
+      next: (res) => {
+        this._employees.set(res.data);
+        this._pagination.set(res);
       },
       error: (error) => {
         this._errors.set([error]);
@@ -38,7 +41,7 @@ export class EmployeeService {
     });
   }
 
-  show(id: number){
+  show(id: number) {
     this.http.get<Employee>(`${this.apiUrl}/${id}`).subscribe({
       next: (employee) => {
         this._employee.set(employee);
@@ -49,7 +52,7 @@ export class EmployeeService {
     });
   }
 
-  store(employee: FormData){
+  store(employee: FormData) {
     this.http.post<Employee>(`${this.apiUrl}`, employee).subscribe({
       next: (employee) => {
         this._employee.set(employee);
@@ -61,7 +64,7 @@ export class EmployeeService {
     });
   }
 
-  update(employee: Employee){
+  update(employee: Employee) {
     this.http.put<Employee>(`${this.apiUrl}/${employee.id}`, employee).subscribe({
       next: (employee) => {
         this._employees.update((employees) => {
@@ -76,7 +79,7 @@ export class EmployeeService {
     });
   }
 
-  destroy(id: string){
+  destroy(id: string) {
     this.http.delete<Employee>(`${this.apiUrl}/${id}`).subscribe({
       next: () => {
         this._employees.update((employees) => {
