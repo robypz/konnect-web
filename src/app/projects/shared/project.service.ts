@@ -9,16 +9,24 @@ export class ProjectService {
 
   private http = inject(HttpClient);
 
-  private projects = signal<Project[]>([]);
-  private project = signal<Project | null>(null);
+  private _projects = signal<Project[]>([]);
+  private _project = signal<Project | null>(null);
   private errors = signal<string[]>([]);
+
+  get projects(): Signal<Project[]> {
+    return this._projects;
+  }
+
+  get project(): Signal<Project | null> {
+    return this._project;
+  }
 
   constructor() { }
 
   index(){
     this.http.get<Project[]>('/api/projects').subscribe({
       next: (projects) => {
-        this.projects.set(projects);
+        this._projects.set(projects);
         this.errors.set([]);
       },
       error: (error) => {
@@ -30,7 +38,7 @@ export class ProjectService {
   show(id: string){
     this.http.get<Project>(`/api/projects/${id}`).subscribe({
       next: (project) => {
-        this.project.set(project);
+        this._project.set(project);
         this.errors.set([]);
       },
       error: (error) => {
@@ -42,7 +50,7 @@ export class ProjectService {
   store(project: Project){
     this.http.post<Project>('/api/projects', project).subscribe({
       next: (project) => {
-        this.projects.update((projects) => [...projects, project]);
+        this._projects.update((projects) => [...projects, project]);
         this.errors.set([]);
       },
       error: (error) => {
@@ -54,7 +62,7 @@ export class ProjectService {
   update(id: string, project: Project){
     this.http.put<Project>(`/api/projects/${id}`, project).subscribe({
       next: (project) => {
-        this.projects.update((projects) => projects.map(p => p.id === project.id ? project : p));
+        this._projects.update((projects) => projects.map(p => p.id === project.id ? project : p));
         this.errors.set([]);
       },
       error: (error) => {

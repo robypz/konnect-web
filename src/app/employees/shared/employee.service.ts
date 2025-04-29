@@ -45,7 +45,7 @@ export class EmployeeService {
     });
   }
 
-  show(id: number) {
+  show(id: String) {
     this.http.get<Employee>(`${this.apiUrl}/${id}`).subscribe({
       next: (employee) => {
         this._employee.set(employee);
@@ -91,6 +91,18 @@ export class EmployeeService {
           employees.splice(index, 1);
           return [...employees];
         });
+      },
+      error: (error) => {
+        this._errors.set([error]);
+      }
+    });
+  }
+
+  search(search:string){
+    this.http.get<any>(`${this.apiUrl}/search/${search}`).subscribe({
+      next: (res) => {
+        this._employees.set(res.data);
+        this._pagination.set(res);
       },
       error: (error) => {
         this._errors.set([error]);

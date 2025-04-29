@@ -33,9 +33,9 @@ export const routes: Routes = [
       {path:'messages', component: MessagesComponent},
       {path: 'tasks', component: TaskIndexComponent},
       {path: 'events', component: EventIndexComponent},
-      {path: 'employees', component: EmployeeIndexComponent, children:[
-        {path: ':id', component: EmployeeShowComponent},
-      ]},
+
+      {path: 'employees', component: EmployeeIndexComponent},
+      {path: 'employees/:id', component: EmployeeShowComponent},
     ],
   },
 ];
