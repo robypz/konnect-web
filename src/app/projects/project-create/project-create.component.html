@@ -34,7 +34,13 @@
           </button>
         </div>
         <!-- Modal body -->
-        <form class="p-4 md:p-5">
+         @if (errors) {
+          <div class="my-3 bg-red-300 text-red-600">
+              Errores
+          </div>
+         }
+
+        <form class="p-4 md:p-5" [formGroup]="createProjectForm">
           <div class="grid gap-4 mb-4 grid-cols-2">
             <div class="col-span-2">
               <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project Name</label>
@@ -87,6 +93,13 @@
                 placeholder="Sarch employees..." required="">
 
             </div>
+            <div class="flex">
+              @for (employee of this.createProjectForm.value.employees; track $index) {
+                <div class="inline-flex rounded-full bg-gray-300 justify-between items-center  py-0.5 px-2 text-sm font-semibold text-gray-700">{{employee.user.name+" "+employee.user.last_name}}<span><svg class="w-5 h-5 text-gray-700 dark:text-white rotate-45" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+                </svg></span></div>
+              }
+            </div>
             <div class="col-span-2 bg-gray-100 rounded-md p-2">
               @for (employee of employees; track $index) {
                 <div class="flex items-center justify-between mb-2">
@@ -94,7 +107,7 @@
                     <img class="w-10 h-10 rounded-full me-2" src="{{apiFilesUrl+employee.profile_photo}}" alt="Rounded avatar"><div class="flex flex-col"><p>{{employee.user.name}} {{employee.user.last_name}}</p><p>{{employee.user.email}}</p></div>
                   </div>
                   <div class="flex items-center">
-                    <button class="flex items-center justify-center bg-blue-600 w-8 h-8  align-self-end rounded-full"><svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <button (click)="addEmployee(employee)" class="flex items-center justify-center bg-blue-600 w-8 h-8  align-self-end rounded-full"><svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
                     </svg>
                     </button>

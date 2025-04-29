@@ -11,7 +11,7 @@ export class ProjectService {
 
   private _projects = signal<Project[]>([]);
   private _project = signal<Project | null>(null);
-  private errors = signal<string[]>([]);
+  private _errors = signal<any>(null);
 
   get projects(): Signal<Project[]> {
     return this._projects;
@@ -21,16 +21,20 @@ export class ProjectService {
     return this._project;
   }
 
+  get errors(): Signal<any> {
+    return this._errors;
+  }
+
   constructor() { }
 
   index(){
     this.http.get<Project[]>('/api/projects').subscribe({
       next: (projects) => {
         this._projects.set(projects);
-        this.errors.set([]);
+        this._errors.set([]);
       },
       error: (error) => {
-        this.errors.set([error.errors]);
+        this._errors.set([error.errors]);
       }
     });
   }
@@ -39,22 +43,22 @@ export class ProjectService {
     this.http.get<Project>(`/api/projects/${id}`).subscribe({
       next: (project) => {
         this._project.set(project);
-        this.errors.set([]);
+        this._errors.set([]);
       },
       error: (error) => {
-        this.errors.set([error.errors]);
+        this._errors.set([error.errors]);
       }
     });
   }
 
-  store(project: Project){
-    this.http.post<Project>('/api/projects', project).subscribe({
+  store(body: any){
+    this.http.post<Project>('/api/projects', body).subscribe({
       next: (project) => {
         this._projects.update((projects) => [...projects, project]);
-        this.errors.set([]);
+        this._errors.set([]);
       },
       error: (error) => {
-        this.errors.set([error.errors]);
+        this._errors.set([error.errors]);
       }
     });
   }
@@ -63,10 +67,10 @@ export class ProjectService {
     this.http.put<Project>(`/api/projects/${id}`, project).subscribe({
       next: (project) => {
         this._projects.update((projects) => projects.map(p => p.id === project.id ? project : p));
-        this.errors.set([]);
+        this._errors.set([]);
       },
       error: (error) => {
-        this.errors.set([error.errors]);
+        this._errors.set([error.errors]);
       }
     });
   }
