@@ -63,8 +63,8 @@
     </div>
   </div>
   <div class="my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-    <div>
-      <app-employee></app-employee>
-    </div>
+    @for (employee of employees; track employee.id) {
+    <app-employee [employee]="employee"></app-employee>
+    }
   </div>
 </div>

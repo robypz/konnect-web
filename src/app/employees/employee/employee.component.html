@@ -1,53 +1,54 @@
-<div class="border-1 border-gray-300 my-3 p-3 rounded-md">
-  <div class="flex justify-between mb-3">
-    <div class="flex">
-      <div class="me-2">
-        <img class="w-10 h-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-          alt="Rounded avatar">
-      </div>
-      <div>
-        <p class="text-m font-semibold">Jhon Doe</p>
-        <p class="text-sm text-gray-600">test&commat;example.com</p>
-      </div>
-    </div>
-    <div class="flex items-center">
-      <svg class="w-5 h-5 text-gray-800 dark:text-white " aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-        width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-width="4" d="M6 12h.01m6 0h.01m5.99 0h.01" />
-      </svg>
-    </div>
-  </div>
-  <div class="grid">
-    <div class="flex">
-      <div>
-        Role
-      </div>
-      <div class="flex justify-end w-1/1 items-center">
-        <div class="rounded-full border border-gray-300 px-2 text-sm font-semibold">
-            UI/UX Designer
-        </div>
-      </div>
-    </div>
-    <div class="flex">
-      <div>
-        Deparment
-      </div>
-      <div class="flex justify-end w-1/1">
-        <div class="text-gray-600">
-            Marketing
-        </div>
-      </div>
-    </div>
-    <div class="flex">
-      <div>
-        Joined
-      </div>
-      <div class="flex justify-end w-1/1">
-        <div class="text-gray-600">
-          March 1, 2025
-        </div>
-      </div>
-    </div>
 
+  <div class="border-1 border-gray-300 my-3 p-3 rounded-md">
+    <div class="flex justify-between mb-3">
+      <div class="flex">
+        <div class="me-2">
+          <img class="w-10 h-10 rounded-full" src="{{apiFilesUrl+employee()?.profile_photo}}"
+            alt="Rounded avatar">
+        </div>
+        <div>
+          <p class="text-m font-semibold">{{employee()?.user?.name+ ' ' +employee()?.user?.last_name}}</p>
+          <p class="text-sm text-gray-600">{{employee()?.user?.email}}</p>
+        </div>
+      </div>
+      <div class="flex items-center">
+        <svg class="w-5 h-5 text-gray-800 dark:text-white " aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+          width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-width="4" d="M6 12h.01m6 0h.01m5.99 0h.01" />
+        </svg>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="flex">
+        <div>
+          Role
+        </div>
+        <div class="flex justify-end w-1/1 items-center">
+          <div class="rounded-full border border-gray-300 px-2 text-sm font-semibold">
+              {{employee()?.job}}
+          </div>
+        </div>
+      </div>
+      <div class="flex">
+        <div>
+          Deparment
+        </div>
+        <div class="flex justify-end w-1/1">
+          <div class="text-gray-600">
+              {{employee()?.department?.name}}
+          </div>
+        </div>
+      </div>
+      <div class="flex">
+        <div>
+          Joined
+        </div>
+        <div class="flex justify-end w-1/1">
+          <div class="text-gray-600">
+            {{employee()?.created_at | date:'dd/MM/yyyy'}}
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
-</div>

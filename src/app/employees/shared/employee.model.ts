@@ -1,4 +1,5 @@
 import { User } from "../../core/models/user.model";
+import { Department } from "../../deparments/shared/department.model";
 import { Project } from "../../projects/shared/project.model";
 import { Task } from "../../tasks/shared/task.model";
 
@@ -8,8 +9,10 @@ export interface Employee {
   updated_at: Date; // Timestamp when the employee was last updated
   deparmentId: string; // ID of the department the employee belongs to
   job: string; // Job title of the employee
+  profile_photo?: string; // URL of the employee's profile photo
   tasks?: Task[]; // Optional array of tasks associated with the employee
   projects?: Project[]; // Optional array of projects associated with the employee
+  department?: Department; // Optional array of projects associated with the employee
   user_id: string; // ID of the user associated with the employee
   user: User;
 }

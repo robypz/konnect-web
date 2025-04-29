@@ -27,6 +27,10 @@ export class EmployeeService {
     return this._errors;
   }
 
+  get pagination() {
+    return this._pagination;
+  }
+
   constructor() { }
 
   index() {
