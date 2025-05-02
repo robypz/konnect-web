@@ -5,15 +5,17 @@
   <button data-modal-target="create-project-modal" data-modal-toggle="create-project-modal" (click)="openModal()"
     class="flex justify-center w-1/1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
     type="button">
-    <svg class="w-5 h-5 me-3 text-white-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+    <svg class="w-5 h-5 me-3 text-white-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+      width="24" height="24" fill="none" viewBox="0 0 24 24">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
     </svg>
     New Project
   </button>
 
   <!-- Main modal -->
   <div id="create-project-modal" tabindex="-1" aria-hidden="true" showing="true"
-    class=" overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md max-h-full">
       <!-- Modal content -->
       <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
@@ -34,57 +36,110 @@
           </button>
         </div>
         <!-- Modal body -->
-         @if (errors) {
-          <div class="my-3 bg-red-300 text-red-600">
-              Errores
-          </div>
-         }
+        @if (errors) {
+        <div class="my-3 bg-red-300 text-red-600">
+          Errores
+        </div>
+        }
 
-        <form class="p-4 md:p-5" [formGroup]="createProjectForm">
+        <form class="p-4 md:p-5" [formGroup]="createProjectForm" (ngSubmit)="createProject()">
           <div class="grid gap-4 mb-4 grid-cols-2">
             <div class="col-span-2">
-              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project Name</label>
-              <input type="text" name="name" id="name"
+              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project
+                Name</label>
+              <input type="text" name="name" id="name" formControlName="name"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Type project name" required="">
+              <div class="text-red-500 text-sm mt-1">
+                @if (createProjectForm.get('name')?.hasError('required') && (createProjectForm.get('name')?.dirty ||
+                createProjectForm.get('name')?.touched)) {
+                <div>
+                  Name is required.
+                </div>
+                }
+              </div>
+
             </div>
             <div class="col-span-2">
               <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Description</label>
-              <textarea id="description" rows="4"
+              <textarea id="description" rows="4" formControlName="description" name="description"
                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Write project description here"></textarea>
+              <div class="text-red-500 text-sm mt-1">
+                @if (createProjectForm.get('description')?.hasError('required') &&
+                (createProjectForm.get('description')?.dirty ||
+                createProjectForm.get('description')?.touched)) {
+                <div>
+                  Description is required.
+                </div>
+                }
+              </div>
             </div>
 
-            <div class="col-span-2 sm:col-span-2">
+            <!--<div class="col-span-2 sm:col-span-2">
               <label for="category"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
-              <select id="category"
+              <select id="category" formControlName="deparment_id"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                 <option selected="">Select department</option>
-                <option value="TV">TV/Monitors</option>
-                <option value="PC">PC</option>
-                <option value="GA">Gaming/Console</option>
-                <option value="PH">Phones</option>
+                @for (deparment of deparments; track deparment.id) {
+                <option value="{{deparment.id}}">{{deparment.name}}</option>
+                }
               </select>
-            </div>
+              <div class="text-red-500 text-sm mt-1">
+                @if (createProjectForm.get('department_id')?.invalid && (createProjectForm.get('department_id')?.dirty || createProjectForm.get('department_id')?.touched)) {
+                  <div>
+                    Department is required.
+                  </div>
+                }
+              </div>
+            </div>-->
             <div class="col-span-2 sm:col-span-1">
-              <label for="category"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
-              <select id="category"
+              <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+              <select id="category" formControlName="status_id"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                <option selected="">Select status</option>
-                <option value="TV">TV/Monitors</option>
-                <option value="PC">PC</option>
-                <option value="GA">Gaming/Console</option>
-                <option value="PH">Phones</option>
+                <option selected="" value="null">Select Status</option>
+                @for (status of statuses; track status.id) {
+                <option value="{{status.id}}">{{status.name}}</option>
+                }
               </select>
+              <div class="text-red-500 text-sm mt-1">
+                @if (createProjectForm.get('status_id')?.hasError('required') &&
+                (createProjectForm.get('status_id')?.dirty ||
+                createProjectForm.get('status_id')?.touched)) {
+                <div>
+                  Status is required.
+                </div>
+                }
+              </div>
             </div>
             <div class="col-span-2 sm:col-span-1">
               <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deadline</label>
-              <input type="date" name="price" id="price"
+              <input type="date" name="deadline" id="deadline" formControlName="deadline"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="$2999" required="">
+              <div class="text-red-500 text-sm mt-1">
+                @if (createProjectForm.get('deadline')?.hasError('required') &&
+                (createProjectForm.get('deadline')?.dirty ||
+                createProjectForm.get('deadline')?.touched)) {
+                <div>
+                  Dadline is required.
+                </div>
+                }
+              </div>
+            </div>
+            <div class="col-span-2 ">
+              <div class="flex items-center justify-between mb-2">
+                <label for="minmax-range"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Progress</label>
+                <span
+                  class="text-sm font-medium text-gray-900 dark:text-white">{{createProjectForm.value.progress}}%</span>
+
+              </div>
+              <input id="minmax-range" type="range" min="0" max="100" step="1" formControlName="progress"
+                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+
             </div>
             <div class="col-span-2 flex space-x-2 items-center">
               <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Team</label>
@@ -95,36 +150,51 @@
             </div>
             <div class="flex">
               @for (employee of this.createProjectForm.value.employees; track $index) {
-                <div class="inline-flex rounded-full bg-gray-300 justify-between items-center  py-0.5 px-2 text-sm font-semibold text-gray-700">{{employee.user.name+" "+employee.user.last_name}}<span><svg class="w-5 h-5 text-gray-700 dark:text-white rotate-45" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
-                </svg></span></div>
+              <div
+                class="inline-flex rounded-full bg-gray-300 justify-between items-center  py-0.5 px-2 text-sm font-semibold text-gray-700">
+                {{employee.user.name+" "+employee.user.last_name}}<span>
+                  <svg class="w-5 h-5 text-gray-700 dark:text-white rotate-45 hover:cursor-pointer hover:text-red-300"
+                    (click)="removeEmployee(employee)" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M5 12h14m-7 7V5" />
+                  </svg></span></div>
               }
             </div>
             <div class="col-span-2 bg-gray-100 rounded-md p-2">
               @for (employee of employees; track $index) {
-                <div class="flex items-center justify-between mb-2">
-                  <div class="flex items-center justify-start">
-                    <img class="w-10 h-10 rounded-full me-2" src="{{apiFilesUrl+employee.profile_photo}}" alt="Rounded avatar"><div class="flex flex-col"><p>{{employee.user.name}} {{employee.user.last_name}}</p><p>{{employee.user.email}}</p></div>
-                  </div>
-                  <div class="flex items-center">
-                    <button (click)="addEmployee(employee)" class="flex items-center justify-center bg-blue-600 w-8 h-8  align-self-end rounded-full"><svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
-                    </svg>
-                    </button>
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center justify-start">
+                  <img class="w-10 h-10 rounded-full me-2" src="{{apiFilesUrl+employee.profile_photo}}"
+                    alt="Rounded avatar">
+                  <div class="flex flex-col">
+                    <p>{{employee.user.name}} {{employee.user.last_name}}</p>
+                    <p>{{employee.user.email}}</p>
                   </div>
                 </div>
+                <div class="flex items-center">
+                  <button (click)="addEmployee(employee)" type="button"
+                    class="flex items-center justify-center bg-blue-600 w-8 h-8  align-self-end rounded-full"><svg
+                      class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                      width="24" height="24" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5 12h14m-7 7V5" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
               }
             </div>
           </div>
           <div>
             <button type="submit"
-            class="text-white mb-1 w-1/1 inline-flex items-center justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Add new Project
-          </button>
-          <button type="submit"
-            class="text-gray w-1/1 inline-flex items-center justify-center bg-gray-100 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Cancel
-          </button>
+              class="text-white mb-1 w-1/1 inline-flex items-center justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              Add new Project
+            </button>
+            <button type="submit"
+              class="text-gray w-1/1 inline-flex items-center justify-center bg-gray-100 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              Cancel
+            </button>
           </div>
 
         </form>

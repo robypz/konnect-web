@@ -1,6 +1,7 @@
 import { inject, Injectable, signal, Signal } from '@angular/core';
 import { Project } from './project.model';
 import { HttpClient } from '@angular/common/http';
+import { config } from '../../../../config';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class ProjectService {
 
   private http = inject(HttpClient);
+  private apiUrl = config.API_URL + '/projects';
 
   private _projects = signal<Project[]>([]);
   private _project = signal<Project | null>(null);
@@ -28,10 +30,9 @@ export class ProjectService {
   constructor() { }
 
   index(){
-    this.http.get<Project[]>('/api/projects').subscribe({
+    this.http.get<Project[]>(`${this.apiUrl}`).subscribe({
       next: (projects) => {
         this._projects.set(projects);
-        this._errors.set([]);
       },
       error: (error) => {
         this._errors.set([error.errors]);
@@ -40,7 +41,7 @@ export class ProjectService {
   }
 
   show(id: string){
-    this.http.get<Project>(`/api/projects/${id}`).subscribe({
+    this.http.get<Project>(`${this.apiUrl}`).subscribe({
       next: (project) => {
         this._project.set(project);
         this._errors.set([]);
@@ -52,13 +53,14 @@ export class ProjectService {
   }
 
   store(body: any){
-    this.http.post<Project>('/api/projects', body).subscribe({
+    this.http.post<Project>(`${this.apiUrl}`, body).subscribe({
       next: (project) => {
         this._projects.update((projects) => [...projects, project]);
         this._errors.set([]);
       },
       error: (error) => {
         this._errors.set([error.errors]);
+        console.error(error);
       }
     });
   }

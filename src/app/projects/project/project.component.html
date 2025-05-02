@@ -1,13 +1,13 @@
 <div class="border border-gray-300 rounded-lg shadow-md p-5 hover:cursor-pointer hover:border-blue-300" routerLink="1">
   <div class="grid grid-cols-3 mb-3">
     <div class="col-span-2">
-      <h2 class="text-xl font-semibold">Project Name</h2>
-      <p class="text-gray-500 text-sm">Project category</p>
+      <h2 class="text-xl font-semibold">{{project()?.name}}</h2>
+      <p class="text-gray-500 text-sm">{{project()?.description}}</p>
     </div>
     <div>
       <div
         class="rounded-full p-2 bg-green-100 text-center text-xs text-green-800 dark:bg-green-900 dark:text-green-300">
-        Project Status
+        {{project()?.status?.name}}
       </div>
     </div>
   </div>
@@ -16,15 +16,15 @@
       Progress
     </div>
     <div>
-      100%
+      {{project()?.progress}}%
     </div>
   </div>
   <div class="mb-3">
     <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-      <div class="bg-blue-600 h-2.5 rounded-full" style="width: 45%"></div>
+      <div class="bg-blue-600 h-2.5 rounded-full" [style.width.%]="project()?.progress"></div>
     </div>
   </div>
-  <div class="mb-3">
+  <!--<div class="mb-3">
     <h3 class="mb-2">Team</h3>
     <div class="flex items-center space-x-2">
       <img class="w-8 h-8 rounded-full" src="https://placehold.co/400" alt="Team Member 1">
@@ -33,14 +33,14 @@
       <img class="w-8 h-8 rounded-full" src="https://placehold.co/400" alt="Team Member 4">
       <img class="w-8 h-8 rounded-full" src="https://placehold.co/400" alt="Team Member 5">
     </div>
-  </div>
+  </div>-->
   <div>
     <div class="flex justify-between">
       <div>
         Started on
       </div>
       <div>
-        March 1, 2025
+        {{project()?.create_at | date:'dd/MM/yyyy'}}
       </div>
     </div>
   </div>
