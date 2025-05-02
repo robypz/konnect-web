@@ -44,7 +44,6 @@ export class ProjectService {
     this.http.get<Project>(`${this.apiUrl}`).subscribe({
       next: (project) => {
         this._project.set(project);
-        this._errors.set([]);
       },
       error: (error) => {
         this._errors.set([error.errors]);
@@ -56,7 +55,6 @@ export class ProjectService {
     this.http.post<Project>(`${this.apiUrl}`, body).subscribe({
       next: (project) => {
         this._projects.update((projects) => [...projects, project]);
-        this._errors.set([]);
       },
       error: (error) => {
         this._errors.set([error.errors]);
@@ -69,7 +67,6 @@ export class ProjectService {
     this.http.put<Project>(`/api/projects/${id}`, project).subscribe({
       next: (project) => {
         this._projects.update((projects) => projects.map(p => p.id === project.id ? project : p));
-        this._errors.set([]);
       },
       error: (error) => {
         this._errors.set([error.errors]);

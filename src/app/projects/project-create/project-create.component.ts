@@ -10,6 +10,8 @@ import { Department } from '../../deparments/shared/department.model';*/
 import { StatusService } from '../../core/services/status.service';
 import { Status } from '../../core/models/status.model';
 import { Project } from '../shared/project.model';
+import { Category } from '../../categories/shared/category.model';
+import { CategoryService } from '../../categories/shared/category.service';
 @Component({
   selector: 'app-project-create',
   imports: [ReactiveFormsModule],
@@ -29,6 +31,10 @@ export class ProjectCreateComponent implements OnInit {
   /*private deparmentService = inject(DepartmentService);
   private _deparments = computed(() => this.deparmentService.departments());
   public deparments: Department[] = [];*/
+
+  private categoryService = inject(CategoryService);
+  private _categories = computed(() => this.categoryService.categories());
+  public categories: Category[] = [];
 
   private statusService = inject(StatusService);
   private _statuses = computed(() => this.statusService.statuses());
@@ -75,6 +81,7 @@ export class ProjectCreateComponent implements OnInit {
   ngOnInit() {
     //this.deparmentService.index();
     this.statusService.index();
+    this.categoryService.index();
   }
 
 

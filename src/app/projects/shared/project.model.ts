@@ -6,9 +6,9 @@ export interface Project {
   id: string;
   name: string;
   description: string;
-  startDate: Date;
+  start_date: Date;
   progress: number;
-  endDate: Date;
+  deadline: Date;
   status_id: string;
   employees: Employee[];
   tasks: Task[];
