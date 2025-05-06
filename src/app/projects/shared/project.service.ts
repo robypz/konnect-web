@@ -35,7 +35,7 @@ export class ProjectService {
         this._projects.set(projects);
       },
       error: (error) => {
-        this._errors.set([error.errors]);
+        this._errors.set(error);
       }
     });
   }

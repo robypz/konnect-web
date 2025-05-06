@@ -23,7 +23,7 @@ export class ProjectIndexComponent implements OnInit {
         this.projects = this._projects();
       }
       if (this._errors() !== null) {
-        console.error(this._errors());
+        //console.error(this._errors());
       }
     });
   }
