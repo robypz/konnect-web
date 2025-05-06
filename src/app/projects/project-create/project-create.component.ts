@@ -22,7 +22,7 @@ export class ProjectCreateComponent implements OnInit {
   private projectService = inject(ProjectService);
   private _project = computed(() => this.projectService.project());
   private _errors = computed(() => this.projectService.errors());
-  public errors :any = null;
+  public errors: any = null;
 
   private employeeService = inject(EmployeeService);
   private _employees = computed(() => this.employeeService.employees());
@@ -45,9 +45,11 @@ export class ProjectCreateComponent implements OnInit {
   createProjectForm = new FormGroup({
     name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     description: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
-    progress : new FormControl(0, { nonNullable: true, validators: [Validators.required] }),
+    progress: new FormControl(0, { nonNullable: true, validators: [Validators.required] }),
     status_id: new FormControl(null, { nonNullable: true, validators: [Validators.required] }),
     deadline: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    category_id: new FormControl(null, { nonNullable: true, validators: [Validators.required] }),
+    start_date: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     employees: new FormControl<Employee[]>([], { nonNullable: true, validators: [Validators.required] }),
   });
 
@@ -67,6 +69,10 @@ export class ProjectCreateComponent implements OnInit {
       /*if (this._deparments() !== this.deparments) {
         this.deparments = this._deparments();
       }*/
+
+      if (this._categories() !== this.categories) {
+        this.categories = this._categories();
+      }
 
       if (this._statuses() !== this.statuses) {
         this.statuses = this._statuses();
@@ -127,7 +133,7 @@ export class ProjectCreateComponent implements OnInit {
     if (this.createProjectForm.valid) {
       this.projectService.store(this.createProjectForm.value);
       //console.log(this.createProjectForm.value);
-    }else{
+    } else {
       console.log(this.createProjectForm.errors);
     }
   }

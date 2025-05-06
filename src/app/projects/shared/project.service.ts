@@ -41,7 +41,7 @@ export class ProjectService {
   }
 
   show(id: string){
-    this.http.get<Project>(`${this.apiUrl}`).subscribe({
+    this.http.get<Project>(`${this.apiUrl}/`+id).subscribe({
       next: (project) => {
         this._project.set(project);
       },
