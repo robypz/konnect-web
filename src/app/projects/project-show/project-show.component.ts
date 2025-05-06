@@ -3,10 +3,12 @@ import { ProjectNavbarComponent } from "../project-navbar/project-navbar.compone
 import { RouterOutlet } from '@angular/router';
 import { ProjectService } from '../shared/project.service';
 import { Project } from '../shared/project.model';
+import { DatePipe } from '@angular/common';
+import { ProjectEditComponent } from "../project-edit/project-edit.component";
 
 @Component({
   selector: 'app-project-show',
-  imports: [ProjectNavbarComponent, RouterOutlet],
+  imports: [ProjectNavbarComponent, RouterOutlet, DatePipe, ProjectEditComponent],
   templateUrl: './project-show.component.html',
   styleUrl: './project-show.component.scss'
 })

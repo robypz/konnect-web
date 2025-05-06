@@ -63,8 +63,8 @@ export class ProjectService {
     });
   }
 
-  update(id: string, project: Project){
-    this.http.put<Project>(`/api/projects/${id}`, project).subscribe({
+  update(body: any, id: any){
+    this.http.put<Project>(`/api/projects/${id}`, body).subscribe({
       next: (project) => {
         this._projects.update((projects) => projects.map(p => p.id === project.id ? project : p));
       },
