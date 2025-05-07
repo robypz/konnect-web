@@ -37,31 +37,34 @@ export class ProjectShowComponent {
       }
     });
     afterNextRender(() => {
-      const tabElement = document.getElementById('default-styled-tab') as HTMLElement;
-      const tabElements = [
-        {
-          id: 'posts',
-          triggerEl: document.getElementById('posts-tab') as HTMLElement,
-          targetEl: document.getElementById('styled-posts') as HTMLElement,
-        },
-        {
-          id: 'tasks',
-          triggerEl: document.getElementById('tasks-tab') as HTMLElement,
-          targetEl: document.getElementById('styled-tasks') as HTMLElement,
-        },
-        {
-          id: 'team',
-          triggerEl: document.getElementById('team-tab') as HTMLElement,
-          targetEl: document.getElementById('styled-team') as HTMLElement,
-        },
-        {
-          id: 'files',
-          triggerEl: document.getElementById('files-tab') as HTMLElement,
-          targetEl: document.getElementById('styled-files') as HTMLElement,
-        },
-      ];
+      if (this.project) {
+        const tabElement = document.getElementById('default-styled-tab') as HTMLElement;
+        const tabElements = [
+          {
+            id: 'posts',
+            triggerEl: document.getElementById('posts-tab') as HTMLElement,
+            targetEl: document.getElementById('styled-posts') as HTMLElement,
+          },
+          {
+            id: 'tasks',
+            triggerEl: document.getElementById('tasks-tab') as HTMLElement,
+            targetEl: document.getElementById('styled-tasks') as HTMLElement,
+          },
+          {
+            id: 'team',
+            triggerEl: document.getElementById('team-tab') as HTMLElement,
+            targetEl: document.getElementById('styled-team') as HTMLElement,
+          },
+          {
+            id: 'files',
+            triggerEl: document.getElementById('files-tab') as HTMLElement,
+            targetEl: document.getElementById('styled-files') as HTMLElement,
+          },
+        ];
 
-      const tab = new Tabs(tabElement, tabElements);
+        const tab = new Tabs(tabElement, tabElements);
+      }
+
     }
     );
   }

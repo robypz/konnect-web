@@ -14,9 +14,9 @@
       </form>
     </div>
   </div>
-  <div class="my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-    <div>
-      <app-employee></app-employee>
-    </div>
+  <div class="my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+      @for (employee of employees(); track $index) {
+        <app-employee [employee]="employee"></app-employee>
+      }
   </div>
 </div>
