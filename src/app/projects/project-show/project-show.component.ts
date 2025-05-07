@@ -5,6 +5,7 @@ import { ProjectService } from '../shared/project.service';
 import { Project } from '../shared/project.model';
 import { DatePipe } from '@angular/common';
 import { ProjectEditComponent } from "../project-edit/project-edit.component";
+import { config } from '../../../../config';
 
 @Component({
   selector: 'app-project-show',
@@ -16,6 +17,7 @@ export class ProjectShowComponent {
   private projectService = inject(ProjectService);
   private _project = computed(() => this.projectService.project());
   public project: Project | null = null;
+  public apiFilesUrl = config.API_PUBLIC_FILES_URL;
 
   @Input()
   set id(id: string) {
