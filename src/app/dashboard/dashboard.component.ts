@@ -41,7 +41,5 @@ export class DashboardComponent {
       const tab = new Tabs(tabElement, tabElements);
     }
     );
-
-
   }
 }

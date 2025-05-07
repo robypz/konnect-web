@@ -22,12 +22,12 @@ export const routes: Routes = [
       {path: '', component: DashboardComponent},
       {path: 'projects', component: ProjectIndexComponent},
       {path: 'projects/:id', component: ProjectShowComponent,
-        children:[
+        /*children:[
           {path: 'posts', component: ProjectPostsComponent},
           {path: 'tasks', component: ProjectTasksComponent},
           {path: 'team', component: ProjectTeamComponent},
           {path: 'files', component: ProjectFilesComponent},
-        ],
+        ],*/
       },
 
       {path:'messages', component: MessagesComponent},
