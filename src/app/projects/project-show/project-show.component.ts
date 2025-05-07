@@ -1,22 +1,29 @@
-import { afterNextRender, Component, computed, effect, inject, Input } from '@angular/core';
-import { ProjectNavbarComponent } from "../project-navbar/project-navbar.component";
-import { RouterOutlet } from '@angular/router';
+import {
+  afterNextRender,
+  AfterViewInit,
+  Component,
+  computed,
+  effect,
+  inject,
+  Input,
+} from '@angular/core';
 import { ProjectService } from '../shared/project.service';
 import { Project } from '../shared/project.model';
 import { DatePipe } from '@angular/common';
-import { ProjectEditComponent } from "../project-edit/project-edit.component";
+import { ProjectEditComponent } from '../project-edit/project-edit.component';
 import { config } from '../../../../config';
 import { Tabs } from 'flowbite';
 import { ProjectPostsComponent } from "../project-posts/project-posts.component";
-import { ProjectFilesComponent } from "../project-files/project-files.component";
-import { ProjectTeamComponent } from "../project-team/project-team.component";
+import { ProjectComponent } from "../project/project.component";
 import { ProjectTasksComponent } from "../project-tasks/project-tasks.component";
+import { ProjectTeamComponent } from "../project-team/project-team.component";
+import { ProjectFilesComponent } from "../project-files/project-files.component";
 
 @Component({
   selector: 'app-project-show',
-  imports: [DatePipe, ProjectEditComponent, ProjectPostsComponent, ProjectFilesComponent, ProjectTeamComponent, ProjectTasksComponent],
+  imports: [DatePipe, ProjectEditComponent, ProjectPostsComponent, ProjectTasksComponent, ProjectTeamComponent, ProjectFilesComponent],
   templateUrl: './project-show.component.html',
-  styleUrl: './project-show.component.scss'
+  styleUrl: './project-show.component.scss',
 })
 export class ProjectShowComponent {
   private projectService = inject(ProjectService);
@@ -33,40 +40,44 @@ export class ProjectShowComponent {
     effect(() => {
       if (this._project() !== null) {
         this.project = this._project();
-        console.log(this.project);
       }
     });
     afterNextRender(() => {
-      if (this.project) {
-        const tabElement = document.getElementById('default-styled-tab') as HTMLElement;
-        const tabElements = [
-          {
-            id: 'posts',
-            triggerEl: document.getElementById('posts-tab') as HTMLElement,
-            targetEl: document.getElementById('styled-posts') as HTMLElement,
-          },
-          {
-            id: 'tasks',
-            triggerEl: document.getElementById('tasks-tab') as HTMLElement,
-            targetEl: document.getElementById('styled-tasks') as HTMLElement,
-          },
-          {
-            id: 'team',
-            triggerEl: document.getElementById('team-tab') as HTMLElement,
-            targetEl: document.getElementById('styled-team') as HTMLElement,
-          },
-          {
-            id: 'files',
-            triggerEl: document.getElementById('files-tab') as HTMLElement,
-            targetEl: document.getElementById('styled-files') as HTMLElement,
-          },
-        ];
+      const tabElement = document.getElementById(
+        'project-tab'
+      ) as HTMLElement;
+      const tabElements = [
+        {
+          id: 'posts',
+          triggerEl: document.getElementById(
+            'posts-tab'
+          ) as HTMLElement,
+          targetEl: document.getElementById('posts') as HTMLElement,
+        },
+        {
+          id: 'tasks',
+          triggerEl: document.getElementById(
+            'tasks-tab'
+          ) as HTMLElement,
+          targetEl: document.getElementById('tasks') as HTMLElement,
+        },
+        {
+          id: 'team',
+          triggerEl: document.getElementById(
+            'team-tab'
+          ) as HTMLElement,
+          targetEl: document.getElementById('team') as HTMLElement,
+        },
+        {
+          id: 'files',
+          triggerEl: document.getElementById(
+            'files-tab'
+          ) as HTMLElement,
+          targetEl: document.getElementById('files') as HTMLElement,
+        },
+      ];
 
-        const tab = new Tabs(tabElement, tabElements);
-      }
-
-    }
-    );
+      const tab = new Tabs(tabElement, tabElements);
+    });
   }
-
 }
