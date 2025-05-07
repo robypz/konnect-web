@@ -9,11 +9,10 @@ import { Employee } from '../../employees/shared/employee.model';
 import { Modal } from 'flowbite';
 import { config } from '../../../../config';
 import { Project } from '../shared/project.model';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-project-edit',
-  imports: [ReactiveFormsModule,DatePipe],
+  imports: [ReactiveFormsModule],
   templateUrl: './project-edit.component.html',
   styleUrl: './project-edit.component.scss'
 })
@@ -22,7 +21,7 @@ export class ProjectEditComponent {
   private _project = computed(() => this.projectService.project());
   private _errors = computed(() => this.projectService.errors());
   public errors: any = null;
-  public project = input<Project>();
+  public project: Project | null = null;
 
   /*private employeeService = inject(EmployeeService);
   private _employees = computed(() => this.employeeService.employees());
@@ -47,9 +46,9 @@ export class ProjectEditComponent {
     description: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     progress: new FormControl(0, { nonNullable: true, validators: [Validators.required] }),
     status_id: new FormControl<string|null>(null, { nonNullable: true, validators: [Validators.required] }),
-    deadline: new FormControl<Date|null>(null, { nonNullable: true, validators: [Validators.required] }),
+    deadline: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     category_id: new FormControl<string|null>(null, { nonNullable: true, validators: [Validators.required] }),
-    start_date: new FormControl<Date|null>(null, { nonNullable: true, validators: [Validators.required] }),
+    start_date: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     //employees: new FormControl<Employee[]>([], { nonNullable: true, validators: [Validators.required] }),
   });
 
@@ -59,15 +58,16 @@ export class ProjectEditComponent {
       this.modal = new Modal(document.getElementById('edit-project-modal') as HTMLElement);
     });
     effect(() => {
-      if (this.project) {
+      if (this._project() !== null) {
+        this.project = this._project();
         this.editProjectForm.patchValue({
-          name: this.project()?.name,
-          description: this.project()?.description,
-          progress: this.project()?.progress,
-          status_id: this.project()?.status_id,
-          deadline: this.project()?.deadline,
-          category_id: this.project()?.category_id,
-          start_date: this.project()?.start_date,
+          name: this.project?.name,
+          description: this.project?.description,
+          progress: this.project?.progress,
+          status_id: this.project?.status_id,
+          deadline: this.project?.deadline.toString().split('T')[0],
+          category_id: this.project?.category_id,
+          start_date: this.project?.start_date.toString().split('T')[0],
           //employees: this.project.employees
         });
       }
@@ -140,7 +140,7 @@ export class ProjectEditComponent {
 
   editProject() {
     if (this.editProjectForm.valid) {
-      this.projectService.update(this.editProjectForm.value, this.project()?.id);
+      this.projectService.update(this.editProjectForm.value, this.project?.id);
       //console.log(this.editProjectForm.value);
     } else {
       console.log(this.editProjectForm.errors);
