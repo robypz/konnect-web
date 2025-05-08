@@ -1,14 +1,121 @@
-<div class="border border-gray-300 rounded-lg shadow-md p-5 hover:cursor-pointer hover:border-blue-300 h-full" routerLink="{{project()?.id}}">
+<div class="border border-gray-300 rounded-lg shadow-md p-5 hover:cursor-pointer hover:border-blue-300 h-full"
+  routerLink="{{project()?.id}}">
   <div class="grid grid-cols-3 mb-3">
     <div class="col-span-2">
       <h2 class="text-xl font-semibold">{{project()?.name}}</h2>
       <p class="text-gray-500 text-sm">{{project()?.description}}</p>
     </div>
     <div>
-      <div
-        class="rounded-full p-2 bg-green-100 text-center text-xs text-green-800 dark:bg-green-900 dark:text-green-300">
-        {{project()?.status?.name}}
-      </div>
+      @switch (project()?.status?.name) {
+        @case ('Pending') {
+          <div
+            class="flex rounded-full p-2 bg-yellow-100 text-center text-sm text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300">
+            <svg class="w-6 h-6 text-yellow-800 dark:text-yellow-300" xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Pending
+          </div>
+        }
+        @case ('On Process') {
+          <div
+            class="flex rounded-full p-2 bg-blue-100 text-center text-sm text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+            <svg class="w-6 h-6 text-blue-800 dark:text-blue-300" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            On Process
+          </div>
+        }
+        @case ('On Review') {
+          <div
+            class="flex rounded-full p-2 bg-green-100 text-center text-sm text-green-800 dark:bg-green-900 dark:text-green-300">
+            <svg class="w-6 h-6 text-green-800 dark:text-green-300" xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            On Review
+          </div>
+        }
+        @case ('Aproved') {
+          <div
+            class="flex rounded-full p-2 bg-green-100 text-center text-sm text-green-800 dark:bg-green-900 dark:text-green-300">
+            <svg class="w-6 h-6 text-green-800 dark:text-green-300" xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Aproved
+          </div>
+        }
+        @case ('Blocked') {
+          <div class="flex rounded-full p-2 bg-red-100 text-center text-sm text-red-800 dark:bg-red-900 dark:text-red-300">
+            <svg class="w-6 h-6 text-red-800 dark:text-red-300" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Blocked
+          </div>
+        }
+        @case ('Completed') {
+          <div
+            class="flex rounded-full p-2 bg-green-100 text-center text-sm text-green-800 dark:bg-green-900 dark:text-green-300">
+            <svg class="w-6 h-6 text-green-800 dark:text-green-300" xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Completed
+          </div>
+        }
+        @case ('Cancelled') {
+          <div class="flex rounded-full p-2 bg-red-100 text-center text-sm text-red-800 dark:bg-red-900 dark:text-red-300">
+            <svg class="w-6 h-6 text-red-800 dark:text-red-300" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Cancelled
+          </div>
+        }
+        @case ('Waiting Response') {
+          <div
+            class="flex rounded-full p-2 bg-yellow-100 text-center text-sm text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300">
+            <svg class="w-6 h-6 text-yellow-800 dark:text-yellow-300" xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Waiting Response
+          </div>
+        }
+        @case ('On Testing') {
+          <div
+            class="flex rounded-full p-2 bg-blue-100 text-center text-sm text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+            <svg class="w-6 h-6 text-blue-800 dark:text-blue-300" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            On Testing
+          </div>
+        }
+        @case ('Archived') {
+          <div
+            class="flex rounded-full p-2 bg-gray-100 text-center text-sm text-gray-800 dark:bg-gray-900 dark:text-gray-300">
+            <svg class="w-6 h-6 text-gray-800 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Archived
+          </div>
+        }
+      }
     </div>
   </div>
   <div class="flex justify-between mb-1">
