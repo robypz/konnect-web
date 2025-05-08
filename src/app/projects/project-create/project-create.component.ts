@@ -126,7 +126,6 @@ export class ProjectCreateComponent implements OnInit {
     if (event.target.value.length > 2) {
       this.employeeService.search(event.target.value);
     }
-
   }
 
   createProject() {
