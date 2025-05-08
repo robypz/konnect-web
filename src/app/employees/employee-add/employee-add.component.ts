@@ -4,6 +4,8 @@ import { EmployeeService } from '../shared/employee.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Employee } from '../shared/employee.model';
 import { config } from '../../../../config';
+import { ProjectService } from '../../projects/shared/project.service';
+import { Project } from '../../projects/shared/project.model';
 
 @Component({
   selector: 'app-employee-add',
@@ -12,6 +14,9 @@ import { config } from '../../../../config';
   styleUrl: './employee-add.component.scss'
 })
 export class EmployeeAddComponent {
+  private projectService = inject(ProjectService);
+  private _project = computed(()=>this.projectService.project());
+  public project : Project |null = null;
   private employeeService = inject(EmployeeService);
   public searchEmployees = computed(() => this.employeeService.employees());
   public employees = input<Employee[]>();
@@ -33,6 +38,10 @@ export class EmployeeAddComponent {
         this.addEmployeeForm.patchValue({
           employees: this.employees()
         });
+      }
+
+      if (this._project() != null) {
+        this.project = this._project();
       }
     });
   }
@@ -68,6 +77,6 @@ export class EmployeeAddComponent {
   }
 
   storeEmployees() {
-
+    this.projectService.updateEmployees(this.addEmployeeForm.value, this.project?.id || '' );
   }
 }

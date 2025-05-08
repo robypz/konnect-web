@@ -29,7 +29,7 @@ export class ProjectService {
 
   constructor() { }
 
-  index(){
+  index() {
     this.http.get<Project[]>(`${this.apiUrl}`).subscribe({
       next: (projects) => {
         this._projects.set(projects);
@@ -40,8 +40,8 @@ export class ProjectService {
     });
   }
 
-  show(id: string){
-    this.http.get<Project>(`${this.apiUrl}/`+id).subscribe({
+  show(id: string) {
+    this.http.get<Project>(`${this.apiUrl}/` + id).subscribe({
       next: (project) => {
         this._project.set(project);
       },
@@ -51,7 +51,7 @@ export class ProjectService {
     });
   }
 
-  store(body: any){
+  store(body: any) {
     this.http.post<Project>(`${this.apiUrl}`, body).subscribe({
       next: (project) => {
         this._projects.update((projects) => [...projects, project]);
@@ -63,11 +63,27 @@ export class ProjectService {
     });
   }
 
-  update(body: any, id: any){
+  update(body: any, id: any) {
     this.http.put<Project>(`${this.apiUrl}/${id}`, body).subscribe({
       next: (project) => {
         this._projects.update((projects) => projects.map(p => p.id === project.id ? project : p));
         this._project.set(project);
+      },
+      error: (error) => {
+        this._errors.set(error);
+        console.error(error);
+      }
+    });
+  }
+
+  updateEmployees(data: any, id: string) {
+    this.http.put<Project>(`${this.apiUrl}/updateEmployees/${id}`, data).subscribe({
+      next: (project) => {
+        this._projects.update((projects) =>
+          projects.map(p =>
+            p.id === project.id ? { ...p, employees: project.employees } : p
+          )
+        );
       },
       error: (error) => {
         this._errors.set(error);
