@@ -24,7 +24,7 @@ export class ProjectCreateComponent implements OnInit {
   private _errors = computed(() => this.projectService.errors());
   public errors: any = null;
 
-  private employeeService = inject(EmployeeService);
+  public employeeService = inject(EmployeeService);
   private _employees = computed(() => this.employeeService.employees());
   public employees: Employee[] = [];
 
@@ -99,7 +99,7 @@ export class ProjectCreateComponent implements OnInit {
   }
 
   addEmployee(employee: Employee) {
-    if (this.createProjectForm.value.employees) {
+    /*if (this.createProjectForm.value.employees) {
       const employees = this.createProjectForm.value.employees as Employee[];
       if (!employees.find((e: Employee) => e.id === employee.id)) {
         employees.push(employee);
@@ -108,18 +108,30 @@ export class ProjectCreateComponent implements OnInit {
     } else {
       this.createProjectForm.patchValue({ employees: [employee] });
     }
-    console.log(this.createProjectForm.value.employees);
+    console.log(this.createProjectForm.value.employees);*/
+    this.createProjectForm.patchValue({
+      employees: this.employeeService.addEmployee(
+        employee,
+        this.createProjectForm.value.employees as Employee[]
+      )
+    });
   }
 
   removeEmployee(employee: Employee) {
-    if (this.createProjectForm.value.employees) {
+    /*if (this.createProjectForm.value.employees) {
       const employees = this.createProjectForm.value.employees as Employee[];
       const index = employees.findIndex((e: Employee) => e.id === employee.id);
       if (index !== -1) {
         employees.splice(index, 1);
         this.createProjectForm.patchValue({ employees });
       }
-    }
+    }*/
+    this.createProjectForm.patchValue({
+      employees: this.employeeService.removeEmployee(
+        employee,
+        this.createProjectForm.value.employees as Employee[]
+      )
+    });
   }
 
   searchEmployee(event: any) {

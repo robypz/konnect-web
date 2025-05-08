@@ -1,4 +1,4 @@
-import { afterNextRender, Component, inject } from '@angular/core';
+import { afterNextRender, Component, computed, effect, inject, input } from '@angular/core';
 import { Modal } from 'flowbite';
 import { EmployeeService } from '../shared/employee.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -13,7 +13,8 @@ import { config } from '../../../../config';
 })
 export class EmployeeAddComponent {
   private employeeService = inject(EmployeeService);
-  public employees : Employee[] = [];
+  public searchEmployees = computed(() => this.employeeService.employees());
+  public employees = input<Employee[]>();
   public errors: any = null;
   public apiFilesUrl = config.API_PUBLIC_FILES_URL;
 
@@ -26,6 +27,13 @@ export class EmployeeAddComponent {
   constructor() {
     afterNextRender(() => {
       this.modal = new Modal(document.getElementById('add-employee-modal') as HTMLElement);
+    });
+    effect(() => {
+      if (this.employees() != undefined) {
+        this.addEmployeeForm.patchValue({
+          employees: this.employees()
+        });
+      }
     });
   }
   openModal() {
@@ -42,27 +50,21 @@ export class EmployeeAddComponent {
   }
 
   addEmployee(employee: Employee) {
-    if (this.addEmployeeForm.value.employees) {
-      const employees = this.addEmployeeForm.value.employees as Employee[];
-      if (!employees.find((e: Employee) => e.id === employee.id)) {
-        employees.push(employee);
-        this.addEmployeeForm.patchValue({ employees });
-      }
-    } else {
-      this.addEmployeeForm.patchValue({ employees: [employee] });
-    }
-    console.log(this.addEmployeeForm.value.employees);
+    this.addEmployeeForm.patchValue({
+      employees: this.employeeService.addEmployee(
+        employee,
+        this.addEmployeeForm.value.employees as Employee[]
+      )
+    });
   }
 
   removeEmployee(employee: Employee) {
-    if (this.addEmployeeForm.value.employees) {
-      const employees = this.addEmployeeForm.value.employees as Employee[];
-      const index = employees.findIndex((e: Employee) => e.id === employee.id);
-      if (index !== -1) {
-        employees.splice(index, 1);
-        this.addEmployeeForm.patchValue({ employees });
-      }
-    }
+    this.addEmployeeForm.patchValue({
+      employees: this.employeeService.removeEmployee(
+        employee,
+        this.addEmployeeForm.value.employees as Employee[]
+      )
+    });
   }
 
   storeEmployees() {

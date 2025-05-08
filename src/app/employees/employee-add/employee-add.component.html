@@ -65,7 +65,7 @@
               }
             </div>
             <div class="col-span-2 bg-gray-100 rounded-md p-2">
-              @for (employee of employees; track $index) {
+              @for (employee of searchEmployees(); track $index) {
               <div class="flex items-center justify-between mb-2">
                 <div class="flex items-center justify-start">
                   <img class="w-10 h-10 rounded-full me-2" src="{{apiFilesUrl+employee.profile_photo}}"

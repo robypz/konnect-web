@@ -98,7 +98,7 @@ export class EmployeeService {
     });
   }
 
-  search(search:string){
+  search(search: string) {
     this.http.get<any>(`${this.apiUrl}/search/${search}`).subscribe({
       next: (res) => {
         this._employees.set(res.data);
@@ -108,5 +108,23 @@ export class EmployeeService {
         this._errors.set([error]);
       }
     });
+  }
+
+  addEmployee(employee: Employee, employees: Employee[]) {
+    if (!employees.find((e: Employee) => e.id === employee.id)) {
+      employees.push(employee);
+    }
+    else {
+      employees = [employee];
+    }
+    return employees;
+  }
+
+  removeEmployee(employee: Employee, employees: Employee[]) {
+    const index = employees.findIndex((e: Employee) => e.id === employee.id);
+    if (index !== -1) {
+      employees.splice(index, 1);
+    }
+    return employees;
   }
 }
