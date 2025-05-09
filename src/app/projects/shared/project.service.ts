@@ -91,4 +91,24 @@ export class ProjectService {
       }
     });
   }
+
+addTask(data: any, id: string) {
+  this.http.put<Project>(`${this.apiUrl}/addTask/${id}`, data).subscribe({
+    next: (project) => {
+      // Actualiza la lista de proyectos
+      this._projects.update((projects) =>
+        projects.map(p => p.id === project.id ? { ...p, tasks: project.tasks } : p)
+      );
+
+      // Mantiene las propiedades actuales de _project y solo actualiza las tareas
+      this._project.update((currentProject) => currentProject ? { ...currentProject, tasks: project.tasks } : currentProject);
+    },
+    error: (error) => {
+      this._errors.set(error);
+      console.error(error);
+    }
+  });
+}
+
+
 }

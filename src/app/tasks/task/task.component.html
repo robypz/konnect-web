@@ -4,7 +4,7 @@
     <div class="flex items-center" (click)="toggleTaskStatus('title','1')">
       <input type="checkbox" id="task-1-title" name="title"
         class="me-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-      <label for="task-1-title" id="task-1-label" class="font-semibold text-md">Task Title</label>
+      <label for="task-1-title" id="task-1-label" class="font-semibold text-md">{{task.name}}</label>
     </div>
     <div  class="flex justify-end">
       <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
@@ -33,8 +33,7 @@
     </div>
   </div>
   <div class="text-gray-600 text-sm mb-3">
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit dicta numquam, ex iure, aut tempora esse
-    facilis explicabo, molestiae voluptatem neque quasi obcaecati consequuntur magni nobis rem ducimus quam vero.
+    {{task.description}}
   </div>
 
   <div class="flex justify-between mb-1">
@@ -54,11 +53,120 @@
     <div>
       <div
       class="rounded-full p-2 bg-green-100 text-center text-xs text-green-800 dark:bg-green-900 dark:text-green-300">
-      Project Status
+            @switch (task.status.name) {
+        @case ('Pending') {
+          <div
+            class="flex rounded-full p-2 bg-yellow-100 text-center text-sm text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300">
+            <svg class="w-6 h-6 text-yellow-800 dark:text-yellow-300" xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Pending
+          </div>
+        }
+        @case ('On Process') {
+          <div
+            class="flex rounded-full p-2 bg-blue-100 text-center text-sm text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+            <svg class="w-6 h-6 text-blue-800 dark:text-blue-300" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            On Process
+          </div>
+        }
+        @case ('On Review') {
+          <div
+            class="flex rounded-full p-2 bg-green-100 text-center text-sm text-green-800 dark:bg-green-900 dark:text-green-300">
+            <svg class="w-6 h-6 text-green-800 dark:text-green-300" xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            On Review
+          </div>
+        }
+        @case ('Aproved') {
+          <div
+            class="flex rounded-full p-2 bg-green-100 text-center text-sm text-green-800 dark:bg-green-900 dark:text-green-300">
+            <svg class="w-6 h-6 text-green-800 dark:text-green-300" xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Aproved
+          </div>
+        }
+        @case ('Blocked') {
+          <div class="flex rounded-full p-2 bg-red-100 text-center text-sm text-red-800 dark:bg-red-900 dark:text-red-300">
+            <svg class="w-6 h-6 text-red-800 dark:text-red-300" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Blocked
+          </div>
+        }
+        @case ('Completed') {
+          <div
+            class="flex rounded-full p-2 bg-green-100 text-center text-sm text-green-800 dark:bg-green-900 dark:text-green-300">
+            <svg class="w-6 h-6 text-green-800 dark:text-green-300" xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Completed
+          </div>
+        }
+        @case ('Cancelled') {
+          <div class="flex rounded-full p-2 bg-red-100 text-center text-sm text-red-800 dark:bg-red-900 dark:text-red-300">
+            <svg class="w-6 h-6 text-red-800 dark:text-red-300" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Cancelled
+          </div>
+        }
+        @case ('Waiting Response') {
+          <div
+            class="flex rounded-full p-2 bg-yellow-100 text-center text-sm text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300">
+            <svg class="w-6 h-6 text-yellow-800 dark:text-yellow-300" xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Waiting Response
+          </div>
+        }
+        @case ('On Testing') {
+          <div
+            class="flex rounded-full p-2 bg-blue-100 text-center text-sm text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+            <svg class="w-6 h-6 text-blue-800 dark:text-blue-300" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            On Testing
+          </div>
+        }
+        @case ('Archived') {
+          <div
+            class="flex rounded-full p-2 bg-gray-100 text-center text-sm text-gray-800 dark:bg-gray-900 dark:text-gray-300">
+            <svg class="w-6 h-6 text-gray-800 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Archived
+          </div>
+        }
+      }
     </div>
     </div>
     <div class="flex items-center justify-end">
-      <div class="me-2 text-gray-600">April 5, 2025</div>
+      <div class="me-2 text-gray-600">{{task.created_at | date}}</div>
       <div>
         <img class="w-10 h-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
         alt="Rounded avatar">

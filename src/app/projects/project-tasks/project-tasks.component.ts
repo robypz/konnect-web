@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, effect, input } from '@angular/core';
 import { TaskComponent } from "../../tasks/task/task.component";
 import { TaskCreateComponent } from "../../tasks/task-create/task-create.component";
 import { Task } from '../../tasks/shared/task.model';
@@ -10,5 +10,13 @@ import { Task } from '../../tasks/shared/task.model';
   styleUrl: './project-tasks.component.scss'
 })
 export class ProjectTasksComponent {
-
+  _tasks = input<Task[]>();
+  tasks: Task[] = [];
+  constructor() {
+    effect(() => {
+      if (this._tasks() != null) {
+        this.tasks = this._tasks() as Task[];
+      }
+    });
+  }
 }

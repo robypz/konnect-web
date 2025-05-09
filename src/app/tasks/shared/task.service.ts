@@ -12,15 +12,15 @@ export class TaskService {
   private _errors = signal<string[]>([]);
 
   get tasks() {
-    return this._tasks();
+    return this._tasks;
   }
 
   get task() {
-    return this._task();
+    return this._task;
   }
 
   get errors() {
-    return this._errors();
+    return this._errors;
   }
 
   constructor() { }

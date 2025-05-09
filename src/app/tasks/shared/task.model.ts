@@ -1,3 +1,4 @@
+import { Status } from "../../core/models/status.model";
 import { Employee } from "../../employees/shared/employee.model";
 import { Project } from "../../projects/shared/project.model";
 
@@ -12,4 +13,6 @@ export interface Task {
   employee : Employee; // Employee object associated with the task
   project_id: string; // ID of the project to which the task belongs
   project : Project; // Project object associated with the task
+  status_id : string; // ID of the status of the task
+  status : Status; // Status object associated with the task
 }
