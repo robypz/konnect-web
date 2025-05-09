@@ -321,7 +321,7 @@
     <app-project-posts></app-project-posts>
   </div>
   <div class="hidden  rounded-lg bg-white-50 dark:bg-gray-800" id="tasks" role="tabpanel" aria-labelledby="tasks-tab">
-    <app-project-tasks></app-project-tasks>
+    <app-project-tasks [_tasks]="project?.tasks"></app-project-tasks>
   </div>
   <div class="hidden rounded-lg bg-white-50 dark:bg-gray-800" id="team" role="tabpanel" aria-labelledby="team-tab">
     <app-project-team [employees]="project?.employees"></app-project-team>

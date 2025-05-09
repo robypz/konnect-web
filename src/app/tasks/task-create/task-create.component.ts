@@ -5,6 +5,7 @@ import { Project } from '../../projects/shared/project.model';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { StatusService } from '../../core/services/status.service';
 import { Status } from '../../core/models/status.model';
+import { Employee } from '../../employees/shared/employee.model';
 
 @Component({
   selector: 'app-task-create',
@@ -24,12 +25,13 @@ export class TaskCreateComponent {
   public statuses!: Status[];
 
   modal: Modal | null = null;
+  employees! : Employee[];
 
   addTasksForm = new FormGroup({
     name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     description: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
-    employee_id: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
-    status_id: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    employee_id: new FormControl(null, { nonNullable: true, validators: [Validators.required] }),
+    status_id: new FormControl(null, { nonNullable: true, validators: [Validators.required] }),
     deadline: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
   });
 
@@ -39,8 +41,9 @@ export class TaskCreateComponent {
       this.projectService.index();
     });
     effect(()=>{
-      if (this._project != null) {
+      if (this._project() != null) {
         this.project = this._project() as Project;
+        this.employees = this.project.employees;
       }
       if (this._statuses != null) {
         this.statuses = this._statuses() as Status[];
@@ -56,9 +59,11 @@ export class TaskCreateComponent {
     this.modal?.hide();
   }
 
-  addTasks(){
+  create(){
     if (this.addTasksForm.valid) {
       this.projectService.addTask(this.addTasksForm.value,this.project.id);
+    }else{
+      console.log('invalid form');
     }
   }
 }

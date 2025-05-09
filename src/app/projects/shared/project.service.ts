@@ -93,7 +93,7 @@ export class ProjectService {
   }
 
 addTask(data: any, id: string) {
-  this.http.put<Project>(`${this.apiUrl}/addTask/${id}`, data).subscribe({
+  this.http.post<Project>(`${this.apiUrl}/${id}/addTask`, data).subscribe({
     next: (project) => {
       // Actualiza la lista de proyectos
       this._projects.update((projects) =>
