@@ -13,7 +13,7 @@ import { EventsComponent } from "../events/events.component";
 export class DashboardComponent {
 
   constructor() {
-    afterNextRender(() => {
+    /*afterNextRender(() => {
       const tabElement = document.getElementById('default-styled-tab') as HTMLElement;
       const tabElements = [
         {
@@ -40,6 +40,6 @@ export class DashboardComponent {
 
       const tab = new Tabs(tabElement, tabElements);
     }
-    );
+    );*/
   }
 }
