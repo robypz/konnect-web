@@ -67,7 +67,7 @@ export class ProjectService {
     this.http.put<Project>(`${this.apiUrl}/${id}`, body).subscribe({
       next: (project) => {
         this._projects.update((projects) => projects.map(p => p.id === project.id ? project : p));
-        this._project.set(project);
+        this._project.update((p) => ({ ...p, ...project }));
       },
       error: (error) => {
         this._errors.set(error);

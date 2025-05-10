@@ -38,7 +38,7 @@ export class ProjectShowComponent {
 
   constructor() {
     effect(() => {
-      if (this._project() !== null) {
+      if (this._project()) {
         this.project = this._project();
       }
     });

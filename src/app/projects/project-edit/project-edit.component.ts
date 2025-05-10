@@ -45,9 +45,9 @@ export class ProjectEditComponent {
     name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     description: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     progress: new FormControl(0, { nonNullable: true, validators: [Validators.required] }),
-    status_id: new FormControl<string|null>(null, { nonNullable: true, validators: [Validators.required] }),
+    status_id: new FormControl<string | null>(null, { nonNullable: true, validators: [Validators.required] }),
     deadline: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
-    category_id: new FormControl<string|null>(null, { nonNullable: true, validators: [Validators.required] }),
+    category_id: new FormControl<string | null>(null, { nonNullable: true, validators: [Validators.required] }),
     start_date: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     //employees: new FormControl<Employee[]>([], { nonNullable: true, validators: [Validators.required] }),
   });
