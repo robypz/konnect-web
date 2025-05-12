@@ -27,3 +27,7 @@
 .ng-submitted {
   //@apply border-blue-500 bg-blue-50 text-blue-700;
 }
+
+body{
+  @apply dark:text-white
+}
