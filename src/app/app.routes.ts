@@ -13,9 +13,13 @@ import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-l
 import { EventIndexComponent } from './events/event-index/event-index.component';
 import { EmployeeIndexComponent } from './employees/employee-index/employee-index.component';
 import { EmployeeShowComponent } from './employees/employee-show/employee-show.component';
+import { GuestLayoutComponent } from './layouts/guest-layout/guest-layout.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 
 export const routes: Routes = [
-  {path: '', component: HomeComponent},
 
   {path: 'dashboard', component: DashboardLayoutComponent,
     children:[
@@ -38,4 +42,14 @@ export const routes: Routes = [
       {path: 'employees/:id', component: EmployeeShowComponent},
     ],
   },
+
+  {path:'',component : GuestLayoutComponent,
+    children:[
+      {path: '', component: HomeComponent},
+      {path: 'signin', component: SigninComponent},
+      {path: 'signup', component: SignupComponent},
+      {path: 'forgot-password', component: ForgotPasswordComponent},
+      {path: 'reset-password', component: ResetPasswordComponent},
+    ],
+  }
 ];
