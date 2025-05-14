@@ -1,6 +1,6 @@
 <div class="min-h-[89dvh] flex justify-center items-center">
   <div>
-    <form class="max-w-md lg:w-lg dark:bg-gray-800 bg-white p-8 rounded-lg shadow-md" [formGroup]="signinForm">
+    <form class="max-w-md lg:w-lg dark:bg-gray-800 bg-white p-8 rounded-lg shadow-md" [formGroup]="signinForm" (ngSubmit)="signin()">
       <div class="mb-5">
         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
         <input formControlName="email" type="email" id="email"

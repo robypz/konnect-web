@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { afterNextRender, effect, inject, Injectable, signal } from '@angular/core';
 import { config } from '../../../../config';
+import { tick } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ export class AuthService {
   private _forgotpassword = signal<boolean>(false);
   private _passwordReset = signal<boolean>(false);
   private _error = signal<any>(null);
+  private _auth = signal<boolean>(false)
+  private _token = signal<string|null>(null);
 
   get forgotpassword() {
     return this._forgotpassword;
@@ -21,7 +24,11 @@ export class AuthService {
   }
 
   get token() {
-    return localStorage.getItem('konnect-token');
+    return this._token;
+  }
+
+  get auth(){
+    return this._auth;
   }
 
   get error() {
@@ -31,12 +38,23 @@ export class AuthService {
 
   constructor() {
 
+    this._token.set(localStorage.getItem('konnect-token'));
+    console.log(this._token());
+    effect(()=>{
+      if (this._token()) {
+        this._auth.set(true)
+      } else{
+        this._auth.set(false);
+      }
+    })
   }
 
   signin(body: any) {
     this.http.post<string>(`${this.apiUrl}/signin`, body).subscribe({
       next: (response) => {
         localStorage.setItem('konnect-token', response);
+        this._token.set(response);
+        this._auth.set(true);
       },
       error: (error) => {
         this._error.set(error);
