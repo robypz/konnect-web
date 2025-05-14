@@ -27,7 +27,10 @@ export class ForgotPasswordComponent {
 
   sendPasswordResetLink(){
     if (this.forgotPasswordForm.valid) {
+
       this.authService.sendPasswordResetLink(this.forgotPasswordForm.value);
+    }else{
+      console.log(this.error);
     }
 
   }

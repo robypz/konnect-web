@@ -16,7 +16,11 @@ export class AuthService {
     return this._forgotpassword;
   }
 
-    get error() {
+  get passwordReset() {
+    return this._passwordReset;
+  }
+
+  get error() {
     return this._error;
   }
 
@@ -31,23 +35,23 @@ export class AuthService {
 
   }
 
-  sendPasswordResetLink(body:any) {
-    this.http.post(`${this.apiUrl}/sendPasswordResetLink`,body).subscribe({
+  sendPasswordResetLink(body: any) {
+    this.http.post(`${this.apiUrl}/sendPasswordResetLink`, body).subscribe({
       next: (response) => {
         this._forgotpassword.set(true);
       },
-      error: (error) =>{
+      error: (error) => {
         this._error.set(error);
       }
     });
   }
 
-  resetPassword(body:any) {
-    this.http.post(`${this.apiUrl}/resetPassword`,body).subscribe({
+  resetPassword(body: any) {
+    this.http.post(`${this.apiUrl}/resetPassword`, body).subscribe({
       next: (response) => {
         this._passwordReset.set(true);
       },
-      error: (error) =>{
+      error: (error) => {
         this._error.set(error);
       }
     });
