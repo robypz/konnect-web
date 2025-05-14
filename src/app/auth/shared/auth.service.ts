@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { afterNextRender, effect, inject, Injectable, signal } from '@angular/core';
 import { config } from '../../../../config';
 
 @Injectable({
@@ -20,19 +20,50 @@ export class AuthService {
     return this._passwordReset;
   }
 
+  get token() {
+    return localStorage.getItem('konnect-token');
+  }
+
   get error() {
     return this._error;
   }
 
 
-  constructor() { }
-
-  signin() {
+  constructor() {
 
   }
 
-  signup() {
+  signin(body: any) {
+    this.http.post<string>(`${this.apiUrl}/signin`, body).subscribe({
+      next: (response) => {
+        localStorage.setItem('konnect-token', response);
+      },
+      error: (error) => {
+        this._error.set(error);
+      },
+    });
+  }
 
+  signup(body: any) {
+    this.http.post<string>(`${this.apiUrl}/signup`, body).subscribe({
+      next: (response) => {
+        localStorage.setItem('konnect-token', response);
+      },
+      error: (error) => {
+        this._error.set(error);
+      },
+    });
+  }
+
+  signout() {
+    this.http.post<string>(`${this.apiUrl}/signout`, null).subscribe({
+      next: (response) => {
+        localStorage.removeItem('konnect-token');
+      },
+      error: (error) => {
+        this._error.set(error);
+      },
+    });
   }
 
   sendPasswordResetLink(body: any) {
