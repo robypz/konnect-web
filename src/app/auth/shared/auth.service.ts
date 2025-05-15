@@ -13,7 +13,7 @@ export class AuthService {
   private _passwordReset = signal<boolean>(false);
   private _error = signal<any>(null);
   private _auth = signal<boolean>(false)
-  private _token = signal<string|null>(null);
+  private _token = signal<string | null>(null);
 
   get forgotpassword() {
     return this._forgotpassword;
@@ -27,7 +27,7 @@ export class AuthService {
     return this._token;
   }
 
-  get auth(){
+  get auth() {
     return this._auth;
   }
 
@@ -40,10 +40,10 @@ export class AuthService {
 
     this._token.set(localStorage.getItem('konnect-token'));
     console.log(this._token());
-    effect(()=>{
+    effect(() => {
       if (this._token()) {
         this._auth.set(true)
-      } else{
+      } else {
         this._auth.set(false);
       }
     })
@@ -104,5 +104,14 @@ export class AuthService {
         this._error.set(error);
       }
     });
+  }
+
+  getDeviceName() {
+    let userAgent = navigator.userAgent;
+    if (userAgent.includes("Windows")) return "PC con Windows";
+    if (userAgent.includes("Mac")) return "Mac";
+    if (userAgent.includes("Android")) return "Dispositivo Android";
+    if (userAgent.includes("iPhone") || userAgent.includes("iPad")) return "Dispositivo iOS";
+    return "Desconocido";
   }
 }

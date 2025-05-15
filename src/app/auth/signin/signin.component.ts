@@ -18,10 +18,11 @@ export class SigninComponent {
   signinForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    device_name: new FormControl('',[Validators.required])
+    device_name: new FormControl('', [Validators.required])
   });
 
   constructor() {
+    this.signinForm.patchValue({ device_name: this.authService.getDeviceName() });
     effect(() => {
       if (this.auth()) {
         console.log(this.auth());
