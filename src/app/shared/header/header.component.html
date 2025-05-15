@@ -55,7 +55,7 @@
             <a href="#" class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
               <div class="flex-shrink-0">
                 <img class="w-11 h-11 rounded-full"
-                  src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
+                  src="{{apiFilesUrl+user?.employee?.profile_photo}}"
                   alt="Bonnie Green avatar">
                 <div
                   class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 rounded-full border border-white bg-primary-700 dark:border-gray-700">
@@ -290,7 +290,7 @@
           class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
           id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
           <span class="sr-only">Open user menu</span>
-          <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+          <img class="w-8 h-8 rounded-full" [src]="apiFilesUrl+user?.employee?.profile_photo"
             alt="user photo">
         </button>
         <!-- Dropdown menu -->

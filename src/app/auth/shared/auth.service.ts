@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { effect, inject, Injectable, signal } from '@angular/core';
 import { config } from '../../../../config';
+import { User } from '../../core/models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class AuthService {
   private _error = signal<any>(null);
   private _auth = signal<boolean>(false)
   private _token = signal<string | null>(null);
+  private _user = signal<User | null>(null);
 
   get forgotpassword() {
     return this._forgotpassword;
@@ -32,6 +34,10 @@ export class AuthService {
 
   get error() {
     return this._error;
+  }
+
+  get user() {
+    return this._user;
   }
 
 
@@ -110,5 +116,16 @@ export class AuthService {
     if (userAgent.includes("Android")) return "Dispositivo Android";
     if (userAgent.includes("iPhone") || userAgent.includes("iPad")) return "Dispositivo iOS";
     return "Desconocido";
+  }
+
+  getUser() {
+    this.http.get<User>(`${this.apiUrl}/user`).subscribe({
+      next: (user) => {
+        this._user.set(user);
+      },
+      error: (error) => {
+        this._error.set(error);
+      }
+    });
   }
 }
