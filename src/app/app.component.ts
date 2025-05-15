@@ -11,11 +11,11 @@ import { initFlowbite } from 'flowbite';
 })
 export class AppComponent {
   title = 'konnect-web';
-  constructor(private flowbiteService: FlowbiteService) {}
+  constructor(/*private flowbiteService: FlowbiteService*/) {}
 
   ngOnInit(): void {
-    this.flowbiteService.loadFlowbite((flowbite) => {
+    /*this.flowbiteService.loadFlowbite((flowbite) => {
       initFlowbite();
-    });
+    });*/
   }
 }

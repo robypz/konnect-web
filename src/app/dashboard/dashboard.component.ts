@@ -13,7 +13,10 @@ import { User } from '../core/models/user.model';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
-
+  private authService = inject(AuthService);
+  private _user = computed(() => this.authService.user());
+  public user!: User |null;
+  private _error = computed(() => this.authService.error());
 
 
   constructor() {
@@ -45,7 +48,14 @@ export class DashboardComponent implements OnInit {
       const tab = new Tabs(tabElement, tabElements);
     }
     );*/
-    
+    effect(() => {
+      if (this._user()) {
+        this.user = this._user();
+      }
+      if (this._error() != null) {
+        console.log(this._error());
+      }
+    });
   }
 
   ngOnInit(): void {

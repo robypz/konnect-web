@@ -1,24 +1,24 @@
-import { Component, computed, effect, inject } from '@angular/core';
+import { Component, computed, effect, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/shared/auth.service';
 import { User } from '../../core/models/user.model';
 import { config } from '../../../../config';
+import { NgOptimizedImage } from '@angular/common'
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   private authService = inject(AuthService);
   private  _user = computed(() => this.authService.user());
-  public user: User | null = null;
+  public user!: User | null;
   private _error = computed(() => this.authService.error());
   
   public apiFilesUrl = config.API_PUBLIC_FILES_URL;
 
   constructor() {
-    this.authService.getUser();
     effect(() => {
       if (this._user()) {
         this.user = this._user();
@@ -27,5 +27,9 @@ export class HeaderComponent {
         console.log(this._error());
       }
     });
+  }
+
+  ngOnInit(): void {
+    this.authService.getUser();
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect, input } from '@angular/core';
 import { ProjectComponent } from "./project/project.component";
 
 @Component({
@@ -8,5 +8,12 @@ import { ProjectComponent } from "./project/project.component";
   styleUrl: './projects.component.scss'
 })
 export class ProjectsComponent {
-
+  public employeeId = input<string>();
+  constructor(){
+    effect(()=>{
+      if (this.employeeId()) {
+        console.log(this.employeeId());
+      }
+    });
+  }
 }
