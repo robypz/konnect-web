@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { afterNextRender, effect, inject, Injectable, signal } from '@angular/core';
+import { effect, inject, Injectable, signal } from '@angular/core';
 import { config } from '../../../../config';
-import { tick } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
@@ -37,12 +36,10 @@ export class AuthService {
 
 
   constructor() {
-
     this._token.set(localStorage.getItem('konnect-token'));
-    console.log(this._token());
     effect(() => {
       if (this._token()) {
-        this._auth.set(true)
+        this._auth.set(true);
       } else {
         this._auth.set(false);
       }

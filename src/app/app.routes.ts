@@ -18,6 +18,7 @@ import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
 
@@ -41,6 +42,7 @@ export const routes: Routes = [
       {path: 'employees', component: EmployeeIndexComponent},
       {path: 'employees/:id', component: EmployeeShowComponent},
     ],
+    canActivate : [authGuard]
   },
 
   {path:'',component : GuestLayoutComponent,
