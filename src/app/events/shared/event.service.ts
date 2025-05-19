@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Event } from './event.model';
+import { config } from '../../../../config';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +10,16 @@ export class EventService {
   private http = inject(HttpClient);
   private _events = signal<Event[]>([]);
   private _event = signal<Event | null>(null);
-  private _errors = signal<string[]>([]);
+  private _errors = signal<HttpErrorResponse|null>(null);
+  private apiUrl = config.API_URL+'/events';
 
   constructor() { }
 
-  get Events() {
+  get events() {
     return this._events();
   }
 
-  get Event() {
+  get event() {
     return this._event();
   }
 
@@ -47,13 +49,14 @@ export class EventService {
     });
   }
 
-  store(event: Event) {
-    this.http.post<Event>('/api/events', event).subscribe({
+  store(data: any) {
+    this.http.post<Event>(`${this.apiUrl}`, data).subscribe({
       next: (event) => {
         this._events.update(events => [...events, event]);
+        this._event.set(event);
       },
       error: (error) => {
-        this._errors.set(error.error.errors);
+        this._errors.set(error);
       }
     });
   }

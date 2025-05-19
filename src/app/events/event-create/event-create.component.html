@@ -36,53 +36,103 @@
           </button>
         </div>
         <!-- Modal body -->
-        <form class="p-4 md:p-5">
+        <form class="p-4 md:p-5" [formGroup]="createEventForm" (ngSubmit)="onSubmit()">
           <div class="grid gap-4 mb-4 grid-cols-2">
             <div class="col-span-2">
               <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Event Name</label>
-              <input type="text" name="name" id="name"
+              <input type="text" name="name" id="name" formControlName="name"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Type project name" required="">
+              @if (createEventForm.get('name')?.invalid && (createEventForm.get('name')?.dirty ||
+              createEventForm.get('name')?.touched)) {
+              <div class="text-red-500 text-sm mt-1">
+                @if (createEventForm.get('name')?.hasError('required')) {
+                <div>
+                  Name is required.
+                </div>
+                }
+              </div>
+              }
             </div>
             <div class="col-span-2">
               <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Description</label>
-              <textarea id="description" rows="4"
+              <textarea id="description" rows="4" formControlName="description"
                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Write project description here"></textarea>
+              @if (createEventForm.get('description')?.invalid && (createEventForm.get('description')?.dirty ||
+              createEventForm.get('description')?.touched)) {
+              <div class="text-red-500 text-sm mt-1">
+                @if (createEventForm.get('description')?.hasError('required')) {
+                <div>
+                  Description is required.
+                </div>
+                }
+              </div>
+              }
             </div>
             <div class="col-span-2">
-              <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Event
+              <label for="event_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Event
                 Type</label>
-              <select id="category"
+              <select id="event_type" formControlName="event_type" id="event_type"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                <option selected="">Select department</option>
-                <option value="TV">TV/Monitors</option>
-                <option value="PC">PC</option>
-                <option value="GA">Gaming/Console</option>
-                <option value="PH">Phones</option>
+                <option selected value="null">Select event type</option>
+                <option value="metting">Metting</option>
+                <option value="workshop">Workshop</option>
+                <option value="social">Social</option>
+                <option value="deadline">Deadline</option>
+                <option value="other">Other</option>
               </select>
+              @if (createEventForm.get('event_type')?.invalid && (createEventForm.get('event_type')?.dirty ||
+              createEventForm.get('event_type')?.touched)) {
+              <div class="text-red-500 text-sm mt-1">
+                @if (createEventForm.get('event_type')?.hasError('required')) {
+                <div>
+                  Event type is required.
+                </div>
+                }
+              </div>
+              }
             </div>
             <div class="col-span-2">
               <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
-              <input type="date" name="price" id="price"
+              <input type="date" id="date" formControlName="date"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="" required="">
+              @if (createEventForm.get('date')?.invalid && (createEventForm.get('date')?.dirty ||
+              createEventForm.get('date')?.touched)) {
+              <div class="text-red-500 text-sm mt-1">
+                @if (createEventForm.get('date')?.hasError('required')) {
+                <div>
+                  Date is required.
+                </div>
+                }
+              </div>
+              }
             </div>
 
             <div class="col-span-2">
               <span class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time</span>
               <div class="flex items-center mb-4">
-                <input id="default-radio-1" type="radio" value="" name="default-radio"
+                <input id="time-1" type="radio" value="false" name="time" formControlName="time"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">All day</label>
+                <label for="time-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">All day</label>
               </div>
               <div class="flex items-center">
-                <input checked id="default-radio-2" type="radio" value="" name="default-radio"
+                <input checked id="time-2" type="radio" value="true" name="time" formControlName="time"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Specific time</label>
+                <label for="time-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Specific
+                  time</label>
               </div>
+              @if (createEventForm.hasError('eventDuration')) {
+              <div class="text-red-500 text-sm mt-1">
 
+                <div>
+                  Event duration must be set.
+                </div>
+
+              </div>
+              }
             </div>
             <div class="col-span-1">
               <label for="time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Start Time</label>
@@ -95,9 +145,10 @@
                       clip-rule="evenodd" />
                   </svg>
                 </div>
-                <input type="time" id="time"
+                <input type="time" id="start_time" formControlName="start_time"
                   class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  min="09:00" max="18:00" value="00:00" required />
+                  required />
+
               </div>
             </div>
             <div class="col-span-1">
@@ -111,16 +162,16 @@
                       clip-rule="evenodd" />
                   </svg>
                 </div>
-                <input type="time" id="time"
+                <input type="time" id="end_time" formControlName="end_time"
                   class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  min="09:00" max="18:00" value="00:00" required />
+                  required />
               </div>
             </div>
             <div class="col-span-2">
               <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
-              <input type="text" name="name" id="name"
+              <input type="text" name="location" id="location" formControlName="location"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="Type project name" required="">
+                placeholder="Event location" required>
             </div>
           </div>
           <div>
@@ -128,9 +179,9 @@
               class="text-white mb-1 w-1/1 inline-flex items-center justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
               Add new Event
             </button>
-            <button type="button" data-modal-toggle="create-event-modal" 
-              class="text-gray w-1/1 inline-flex items-center justify-center bg-gray-100 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Cancel
+            <button type="button" data-modal-toggle="create-event-modal"
+              class="text-gray w-1/1 inline-flex items-center justify-center bg-gray-100 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-gray dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              <span>Cancel</span>
             </button>
           </div>
 

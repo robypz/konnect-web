@@ -1,6 +1,8 @@
-import { /*afterNextRender,*/ Component } from '@angular/core';
+import { afterNextRender, Component, computed, effect, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-//import { Modal } from 'flowbite';
+import { EventService } from '../shared/event.service';
+import { Modal } from 'flowbite';
+import { timeValidator } from '../shared/timeValidator';
 
 @Component({
   selector: 'app-event-create',
@@ -9,7 +11,10 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './event-create.component.scss'
 })
 export class EventCreateComponent {
-  //modal : Modal | null = null;
+  private eventService = inject(EventService);
+  private event = computed(() => this.eventService.event);
+  private errors = computed(() => this.eventService.errors);
+  modal : Modal | null = null;
 
   createEventForm = new FormGroup({
     name: new FormControl('',[Validators.required]),
@@ -19,20 +24,36 @@ export class EventCreateComponent {
     start_time: new FormControl('',[Validators.required]),
     end_time: new FormControl('',[Validators.required]),
     location: new FormControl('',[Validators.required]),
-  });
-
-
+    event_type: new FormControl(null,[Validators.required]),
+  },{validators: [timeValidator]});
 
   constructor() {
-    /*afterNextRender(() => {
+    afterNextRender(() => {
       this.modal = new Modal(document.getElementById('create-event-modal') as HTMLElement);
-    });*/
+    });
 
+    effect(()=>{
+      if(this.event()){
+        this.modal?.hide();
+      }
+      if(this.errors()){
+        console.log(this.errors());
+      }
+    });
   }
-  /*openModal(){
+
+  onSubmit() {
+    if (this.createEventForm.valid) {
+      this.eventService.store(this.createEventForm.value);
+    } else {
+      console.log(this.createEventForm.errors);
+    }
+  }
+
+  openModal(){
     this.modal?.show();
   }
   closeModal(){
     this.modal?.hide();
-  }*/
+  }
 }
