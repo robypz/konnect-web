@@ -74,6 +74,9 @@
     </ul>
   </div>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  mt-4">
-    <app-event></app-event>
+    @for (eventss of events; track $index) {
+      <app-event [_event]="eventss"></app-event>
+    }
+    
   </div>
 </div>

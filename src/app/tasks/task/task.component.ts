@@ -1,6 +1,7 @@
 import { Component, effect, input } from '@angular/core';
 import { Task } from '../shared/task.model';
 import { DatePipe } from '@angular/common';
+import { config } from '../../../../config';
 
 @Component({
   selector: 'app-task',
@@ -11,6 +12,7 @@ import { DatePipe } from '@angular/common';
 export class TaskComponent {
   _task = input<Task>();
   task!: Task;
+  apiFilesUrl = config.API_PUBLIC_FILES_URL;
   constructor(){
     effect(()=>{
       if (this._task() !== null) {

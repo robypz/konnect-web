@@ -86,6 +86,8 @@
     </ul>
   </div>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  mt-4">
-    <app-task></app-task>
+    @for (task of tasks; track $index) {
+      <app-task [_task]="task"></app-task>
+    }
   </div>
 </div>

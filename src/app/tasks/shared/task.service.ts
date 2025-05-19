@@ -28,9 +28,9 @@ export class TaskService {
   constructor() { }
 
   index() {
-    this.http.get<Task[]>('http://localhost:3000/tasks').subscribe({
-      next: (tasks) => {
-        this._tasks.set(tasks);
+    this.http.get(`${this.apiUrl}`).subscribe({
+      next: (res :any) => {
+        this._tasks.set(res.data as Task[]);
         this._error.set(null);
       },
       error: (error) => {

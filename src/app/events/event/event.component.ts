@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, effect, input } from '@angular/core';
+import { Event } from '../shared/event.model';
 
 @Component({
   selector: 'app-event',
@@ -7,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './event.component.scss'
 })
 export class EventComponent {
-
+  _event = input<Event>();
+  event!: Event;
+  constructor(){
+    effect(()=>{
+      if (this._event()) {
+        this.event = this._event() as Event;
+      }
+    })
+  }
 }

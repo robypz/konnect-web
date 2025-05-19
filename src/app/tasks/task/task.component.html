@@ -176,7 +176,7 @@
     <div class="flex items-center justify-end">
       <div class="me-2 text-gray-600">{{task.created_at | date}}</div>
       <div>
-        <img class="w-10 h-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+        <img class="w-10 h-10 rounded-full" src="{{apiFilesUrl+task.employee.profile_photo}}"
           alt="Rounded avatar">
       </div>
     </div>

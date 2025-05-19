@@ -1,4 +1,4 @@
-import { afterNextRender, Component, computed, effect, inject } from '@angular/core';
+import { afterNextRender, Component, computed, effect, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EventService } from '../shared/event.service';
 import { Modal } from 'flowbite';
@@ -12,9 +12,9 @@ import { timeValidator } from '../shared/timeValidator';
 })
 export class EventCreateComponent {
   private eventService = inject(EventService);
-  private event = computed(() => this.eventService.event);
-  private errors = computed(() => this.eventService.errors);
-  modal : Modal | null = null;
+  private event = computed(() => this.eventService.event());
+  private error = computed(() => this.eventService.error());
+  modal! : Modal;
 
   createEventForm = new FormGroup({
     name: new FormControl('',[Validators.required]),
@@ -31,13 +31,12 @@ export class EventCreateComponent {
     afterNextRender(() => {
       this.modal = new Modal(document.getElementById('create-event-modal') as HTMLElement);
     });
-
     effect(()=>{
       if(this.event()){
         this.modal?.hide();
       }
-      if(this.errors()){
-        console.log(this.errors());
+      if(this.error()){
+        console.log(this.error());
       }
     });
   }

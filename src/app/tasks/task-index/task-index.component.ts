@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, computed, effect, inject } from '@angular/core';
 import { TaskComponent } from "../task/task.component";
 import { TaskCreateComponent } from "../task-create/task-create.component";
+import { TaskService } from '../shared/task.service';
+import { Task } from '../shared/task.model';
 
 @Component({
   selector: 'app-task-index',
@@ -8,16 +10,17 @@ import { TaskCreateComponent } from "../task-create/task-create.component";
   templateUrl: './task-index.component.html',
   styleUrl: './task-index.component.scss'
 })
-export class TaskIndexComponent implements OnInit {
-  public projectId: string = '';
+export class TaskIndexComponent  {
+  private taskService = inject(TaskService);
+  private _tasks = computed(() => this.taskService.tasks());
+  public tasks : Task[] = [];
 
-  @Input()
-  set id(id: string) {
-    this.projectId = id;
-  }
-
-
-  ngOnInit() {
-    console.log('TaskIndexComponent initialized with projectId:', this.projectId);
+  constructor(){
+    this.taskService.index();
+    effect(()=>{
+      if (this._tasks()) {
+        this.tasks = this._tasks();
+      }
+    })
   }
 }

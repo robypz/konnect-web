@@ -10,30 +10,31 @@ export class EventService {
   private http = inject(HttpClient);
   private _events = signal<Event[]>([]);
   private _event = signal<Event | null>(null);
-  private _errors = signal<HttpErrorResponse|null>(null);
+  private _error = signal<HttpErrorResponse|null>(null);
   private apiUrl = config.API_URL+'/events';
 
   constructor() { }
 
   get events() {
-    return this._events();
+    return this._events;
   }
 
   get event() {
-    return this._event();
+    return this._event;
   }
 
-  get errors() {
-    return this._errors();
+  get error() {
+    return this._error;
   }
 
   index() {
-    this.http.get<Event[]>('/api/events').subscribe({
-      next: (events) => {
-        this._events.set(events);
+    this.http.get(`${this.apiUrl}`).subscribe({
+      next: (res:any) => {
+        this._events.set(res.data as Event[]);
+        this._error.set(null);
       },
       error: (error) => {
-        this._errors.set(error.error.errors);
+        this._error.set(error);
       }
     });
   }
@@ -44,7 +45,7 @@ export class EventService {
         this._event.set(event);
       },
       error: (error) => {
-        this._errors.set(error.error.errors);
+        this._error.set(error.error.errors);
       }
     });
   }
@@ -56,7 +57,7 @@ export class EventService {
         this._event.set(event);
       },
       error: (error) => {
-        this._errors.set(error);
+        this._error.set(error);
       }
     });
   }
@@ -66,7 +67,7 @@ export class EventService {
         this._events.update(events => events.map(e => e.id === event.id ? event : e));
       },
       error: (error) => {
-        this._errors.set(error.error.errors);
+        this._error.set(error.error.errors);
       }
     });
   }
@@ -77,7 +78,7 @@ export class EventService {
         this._events.update(events => events.filter(event => event.id !== id));
       },
       error: (error) => {
-        this._errors.set(error.error.errors);
+        this._error.set(error.error.errors);
       }
     });
   }
