@@ -57,10 +57,11 @@ export class EmployeeService {
   }
 
   store(employee: FormData) {
-    this.http.post<Employee>(`${this.apiUrl}`, employee).subscribe({
-      next: (employee) => {
-        this._employee.set(employee);
-        this._employees.update((employees) => [...employees, employee]);
+    this.http.post(`${this.apiUrl}`, employee).subscribe({
+      next: (res) => {
+        console.log(res);
+        /*this._employee.set(employee);
+        this._employees.update((employees) => [...employees, employee]);*/
       },
       error: (error) => {
         this._errors.set([error]);
