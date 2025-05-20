@@ -15,9 +15,10 @@ import { User } from '../core/models/user.model';
 export class DashboardComponent implements OnInit {
   private authService = inject(AuthService);
   private _user = computed(() => this.authService.user());
-  public user!: User;
+  public user!: User |null;
   private _error = computed(() => this.authService.error());
 
+  public projectCount = 0;
 
   constructor() {
     /*afterNextRender(() => {
@@ -50,7 +51,7 @@ export class DashboardComponent implements OnInit {
     );*/
     effect(() => {
       if (this._user()) {
-        this.user = this._user() as User;
+        this.user = this._user();
       }
       if (this._error() != null) {
         console.log(this._error());

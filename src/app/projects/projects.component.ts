@@ -1,7 +1,6 @@
-import { Component, computed, effect, inject, input } from '@angular/core';
+import { Component, computed, effect, inject, input, model } from '@angular/core';
 import { ProjectComponent } from "./project/project.component";
 import { ProjectService } from './shared/project.service';
-import { EmployeeService } from '../employees/shared/employee.service';
 import { Project } from './shared/project.model';
 
 @Component({
@@ -13,19 +12,22 @@ import { Project } from './shared/project.model';
 export class ProjectsComponent {
 
   public employeeId = input<string>();
+  projectCount = model<number>(0);
+
 
   private projectService = inject(ProjectService);
   private _projects = computed(()=>this.projectService.projects());
 
-  
-  get projects() : Project[] {
-    return this._projects();
-  }
+  public projects! : Project[];
   
   constructor(){
     effect(()=>{
       if (this.employeeId()) {
         this.projectService.byEmployee(this.employeeId() as string);
+      }
+      if (this._projects() !== this.projects) {
+        this.projects = this._projects();
+        this.projectCount.set(this.projects.length);
       }
     });
   }
