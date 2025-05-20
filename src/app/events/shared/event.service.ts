@@ -10,8 +10,8 @@ export class EventService {
   private http = inject(HttpClient);
   private _events = signal<Event[]>([]);
   private _event = signal<Event | null>(null);
-  private _error = signal<HttpErrorResponse|null>(null);
-  private apiUrl = config.API_URL+'/events';
+  private _error = signal<HttpErrorResponse | null>(null);
+  private apiUrl = config.API_URL + '/events';
 
   constructor() { }
 
@@ -29,15 +29,8 @@ export class EventService {
 
   index() {
     this.http.get(`${this.apiUrl}`).subscribe({
-      next: (res:any) => {
-        if (res.data.length === 0) {
-          this._events.set([]);
-          this._error.set(null);
-        }else{
-        this._events.set(res.data as Event[]);
-        
-        }
-
+      next: (res: any) => {
+        this._events.set(res.data);
       },
       error: (error) => {
         this._error.set(error);
