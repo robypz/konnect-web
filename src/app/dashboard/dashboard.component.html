@@ -149,7 +149,7 @@
   </div>
 </div>
 -->
-<div class="my-4 border border-gray-200 dark:border-gray-700">
+<div class="my-4 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
   <ul class="flex -mb-px justify-around text-sm font-medium " id="default-styled-tab"
     data-tabs-toggle="#default-styled-tab-content"
     data-tabs-active-classes="text-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 border-blue-600 dark:border-blue-500"
@@ -183,18 +183,15 @@
   <div class="hidden p-0 rounded-lg " id="styled-profile" role="tabpanel" aria-labelledby="profile-tab">
     <!-- <app-posts></app-posts> -->
   </div>
-  <div class="hidden p-0 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-dashboard" role="tabpanel"
+  <div class="hidden p-0 rounded-lg " id="styled-dashboard" role="tabpanel"
     aria-labelledby="dashboard-tab">
-
     <app-projects [employeeId]="user?.employee?.id"></app-projects>
-
-
   </div>
-  <div class="hidden p-0 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-settings" role="tabpanel"
+  <div class="hidden p-0 rounded-lg " id="styled-settings" role="tabpanel"
     aria-labelledby="settings-tab">
     <app-tasks [employeeId]="user?.employee?.id"></app-tasks>
   </div>
-  <div class="hidden p-0 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-contacts" role="tabpanel"
+  <div class="hidden p-0 rounded-lg " id="styled-contacts" role="tabpanel"
     aria-labelledby="contacts-tab">
     <!--<app-events></app-events>-->
   </div>
