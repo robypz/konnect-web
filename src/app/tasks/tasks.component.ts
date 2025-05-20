@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input } from '@angular/core';
+import { Component, computed, effect, inject, input, model } from '@angular/core';
 import { TaskComponent } from "./task/task.component";
 import { AuthService } from '../auth/shared/auth.service';
 import { TaskService } from './shared/task.service';
@@ -15,6 +15,7 @@ export class TasksComponent {
   private taskService = inject(TaskService);
   private _tasks = computed(()=>this.taskService.tasks());
   public tasks! : Task[];
+  public tasksCount = model<number>(0);
   constructor(){
     effect(()=>{
       if (this.employeeId()) {
@@ -22,6 +23,7 @@ export class TasksComponent {
       }
       if (this._tasks()) {
         this.tasks = this._tasks();
+        this.tasksCount.set(this.tasks.length);
       }
     })
   }

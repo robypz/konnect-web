@@ -19,7 +19,7 @@
   <div class="flex items-center justify-between h-24 rounded-sm bg-gray-50 dark:bg-gray-800 px-8">
     <div>
       <h2 class="text-2xl font-bold">Tasks</h2>
-      <p class="font-semibold text-xl">12</p>
+      <p class="font-semibold text-xl">{{taskCount}}</p>
     </div>
     <div>
       <svg class="w-8 h-8 text-blue-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -189,7 +189,7 @@
   </div>
   <div class="hidden p-0 rounded-lg " id="styled-settings" role="tabpanel"
     aria-labelledby="settings-tab">
-    <app-tasks [employeeId]="user?.employee?.id"></app-tasks>
+    <app-tasks [employeeId]="user?.employee?.id" [(tasksCount)]="taskCount"></app-tasks>
   </div>
   <div class="hidden p-0 rounded-lg " id="styled-contacts" role="tabpanel"
     aria-labelledby="contacts-tab">

@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   private _error = computed(() => this.authService.error());
 
   public projectCount = 0;
+  public taskCount = 0;
 
   constructor() {
     /*afterNextRender(() => {
