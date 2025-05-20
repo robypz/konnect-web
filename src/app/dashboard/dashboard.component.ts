@@ -20,6 +20,8 @@ export class DashboardComponent implements OnInit {
 
   public projectCount = 0;
   public taskCount = 0;
+  public eventCount = 0;
+  public postCount = 0;
 
   constructor() {
     /*afterNextRender(() => {
