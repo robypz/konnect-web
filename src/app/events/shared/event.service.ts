@@ -30,8 +30,14 @@ export class EventService {
   index() {
     this.http.get(`${this.apiUrl}`).subscribe({
       next: (res:any) => {
+        if (res.data.length === 0) {
+          this._events.set([]);
+          this._error.set(null);
+        }else{
         this._events.set(res.data as Event[]);
-        this._error.set(null);
+        
+        }
+
       },
       error: (error) => {
         this._error.set(error);

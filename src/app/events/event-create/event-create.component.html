@@ -77,7 +77,7 @@
               <select id="event_type" formControlName="event_type" id="event_type"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                 <option selected value="null">Select event type</option>
-                <option value="metting">Metting</option>
+                <option value="meeting">Metting</option>
                 <option value="workshop">Workshop</option>
                 <option value="social">Social</option>
                 <option value="deadline">Deadline</option>
@@ -114,12 +114,12 @@
             <div class="col-span-2">
               <span class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time</span>
               <div class="flex items-center mb-4">
-                <input id="time-1" type="radio" value="false" name="time" formControlName="time"
+                <input id="time-1" type="radio" [value]="false" name="time" formControlName="time"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="time-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">All day</label>
               </div>
               <div class="flex items-center">
-                <input checked id="time-2" type="radio" value="true" name="time" formControlName="time"
+                <input checked id="time-2" type="radio" [value]="true" name="time" formControlName="time"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="time-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Specific
                   time</label>
