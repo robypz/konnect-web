@@ -57,12 +57,12 @@
     <div>
       Showing 12 of 12 team members
     </div>
-    <div class="flex items-center justify-end bg-gray-100 rounded-md px-2 space-x-2 py-2">
-      <button class="p-2 rounded rounded-md hover:bg-white">Direct</button>
-      <button class="p-2 rounded rounded-md hover:bg-white">Group</button>
+    <div class="flex items-center justify-end bg-gray-100 dark:bg-gray-900 rounded-md px-2 space-x-2 py-2">
+      <button class="p-2 rounded rounded-md bg-gray-50 dark:bg-gray-800">Direct</button>
+      <button class="p-2 rounded rounded-md bg-gray-50 dark:bg-gray-800">Group</button>
     </div>
   </div>
-  <div class="my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+  <div class="my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
     @for (employee of employees; track employee.id) {
     <app-employee [employee]="employee"></app-employee>
     }
