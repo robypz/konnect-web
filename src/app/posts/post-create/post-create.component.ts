@@ -1,4 +1,4 @@
-import { afterNextRender, Component } from '@angular/core';
+import { afterNextRender, Component, input } from '@angular/core';
 import { Modal } from 'flowbite';
 
 @Component({
@@ -8,6 +8,11 @@ import { Modal } from 'flowbite';
   styleUrl: './post-create.component.scss'
 })
 export class PostCreateComponent {
+
+
+  proyectId = input<string>();
+  employeeId = input<string>();
+
   modal : Modal | null = null;
   constructor() {
     afterNextRender(() => {

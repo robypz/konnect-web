@@ -8,7 +8,7 @@ import { AuthService } from '../auth/shared/auth.service';
 import { User } from '../core/models/user.model';
 @Component({
   selector: 'app-dashboard',
-  imports: [/*PostsComponent,*/ProjectsComponent, TasksComponent, EventsComponent],
+  imports: [/*PostsComponent,*/ ProjectsComponent, TasksComponent, EventsComponent, PostsComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
