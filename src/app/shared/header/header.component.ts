@@ -2,11 +2,10 @@ import { Component, computed, effect, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/shared/auth.service';
 import { User } from '../../core/models/user.model';
 import { config } from '../../../../config';
-import { NgOptimizedImage } from '@angular/common'
 
 @Component({
   selector: 'app-header',
-  imports: [NgOptimizedImage],
+  imports: [],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

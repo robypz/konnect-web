@@ -1,9 +1,11 @@
-import { afterNextRender, Component, input } from '@angular/core';
+import { afterNextRender, Component, effect, input } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Modal } from 'flowbite';
+import { User } from '../../core/models/user.model';
 
 @Component({
   selector: 'app-post-create',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './post-create.component.html',
   styleUrl: './post-create.component.scss'
 })
@@ -13,10 +15,25 @@ export class PostCreateComponent {
   proyectId = input<string>();
   employeeId = input<string>();
 
+  createPostForm = new FormGroup({
+    content: new FormControl(''),
+    media: new FormControl<File[]>([]),
+    proyect_id: new FormControl(''),
+    employee_id: new FormControl('')
+  });
+
   modal : Modal | null = null;
   constructor() {
     afterNextRender(() => {
       this.modal = new Modal(document.getElementById('post-create-modal') as HTMLElement);
+    });
+    effect(() => {
+      if (this.proyectId()) {
+
+      }
+      if (this.employeeId()) {
+        this.createPostForm.get('employee_id')?.setValue(this.employeeId() as string);
+      }
     });
   }
   openModal(){
@@ -24,5 +41,9 @@ export class PostCreateComponent {
   }
   closeModal(){
     this.modal?.hide();
+  }
+
+  onSubmit(){
+
   }
 }

@@ -290,7 +290,8 @@
           id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
           <span class="sr-only">Open user menu</span>
           @if (user) {
-          <img class="rounded-full" ngSrc="{{apiFilesUrl+user.employee.profile_photo}}"  width="32" height="32" priority>
+          <img class="rounded-full" src="{{apiFilesUrl+user.employee.profile_photo}}" width="32" height="32"
+            alt="user photo">
           }
 
         </button>
