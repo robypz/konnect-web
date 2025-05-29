@@ -1,3 +1,6 @@
+import { Employee } from "../../employees/shared/employee.model";
+import { Project } from "../../projects/shared/project.model";
+
 export interface Post {
     id: string;
     content: string;
@@ -5,18 +8,7 @@ export interface Post {
     created_at: Date;
     updated_at: Date;
     employee_id: string;
-    proyect_id?: string;
-    employee: {
-        id: string;
-        name: string;
-        email: string;
-        avatar?: string;
-    };
-    proyect?: {
-        id: string;
-        name: string;
-        description?: string;
-        start_date?: Date;
-        end_date?: Date;
-    };
+    employee: Employee
+    project_id?: string;
+    project: Project
 }

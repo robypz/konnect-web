@@ -1,6 +1,8 @@
 <div>
   <div class="grid grid-cols-4 gap-4">
     <app-post-create [employeeId]="employeeId()" class="col-span-2 col-start-2"></app-post-create>
-    <app-post class="col-span-2 col-start-2"></app-post>
+    @for (post of posts; track $index) {
+    <app-post class="col-span-2 col-start-2" [_post]="post"></app-post>
+    }
   </div>
 </div>

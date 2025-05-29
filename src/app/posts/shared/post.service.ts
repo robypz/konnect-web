@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { inject, Injectable, Signal, signal } from '@angular/core';
 import { Post } from './post.model';
 import { config } from '../../../../config';
@@ -29,9 +29,10 @@ export class PostService {
   }
 
   public index (){
-    this.http.get<Post[]>(this.apiUrl).subscribe({
-      next: (posts) => {
-        this._posts.set(posts);
+    this.http.get(this.apiUrl).subscribe({
+      next: (res : any) => {
+        this._posts.set(res.data);
+        console.log(this._posts());
       },
       error: (error) => {
         this._error.set(error);
@@ -41,16 +42,17 @@ export class PostService {
 
   public show(id: string) {
     this.http.get<Post>(`${this.apiUrl}/${id}`).subscribe({
-      next: (post) => {
-        this._post.set(post);
+      next: (posts) => {
+        this._post.set(posts);
       },
       error: (error) => {
         this._error.set(error);
+        console.log(error)
       }
     });
   }
 
-  public create(body: any) {
+  public store(body: any) {
     this.http.post<Post>(this.apiUrl, body).subscribe({
       next: (newPost) => {
         this._posts.update(posts => [...posts, newPost]);

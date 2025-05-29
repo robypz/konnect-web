@@ -2,12 +2,12 @@
   <div class="flex justify-between mb-3">
     <div class="flex">
       <div class="me-2">
-        <img class="w-10 h-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+        <img class="w-10 h-10 rounded-full" [src]="apiFilesUrl+post?.employee?.profile_photo"
           alt="Rounded avatar">
       </div>
       <div>
-        <p class="text-sm">Jhon Doe</p>
-        <p class="text-xs text-gray-400">Position</p>
+        <p class="text-sm capitalize">{{post?.employee?.user?.name + ' ' +post?.employee?.user?.last_name}}</p>
+        <p class="text-xs text-gray-400">{{post?.employee?.job}}</p>
       </div>
     </div>
     <div class="flex items-center">
@@ -17,12 +17,11 @@
       </svg>
     </div>
   </div>
-  <div class="post-body">
-    <p class="text-md">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita beatae perferendis suscipit
-      molestiae sapiente voluptates repellat deleniti quibusdam dolor, cum eos placeat soluta ratione animi unde!
-      Asperiores vitae modi dolorum.</p>
+  <div class="post-body mb-3">
+    <p class="text-md">{{post?.content}}</p>
   </div>
 
+  @if (post?.media) {
   <div id="animation-carousel" class="relative w-full" data-carousel="static">
     <!-- Carousel wrapper -->
     <div class="relative h-56 overflow-hidden rounded-lg">
@@ -54,8 +53,8 @@
     </div>
     <!-- Slider controls -->
     <button type="button"
-      class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" id="data-carousel-prev"
-      data-carousel-prev>
+      class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+      id="data-carousel-prev" data-carousel-prev>
       <span
         class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
         <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
@@ -67,8 +66,8 @@
       </span>
     </button>
     <button type="button"
-      class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" id="data-carousel-next"
-      data-carousel-next>
+      class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+      id="data-carousel-next" data-carousel-next>
       <span
         class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
         <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
@@ -80,20 +79,26 @@
       </span>
     </button>
   </div>
+  }
+
 
   <div class="flex my-3 justify-end ">
     <div class="flex items-center me-4 hover:cursor-pointer hover:bg-gray-200 p-2 rounded-md">
-      <svg class="me-1 w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
+      <svg class="me-1 w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+        width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
       </svg>
       <span>4</span>
     </div>
 
-      <app-comments></app-comments>
+    <app-comments></app-comments>
 
     <div class="flex items-center hover:cursor-pointer hover:bg-gray-200 p-2 rounded-md">
-      <svg class="me-1 w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"/>
+      <svg class="me-1 w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+        width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3" />
       </svg>
       <span>Share</span>
     </div>

@@ -1,6 +1,8 @@
-import { afterNextRender, Component, OnInit } from '@angular/core';
+import { afterNextRender, Component, input, OnInit } from '@angular/core';
 import { Carousel, CarouselInterface, CarouselItem } from 'flowbite';
 import { CommentsComponent } from "../../comments/comments.component";
+import { Post } from '../shared/post.model';
+import { config } from '../../../../config';
 
 @Component({
   selector: 'app-post',
@@ -9,6 +11,13 @@ import { CommentsComponent } from "../../comments/comments.component";
   styleUrl: './post.component.scss'
 })
 export class PostComponent implements OnInit {
+
+  public _post = input<Post>();
+  public apiFilesUrl = config.API_PUBLIC_FILES_URL;
+  get post() {
+    return this._post();
+  }
+
   constructor() {
     afterNextRender(() => {
       const items: CarouselItem[] = [

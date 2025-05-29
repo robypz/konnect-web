@@ -1,6 +1,8 @@
-import { Component, effect, input } from '@angular/core';
+import { Component, computed, effect, inject, input } from '@angular/core';
 import { PostComponent } from "./post/post.component";
 import { PostCreateComponent } from "./post-create/post-create.component";
+import { PostService } from './shared/post.service';
+import { Post } from './shared/post.model';
 
 @Component({
   selector: 'app-posts',
@@ -10,6 +12,18 @@ import { PostCreateComponent } from "./post-create/post-create.component";
 })
 export class PostsComponent {
   employeeId = input<string>();
+
+  private postService = inject(PostService);
+  private _posts = computed(() => this.postService.posts());
+  private _error = computed(() => this.postService.error());
+  public posts : Post[] = [];
+
   constructor(){
+    this.postService.index();
+    effect(()=>{
+      if (this._posts() !== this.posts) {
+        this.posts = this._posts();
+      }
+    });
   }
 }
