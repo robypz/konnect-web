@@ -11,14 +11,7 @@ import { Modal } from 'flowbite';
   styleUrl: './comments.component.scss'
 })
 export class CommentsComponent {
-  comments = input<Comment[]>([
-    { id: "1", content: 'This is a comment' },
-    { id: "2", content: 'This is another comment' },
-    { id: "3", content: 'Yet another comment' },
-    { id: "4", content: 'This is a comment' },
-    { id: "5", content: 'This is another comment' },
-    { id: "6", content: 'Yet another comment' }
-  ]);
+  comments = input<Comment[]>([]);
 
   modal : Modal | null = null;
   constructor() {
