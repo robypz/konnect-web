@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
+import { CommentService } from '../shared/comment.service';
 
 @Component({
   selector: 'app-comment-create',
@@ -7,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './comment-create.component.scss'
 })
 export class CommentCreateComponent {
-
+  private commentService = inject(CommentService);
+  postId = input<string>();
 }
