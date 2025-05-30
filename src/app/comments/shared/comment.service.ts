@@ -24,7 +24,7 @@ export class CommentService {
     return this._comments;
   }
 
-  public get cooment() {
+  public get comment() {
     return this._comment;
   }
 
@@ -50,4 +50,6 @@ export class CommentService {
       },
     })
   }
+
+
 }

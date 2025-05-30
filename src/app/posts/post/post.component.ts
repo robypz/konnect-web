@@ -13,9 +13,11 @@ import { config } from '../../../../config';
 export class PostComponent implements OnInit {
 
   public _post = input<Post>();
+  
   public apiFilesUrl = config.API_PUBLIC_FILES_URL;
+
   get post() {
-    return this._post();
+    return this._post() as Post;
   }
 
   constructor() {
