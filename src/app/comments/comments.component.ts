@@ -12,6 +12,7 @@ import { Modal } from 'flowbite';
 })
 export class CommentsComponent {
   comments = input<Comment[]>([]);
+  postId = input<string>();
 
   modal : Modal | null = null;
   constructor() {

@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, effect, inject, input } from '@angular/core';
 import { CommentService } from '../shared/comment.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
@@ -14,12 +14,16 @@ export class CommentCreateComponent {
 
   createCommentForm = new FormGroup({
     post_id: new FormControl('', [Validators.required]),
-    employee_id: new FormControl('', [Validators.required]),
     content: new FormControl('', [Validators.required]),
   });
 
   constructor (){
-
+    effect(()=>{
+      if (this.postId() !== this.createCommentForm.value.post_id) {
+        this.createCommentForm.get('post_id')?.setValue(this.postId() as string);
+        console.log(this.postId());
+      }
+    });
   }
 
   create(){
