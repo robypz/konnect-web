@@ -1,8 +1,9 @@
-import { afterNextRender, Component, input } from '@angular/core';
+import { afterNextRender, Component, computed, effect, inject, input } from '@angular/core';
 import { CommentCreateComponent } from "./comment-create/comment-create.component";
 import { Comment } from './shared/comment.model';
 import { CommentComponent } from "./comment/comment.component";
 import { Modal } from 'flowbite';
+import { CommentService } from './shared/comment.service';
 
 @Component({
   selector: 'app-comments',
@@ -11,13 +12,23 @@ import { Modal } from 'flowbite';
   styleUrl: './comments.component.scss'
 })
 export class CommentsComponent {
-  comments = input<Comment[]>([]);
+  private commentService = inject(CommentService);
+  private _comments = computed(()=> this.commentService.comments());
   postId = input<string>();
+
+  get comments(){
+    return this._comments() as Comment[];
+  }
 
   modal : Modal | null = null;
   constructor() {
     afterNextRender(() => {
       this.modal = new Modal(document.getElementById('comment-create-modal') as HTMLElement);
+    });
+    effect(()=>{
+      if (this.postId()) {
+        
+      }
     });
   }
   openModal(){

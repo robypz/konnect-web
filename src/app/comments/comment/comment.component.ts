@@ -8,5 +8,9 @@ import { Comment } from '../shared/comment.model';
   styleUrl: './comment.component.scss'
 })
 export class CommentComponent {
-  comment = input<Comment>();
+  _comment = input<Comment>();
+
+  get comment (){
+    return this._comment() as Comment;
+  }
 }

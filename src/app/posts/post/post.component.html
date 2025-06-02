@@ -92,7 +92,7 @@
       <span>{{post.comments.length}}</span>
     </div>
 
-    <app-comments [comments]="post.comments" [postId]="post.id"></app-comments>
+    <app-comments [postId]="post.id"></app-comments>
 
     <div class="flex items-center hover:cursor-pointer hover:bg-gray-200 p-2 rounded-md">
       <svg class="me-1 w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
