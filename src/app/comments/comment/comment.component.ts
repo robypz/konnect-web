@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
 import { Comment } from '../shared/comment.model';
+import { config } from '../../../../config';
 
 @Component({
   selector: 'app-comment',
@@ -9,7 +10,7 @@ import { Comment } from '../shared/comment.model';
 })
 export class CommentComponent {
   _comment = input<Comment>();
-
+  public apiFilesUrl = config.API_PUBLIC_FILES_URL;
   get comment (){
     return this._comment() as Comment;
   }

@@ -27,9 +27,9 @@ export class CommentsComponent {
     });
     effect(()=>{
       if (this.postId()) {
-        
+        this.commentService.byPost(this.postId() as string);
       }
-    });
+    })
   }
   openModal(){
     this.modal?.show();

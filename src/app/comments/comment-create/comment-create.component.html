@@ -1,21 +1,21 @@
 <div class="bg-gray-100 dark:bg-gray-800 my-3 p-2 rounded-md ">
   <div class="p-2">
-    <form>
+    <form [formGroup]="createCommentForm" (submit)="create()">
       <div class="grid grid-cols-6">
         <div class="col-span-6">
-          <textarea id="content"
+          <textarea id="content" formControlName="content"
             class="block mb-3 p-2.5 w-1/1 text-sm text-gray-900 bg-gray-25 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Write a comment..."></textarea>
         </div>
         <div class="col-span-6 items-center flex justify-between">
           <div class="flex mb-2">
             <div class="me-2">
-              <img class="w-10 h-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+              <img class="w-10 h-10 rounded-full" [src]="apiFilesUrl+user.employee.profile_photo"
                 alt="Rounded avatar">
             </div>
             <div>
-              <p class="text-sm font-semibold">Jhon Doe</p>
-              <p class="text-xs text-gray-400">Position</p>
+              <p class="text-sm font-semibold capitalize">{{user.name + " " + user.last_name}}</p>
+              <p class="text-xs text-gray-400">{{user.employee.job}}</p>
             </div>
           </div>
           <button type="submit"

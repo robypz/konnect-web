@@ -31,7 +31,7 @@ export class CommentService {
   index() {
     this.http.get<any>(this.apiUrl).subscribe({
       next : (res:any) => {
-        this._comments.set(res.body.data)
+        this._comments.set(res.data)
       },
       error : (err) => {
         this._error.set(err);
@@ -43,7 +43,17 @@ export class CommentService {
         this.http.post<Comment>(this.apiUrl,body).subscribe({
       next : (comment) => {
         this._comments.update(comments => [...comments, comment]);
-        this._comment.set(comment);
+      },
+      error : (err) => {
+        this._error.set(err);
+      },
+    })
+  }
+
+  byPost(postId:string){
+        this.http.get<any>(`${this.apiUrl}/byPost/${postId}`).subscribe({
+      next : (res:any) => {
+        this._comments.set(res.data)
       },
       error : (err) => {
         this._error.set(err);

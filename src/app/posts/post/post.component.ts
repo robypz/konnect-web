@@ -10,7 +10,7 @@ import { config } from '../../../../config';
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
 })
-export class PostComponent implements OnInit {
+export class PostComponent {
 
   public _post = input<Post>();
   
@@ -21,7 +21,7 @@ export class PostComponent implements OnInit {
   }
 
   constructor() {
-    afterNextRender(() => {
+    /*afterNextRender(() => {
       const items: CarouselItem[] = [
         {
           position: 0,
@@ -56,10 +56,10 @@ export class PostComponent implements OnInit {
       $nextButton.addEventListener('click', () => {
         carousel.next();
       });
-    });
+    });*/
   }
 
-  ngOnInit(): void {
+  /*ngOnInit(): void {
     const items: CarouselItem[] = [
         {
           position: 0,
@@ -94,5 +94,5 @@ export class PostComponent implements OnInit {
       $nextButton.addEventListener('click', () => {
         carousel.next();
       });
-  }
+  }*/
 }

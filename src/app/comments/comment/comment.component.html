@@ -1,11 +1,11 @@
-<div class="bg-gray-100 my-3 p-3 rounded-md ">
+<div class="bg-gray-100 dark:bg-gray-800 my-3 p-3 rounded-md ">
   <div class="flex">
     <div class="me-2">
-      <img class="w-10 h-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+      <img class="w-10 h-10 rounded-full" [src]="apiFilesUrl+comment.employee.profile_photo"
         alt="Rounded avatar">
     </div>
     <div>
-      <b class="mb-1">User Name</b>
+      <b class="mb-1 capitalize">{{comment.employee.user.name + ' ' + comment.employee.user.last_name}}</b>
       <p>{{comment.content}}</p>
     </div>
   </div>

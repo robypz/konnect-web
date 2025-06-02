@@ -4,10 +4,10 @@
 @source "../node_modules/flowbite";
 
 .ng-valid{
-  @apply border-green-500 text-green-700 focus:ring-green-500 focus:border-green-500;
+  //@apply border-green-500 text-green-700 focus:ring-green-500 focus:border-green-500;
 }
 .ng-invalid {
-  @apply border-red-500  text-red-700 focus:ring-red-500 focus:border-red-500;
+  //@apply border-red-500  text-red-700 focus:ring-red-500 focus:border-red-500;
 }
 .ng-pending {
   //@apply border-yellow-500 bg-yellow-50 text-yellow-700;
@@ -19,7 +19,7 @@
   //@apply border-blue-500 bg-blue-50 text-blue-700;
 }
 .ng-untouched {
-  @apply border border-gray-50;
+  //@apply border border-gray-50;
 }
 .ng-touched {
   //@apply border-none;
