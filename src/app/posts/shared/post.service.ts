@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/htt
 import { inject, Injectable, Signal, signal } from '@angular/core';
 import { Post } from './post.model';
 import { config } from '../../../../config';
+import { Reaction } from '../../reactions/shared/reaction.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class PostService {
   private http = inject(HttpClient);
   private _post = signal<Post | null>(null);
   private _posts = signal<Post[]>([]);
-  private _error = signal<HttpErrorResponse|null>(null);
+  private _error = signal<HttpErrorResponse | null>(null);
 
   private apiUrl = config.API_URL + '/posts';
 
@@ -28,11 +29,10 @@ export class PostService {
     return this._error;
   }
 
-  public index (){
+  public index() {
     this.http.get(this.apiUrl).subscribe({
-      next: (res : any) => {
+      next: (res: any) => {
         this._posts.set(res.data);
-        console.log(this._posts());
       },
       error: (error) => {
         this._error.set(error);
@@ -47,7 +47,6 @@ export class PostService {
       },
       error: (error) => {
         this._error.set(error);
-        console.log(error)
       }
     });
   }
@@ -81,6 +80,35 @@ export class PostService {
       next: () => {
         this._posts.update(posts => posts.filter(post => post.id !== id));
         this._post.set(null);
+      },
+      error: (error) => {
+        this._error.set(error);
+      }
+    });
+  }
+
+  public react(body: any, postId: string, reacted: boolean) {
+    this.http.post<Reaction>(`${this.apiUrl}/react/${postId}`, body).subscribe({
+      next: (reaction) => {
+        if (reacted) {
+          this._posts.update(posts => 
+            posts.map(post => {
+              if (post.id === postId) {
+                post.reactions = post.reactions.filter(r => r.employee_id !== reaction.employee_id);
+              }
+              return post;
+            })
+          );
+        }else{
+          this._posts.update(posts => 
+            posts.map(post => {
+              if (post.id === postId) {
+                post.reactions.push(reaction);
+              }
+              return post;
+            })
+          );
+        }
       },
       error: (error) => {
         this._error.set(error);

@@ -16,14 +16,14 @@ export class PostsComponent {
   private postService = inject(PostService);
   private _posts = computed(() => this.postService.posts());
   private _error = computed(() => this.postService.error());
-  public posts : Post[] = [];
+  get posts(): Post[] {
+    return this._posts() as Post[];
+  }
 
   constructor(){
     this.postService.index();
     effect(()=>{
-      if (this._posts() !== this.posts) {
-        this.posts = this._posts();
-      }
+      console.log('cambio');
     });
   }
 }

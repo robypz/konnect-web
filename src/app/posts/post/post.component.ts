@@ -3,10 +3,11 @@ import { Carousel, CarouselInterface, CarouselItem } from 'flowbite';
 import { CommentsComponent } from "../../comments/comments.component";
 import { Post } from '../shared/post.model';
 import { config } from '../../../../config';
+import { ReactionsComponent } from "../../reactions/reactions.component";
 
 @Component({
   selector: 'app-post',
-  imports: [CommentsComponent],
+  imports: [CommentsComponent, ReactionsComponent],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
 })
