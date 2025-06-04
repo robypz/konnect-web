@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, model } from '@angular/core';
 import { Employee } from '../../../employees/shared/employee.model';
 import { config } from '../../../../../config';
 
@@ -11,9 +11,14 @@ import { config } from '../../../../../config';
 export class ContactComponent {
   _employee = input<Employee>();
   apiFilesUrl = config.API_PUBLIC_FILES_URL;
-  
+
+  selectedEmployee = model<Employee>();
+
   public get employee() : Employee {
     return this._employee() as Employee;
   }
   
+  selectEmployee(employee : Employee){
+    this.selectedEmployee.set(employee);
+  }
 }

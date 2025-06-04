@@ -9,7 +9,7 @@
   <div class="mt-3">
     <div>
       @for (employee of employees; track employee.id) {
-      <app-contact [_employee]="employee"></app-contact>
+      <app-contact [_employee]="employee" [(selectedEmployee)]="selectedEmployee"></app-contact>
       }
     </div>
   </div>

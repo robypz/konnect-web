@@ -1,4 +1,4 @@
-<div class="flex w-1/1 items-center p-2 space-x-2  rounded-md  hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+<div class="flex w-1/1 items-center p-2 space-x-2  rounded-md  hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer" (click)="selectEmployee(employee)">
   <img class="w-10 h-10 rounded-full" [src]="apiFilesUrl+employee.profile_photo" alt="Rounded avatar">
   <div>
     <h5 class="text-sm font-semibold text-gray-900 dark:text-white capitalize">{{employee.user.name + " " +
