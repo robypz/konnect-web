@@ -46,6 +46,11 @@ export class ReactionsComponent {
 
   react(type: string) {
     this.postService.react({ type: type }, this.postId, this.reacted);
-    this.reacted = this.hasReacted('like');
+    if (this.reacted) {
+      this.reacted = false; 
+    }
+    else {
+      this.reacted = true;
+    }
   }
 }
