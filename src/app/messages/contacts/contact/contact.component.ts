@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { Employee } from '../../../employees/shared/employee.model';
+import { config } from '../../../../../config';
 
 @Component({
   selector: 'app-contact',
@@ -7,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
-
+  _employee = input<Employee>();
+  apiFilesUrl = config.API_PUBLIC_FILES_URL;
+  
+  public get employee() : Employee {
+    return this._employee() as Employee;
+  }
+  
 }
