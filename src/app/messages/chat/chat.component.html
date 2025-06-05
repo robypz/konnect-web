@@ -1,10 +1,10 @@
-<div class="bg-white shadow-md rounded-md p-4 min-h-[82dvh] overflow-y-auto border border-gray-200 dark:border-gray-700 relative">
+<div class="bg-gray-100 dark:bg-gray-800 shadow-md rounded-md p-4 min-h-[82dvh] overflow-y-auto border border-gray-200 dark:border-gray-700 relative">
   <div class="flex border-b border-gray-200 dark:border-gray-700 pb-4 mb-4">
-    <div class="flex w-1/1 items-center p-2 space-x-2 bg-white rounded-md  hover:bg-gray-100 cursor-pointer">
-      <img class="w-10 h-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+    <div class="flex w-1/1 items-center p-2 space-x-2 bg-gray-100 dark:bg-gray-800 rounded-md  hover:bg-gray-100 cursor-pointer">
+      <img class="w-10 h-10 rounded-full" [src]="apiFilesUrl+employee.profile_photo"
       alt="Rounded avatar">
       <div>
-        <h5 class="text-sm font-semibold text-gray-900 dark:text-white">Bonnie Green</h5>
+        <h5 class="text-sm font-semibold text-gray-900 dark:text-white">{{employee.user.name + " " + employee.user.last_name}}</h5>
         <p class="text-sm text-gray-500 dark:text-gray-400">Online</p>
       </div>
     </div>

@@ -16,6 +16,10 @@ export class MessagesComponent {
   public set employee(e : Employee) {
     this.employee$.set(e);
   }
+
+  public get getEmployee (){
+    return this.employee$() as Employee;
+  }
   
   constructor(){
     effect(()=>{

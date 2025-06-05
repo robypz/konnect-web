@@ -13,7 +13,7 @@
       <app-contacts [(selectedEmployee)]="employee"></app-contacts>
     </div>
     <div class="col-span-4">
-      <app-chat></app-chat>
+      <app-chat [employee$]="getEmployee"></app-chat>
     </div>
   </div>
 </div>

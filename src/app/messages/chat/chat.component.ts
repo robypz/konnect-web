@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, effect, input } from '@angular/core';
 import { MessageComponent } from "../message/message.component";
+import { Employee } from '../../employees/shared/employee.model';
+import { config } from '../../../../config';
 
 @Component({
   selector: 'app-chat',
@@ -8,5 +10,20 @@ import { MessageComponent } from "../message/message.component";
   styleUrl: './chat.component.scss'
 })
 export class ChatComponent {
+  employee$ = input<Employee>();
 
+  apiFilesUrl = config.API_PUBLIC_FILES_URL;
+  
+  public get employee() {
+    return this.employee$() as Employee;
+  }
+
+  constructor(){
+    effect(()=>{
+      if (this.employee$()) {
+        
+      }
+    });
+  }
+  
 }
