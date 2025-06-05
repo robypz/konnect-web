@@ -1,7 +1,7 @@
 import { Component, effect, input } from '@angular/core';
-import { MessageComponent } from "../message/message.component";
-import { Employee } from '../../employees/shared/employee.model';
-import { config } from '../../../../config';
+import { MessageComponent } from "../messages/message/message.component";
+import { Employee } from '../employees/shared/employee.model';
+import { config } from '../../../config';
 
 @Component({
   selector: 'app-chat',

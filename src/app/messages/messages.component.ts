@@ -1,6 +1,6 @@
 import { Component, effect, input, signal } from '@angular/core';
 import { ContactsComponent } from "./contacts/contacts.component";
-import { ChatComponent } from "./chat/chat.component";
+import { ChatComponent } from "../chat/chat.component";
 import { Employee } from '../employees/shared/employee.model';
 
 @Component({

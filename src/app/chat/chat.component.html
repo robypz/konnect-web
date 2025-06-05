@@ -1,4 +1,5 @@
 <div class="bg-gray-100 dark:bg-gray-800 shadow-md rounded-md p-4 min-h-[82dvh] overflow-y-auto border border-gray-200 dark:border-gray-700 relative">
+  @if (employee) {
   <div class="flex border-b border-gray-200 dark:border-gray-700 pb-4 mb-4">
     <div class="flex w-1/1 items-center p-2 space-x-2 bg-gray-100 dark:bg-gray-800 rounded-md  hover:bg-gray-100 cursor-pointer">
       <img class="w-10 h-10 rounded-full" [src]="apiFilesUrl+employee.profile_photo"
@@ -40,5 +41,7 @@
       </div>
     </form>
   </div>
+  }
+
 </div>
 

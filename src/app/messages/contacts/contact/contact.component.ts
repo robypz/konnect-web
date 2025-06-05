@@ -21,4 +21,6 @@ export class ContactComponent {
   selectEmployee(employee : Employee){
     this.selectedEmployee.set(employee);
   }
+  
+  
 }
