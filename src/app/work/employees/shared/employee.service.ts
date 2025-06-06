@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, Signal, signal } from '@angular/core';
 import { Employee } from './employee.model';
 import { Pagination } from '../../../core/models/pagination.model';
@@ -100,13 +100,14 @@ export class EmployeeService {
   }
 
   search(search: string) {
-    this.http.get<any>(`${this.apiUrl}/search/${search}`).subscribe({
+    this.http.get<any>(`${this.apiUrl}/search?search=${search}`).subscribe({
       next: (res) => {
         this._employees.set(res.data);
         this._pagination.set(res);
       },
       error: (error) => {
         this._errors.set([error]);
+        console.log(this._errors());
       }
     });
   }
