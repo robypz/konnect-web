@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input, model, signal, } from '@angular/core';
+import { Component, computed, effect, inject, model, OnInit, } from '@angular/core';
 import { ContactComponent } from "./contact/contact.component";
 import { EmployeeService } from '../../work/employees/shared/employee.service';
 import { Employee } from '../../work/employees/shared/employee.model';
@@ -10,15 +10,13 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss'
 })
-export class ContactsComponent {
+export class ContactsComponent implements OnInit{
   private employeeService = inject(EmployeeService);
   private _employees = computed(() => this.employeeService.employees());
 
-  selectedEmployee = model<Employee>();
+  private _search : any;
 
-  searchEmployeeForm = new FormGroup({
-    search: new FormControl('', [Validators.minLength(3)]),
-  });
+  selectedEmployee = model<Employee>();
 
   public get employees(): Employee[] {
     return this._employees() as Employee[];
@@ -26,19 +24,22 @@ export class ContactsComponent {
 
   constructor() {
     effect(()=>{
-      if (this._employees()) {
-        console.log(this.employees);
+      if (this.selectedEmployee()) {
+        console.log(this.selectedEmployee());
       }
     })
   }
 
+  ngOnInit(): void {
+    this._search = document.getElementById('contacts') as HTMLElement;
+  }
+
   search(event : any) {
-    var search = (document.getElementById('contacts') as HTMLElement)
     if (event.target.value.length > 2) {
-      search.classList.toggle('hidden');
+      this._search.classList.toggle('hidden');
       this.employeeService.search(event.target.value);
     }else{
-      search.classList.toggle('hidden');
+      this._search.classList.toggle('hidden');
     }
   }
 

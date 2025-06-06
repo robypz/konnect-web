@@ -2,29 +2,17 @@ import { Component, effect, input, signal } from '@angular/core';
 import { ChatComponent } from '../chats/chat/chat.component';
 import { ContactsComponent } from '../contacts/contacts.component';
 import { Employee } from '../../work/employees/shared/employee.model';
+import { ChatsComponent } from "../chats/chats.component";
 
 @Component({
   selector: 'app-messages',
-  imports: [ContactsComponent, ChatComponent],
+  imports: [ChatComponent, ChatsComponent],
   templateUrl: './messages.component.html',
   styleUrl: './messages.component.scss'
 })
 export class MessagesComponent {
-  private employee$ = signal<Employee|null>(null)
 
-  
-  public set employee(e : Employee) {
-    this.employee$.set(e);
-  }
-
-  public get getEmployee (){
-    return this.employee$() as Employee;
-  }
-  
   constructor(){
-    effect(()=>{
-      console.log(this.employee$())
-    });
   }
   
 }

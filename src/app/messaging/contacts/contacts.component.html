@@ -1,17 +1,14 @@
-<div class="bg-white shadow-md rounded-md p-4 min-h-[82dvh] overflow-y-auto dark:bg-gray-800">
+<div>
   <div>
-    <form action="" [formGroup]="searchEmployeeForm">
-      <input type="search" placeholder="Search" (input)="search($event)" formControlName="search"
+    <form action="">
+      <input type="search" placeholder="Search" (input)="search($event)"
         class="w-full p-2 rounded-md border border-gray-300 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
     </form>
   </div>
 
   <div class="hidden mt-3 rounded-md border border-gray-300" id="contacts">
-    <div>
-      @for (employee of employees; track employee.id) {
-      <app-contact [_employee]="employee" [(selectedEmployee)]="selectedEmployee"></app-contact>
-      }
-    </div>
+    @for (employee of employees; track employee.id) {
+    <app-contact [_employee]="employee" [(selectedEmployee)]="selectedEmployee"></app-contact>
+    }
   </div>
-
 </div>
