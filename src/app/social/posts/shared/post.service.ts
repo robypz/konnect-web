@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { inject, Injectable, Signal, signal } from '@angular/core';
 import { Post } from './post.model';
-import { config } from '../../../../config';
 import { Reaction } from '../../reactions/shared/reaction.model';
+import { config } from '../../../../../config';
 
 @Injectable({
   providedIn: 'root'

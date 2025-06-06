@@ -2,8 +2,8 @@ import { afterNextRender, Component, input, OnInit } from '@angular/core';
 import { Carousel, CarouselInterface, CarouselItem } from 'flowbite';
 import { CommentsComponent } from "../../comments/comments.component";
 import { Post } from '../shared/post.model';
-import { config } from '../../../../config';
 import { ReactionsComponent } from "../../reactions/reactions.component";
+import { config } from '../../../../../config';
 
 @Component({
   selector: 'app-post',

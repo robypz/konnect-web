@@ -1,11 +1,11 @@
 import { afterNextRender, Component, computed, effect, inject, OnInit } from '@angular/core';
 import { Tabs } from 'flowbite';
-import { PostsComponent } from '../posts/posts.component';
-import { ProjectsComponent } from "../projects/projects.component";
-import { TasksComponent } from "../tasks/tasks.component";
-import { EventsComponent } from "../events/events.component";
-import { AuthService } from '../auth/shared/auth.service';
 import { User } from '../core/models/user.model';
+import { ProjectsComponent } from '../work/projects/projects.component';
+import { TasksComponent } from '../work/tasks/tasks.component';
+import { EventsComponent } from '../work/events/events.component';
+import { PostsComponent } from '../social/posts/posts.component';
+import { AuthService } from '../core/auth/shared/auth.service';
 @Component({
   selector: 'app-dashboard',
   imports: [/*PostsComponent,*/ ProjectsComponent, TasksComponent, EventsComponent, PostsComponent],

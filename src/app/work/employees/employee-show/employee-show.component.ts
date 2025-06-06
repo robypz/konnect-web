@@ -1,7 +1,7 @@
 import { Component, computed, effect, inject, Input } from '@angular/core';
 import { EmployeeService } from '../shared/employee.service';
 import { Employee } from '../shared/employee.model';
-import { config } from '../../../../config';
+import { config } from '../../../../../config';
 
 @Component({
   selector: 'app-employee-show',

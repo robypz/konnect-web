@@ -1,4 +1,5 @@
-import { Status } from "../../core/models/status.model";
+
+import { Status } from "../../../core/models/status.model";
 import { Employee } from "../../employees/shared/employee.model";
 import { Project } from "../../projects/shared/project.model";
 

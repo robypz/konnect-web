@@ -1,7 +1,7 @@
 import { Component, effect, input } from '@angular/core';
 import { Task } from '../shared/task.model';
 import { DatePipe } from '@angular/common';
-import { config } from '../../../../config';
+import { config } from '../../../../../config';
 
 @Component({
   selector: 'app-task',

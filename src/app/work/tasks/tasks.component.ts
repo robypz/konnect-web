@@ -1,6 +1,5 @@
 import { Component, computed, effect, inject, input, model } from '@angular/core';
 import { TaskComponent } from "./task/task.component";
-import { AuthService } from '../auth/shared/auth.service';
 import { TaskService } from './shared/task.service';
 import { Task } from './shared/task.model';
 

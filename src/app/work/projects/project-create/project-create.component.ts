@@ -4,14 +4,14 @@ import { ProjectService } from '../shared/project.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EmployeeService } from '../../employees/shared/employee.service';
 import { Employee } from '../../employees/shared/employee.model';
-import { config } from '../../../../config';
 /*import { DepartmentService } from '../../deparments/shared/department.service';
 import { Department } from '../../deparments/shared/department.model';*/
-import { StatusService } from '../../core/services/status.service';
-import { Status } from '../../core/models/status.model';
 import { Project } from '../shared/project.model';
 import { Category } from '../../categories/shared/category.model';
 import { CategoryService } from '../../categories/shared/category.service';
+import { StatusService } from '../../../core/services/status.service';
+import { Status } from '../../../core/models/status.model';
+import { config } from '../../../../../config';
 @Component({
   selector: 'app-project-create',
   imports: [ReactiveFormsModule],

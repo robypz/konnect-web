@@ -1,12 +1,12 @@
 import { afterNextRender, Component, computed, effect, inject, OnInit } from '@angular/core';
 import { Modal } from 'flowbite';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { matchingPasswordsValidator } from '../../core/validators/passwordConfirmValidator';
 import { EmployeeService } from '../shared/employee.service';
 import { Employee } from '../shared/employee.model';
 import { Department } from '../../deparments/shared/department.model';
 import { DepartmentService } from '../../deparments/shared/department.service';
-import { FormGroupToFormDataService } from '../../core/libs/form-group-to-form-data.service';
+import { matchingPasswordsValidator } from '../../../core/validators/passwordConfirmValidator';
+import { FormGroupToFormDataService } from '../../../core/libs/form-group-to-form-data.service';
 
 @Component({
   selector: 'app-employee-create',

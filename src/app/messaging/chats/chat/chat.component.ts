@@ -1,7 +1,7 @@
 import { Component, effect, input } from '@angular/core';
-import { Employee } from '../../employees/shared/employee.model';
-import { config } from '../../../../config';
 import { MessageComponent } from '../../messages/message/message.component';
+import { Employee } from '../../../work/employees/shared/employee.model';
+import { config } from '../../../../../config';
 
 
 @Component({

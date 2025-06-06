@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Comment } from './comment.model';
-import { config } from '../../../../config';
+import { config } from '../../../../../config';
 
 @Injectable({
   providedIn: 'root'

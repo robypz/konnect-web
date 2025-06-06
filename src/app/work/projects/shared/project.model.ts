@@ -1,5 +1,5 @@
+import { Status } from "../../../core/models/status.model";
 import { Category } from "../../categories/shared/category.model";
-import { Status } from "../../core/models/status.model";
 import { Employee } from "../../employees/shared/employee.model";
 import { Task } from "../../tasks/shared/task.model";
 

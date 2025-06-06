@@ -1,4 +1,5 @@
-import { User } from "../../core/models/user.model";
+
+import { User } from "../../../core/models/user.model";
 import { Department } from "../../deparments/shared/department.model";
 import { Project } from "../../projects/shared/project.model";
 import { Task } from "../../tasks/shared/task.model";

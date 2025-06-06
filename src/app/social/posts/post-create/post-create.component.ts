@@ -1,9 +1,8 @@
 import { afterNextRender, Component, computed, effect, inject, input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Modal } from 'flowbite';
-import { User } from '../../core/models/user.model';
 import { PostService } from '../shared/post.service';
-import { FormGroupToFormDataService } from '../../core/libs/form-group-to-form-data.service';
+import { FormGroupToFormDataService } from '../../../core/libs/form-group-to-form-data.service';
 
 @Component({
   selector: 'app-post-create',

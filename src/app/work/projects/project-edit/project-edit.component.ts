@@ -2,13 +2,13 @@ import { afterNextRender, Component, computed, effect, inject, input, Input } fr
 import { ProjectService } from '../shared/project.service';
 import { CategoryService } from '../../categories/shared/category.service';
 import { Category } from '../../categories/shared/category.model';
-import { Status } from '../../core/models/status.model';
-import { StatusService } from '../../core/services/status.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Employee } from '../../employees/shared/employee.model';
 import { Modal } from 'flowbite';
-import { config } from '../../../../config';
 import { Project } from '../shared/project.model';
+import { StatusService } from '../../../core/services/status.service';
+import { Status } from '../../../core/models/status.model';
+import { config } from '../../../../../config';
 
 @Component({
   selector: 'app-project-edit',

@@ -1,9 +1,9 @@
 import { Component, computed, effect, inject, input } from '@angular/core';
 import { CommentService } from '../shared/comment.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../auth/shared/auth.service';
-import { User } from '../../core/models/user.model';
-import { config } from '../../../../config';
+import { AuthService } from '../../../core/auth/shared/auth.service';
+import { config } from '../../../../../config';
+import { User } from '../../../core/models/user.model';
 @Component({
   selector: 'app-comment-create',
   imports: [ReactiveFormsModule],

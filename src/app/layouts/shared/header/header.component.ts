@@ -1,7 +1,7 @@
 import { Component, computed, effect, inject, OnInit } from '@angular/core';
-import { AuthService } from '../../auth/shared/auth.service';
-import { User } from '../../core/models/user.model';
-import { config } from '../../../../config';
+import { AuthService } from '../../../core/auth/shared/auth.service';
+import { User } from '../../../core/models/user.model';
+import { config } from '../../../../../config';
 
 @Component({
   selector: 'app-header',

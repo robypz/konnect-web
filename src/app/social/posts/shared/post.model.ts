@@ -1,6 +1,6 @@
+import { Employee } from "../../../work/employees/shared/employee.model";
+import { Project } from "../../../work/projects/shared/project.model";
 import { Comment } from "../../comments/shared/comment.model";
-import { Employee } from "../../employees/shared/employee.model";
-import { Project } from "../../projects/shared/project.model";
 import { Reaction } from "../../reactions/shared/reaction.model";
 
 export interface Post {

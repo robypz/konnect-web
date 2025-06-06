@@ -1,4 +1,4 @@
-import { Employee } from "../../employees/shared/employee.model";
+import { Employee } from "../../work/employees/shared/employee.model";
 
 export interface User {
   id: string; // Unique identifier for the user

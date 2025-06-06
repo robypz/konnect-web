@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Event } from './event.model';
-import { config } from '../../../../config';
+import { config } from '../../../../../config';
 
 @Injectable({
   providedIn: 'root'

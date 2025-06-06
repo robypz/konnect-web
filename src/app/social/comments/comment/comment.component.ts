@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { Comment } from '../shared/comment.model';
-import { config } from '../../../../config';
+import { config } from '../../../../../config';
 
 @Component({
   selector: 'app-comment',

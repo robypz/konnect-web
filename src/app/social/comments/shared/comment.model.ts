@@ -1,4 +1,5 @@
-import { Employee } from "../../employees/shared/employee.model";
+import { Employee } from "../../../work/employees/shared/employee.model";
+
 
 export interface Comment {
   id : string;

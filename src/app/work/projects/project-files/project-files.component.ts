@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FileAddComponent } from "../../files/file-add/file-add.component";
+import { FileAddComponent } from '../../../files/file-add/file-add.component';
 
 @Component({
   selector: 'app-project-files',

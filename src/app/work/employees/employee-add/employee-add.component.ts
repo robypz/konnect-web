@@ -3,9 +3,9 @@ import { Modal } from 'flowbite';
 import { EmployeeService } from '../shared/employee.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Employee } from '../shared/employee.model';
-import { config } from '../../../../config';
 import { ProjectService } from '../../projects/shared/project.service';
 import { Project } from '../../projects/shared/project.model';
+import { config } from '../../../../../config';
 
 @Component({
   selector: 'app-employee-add',

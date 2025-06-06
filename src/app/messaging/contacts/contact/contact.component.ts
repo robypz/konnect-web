@@ -1,6 +1,6 @@
 import { Component, input, model } from '@angular/core';
-import { Employee } from '../../employees/shared/employee.model';
-import { config } from '../../../../config';
+import { Employee } from '../../../work/employees/shared/employee.model';
+import { config } from '../../../../../config';
 
 
 @Component({

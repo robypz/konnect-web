@@ -11,13 +11,13 @@ import { ProjectService } from '../shared/project.service';
 import { Project } from '../shared/project.model';
 import { DatePipe } from '@angular/common';
 import { ProjectEditComponent } from '../project-edit/project-edit.component';
-import { config } from '../../../../config';
 import { Tabs } from 'flowbite';
 import { ProjectPostsComponent } from "../project-posts/project-posts.component";
 import { ProjectComponent } from "../project/project.component";
 import { ProjectTasksComponent } from "../project-tasks/project-tasks.component";
 import { ProjectTeamComponent } from "../project-team/project-team.component";
 import { ProjectFilesComponent } from "../project-files/project-files.component";
+import { config } from '../../../../../config';
 
 @Component({
   selector: 'app-project-show',

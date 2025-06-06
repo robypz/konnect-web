@@ -3,9 +3,9 @@ import { Modal } from 'flowbite';
 import { ProjectService } from '../../projects/shared/project.service';
 import { Project } from '../../projects/shared/project.model';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { StatusService } from '../../core/services/status.service';
-import { Status } from '../../core/models/status.model';
 import { Employee } from '../../employees/shared/employee.model';
+import { StatusService } from '../../../core/services/status.service';
+import { Status } from '../../../core/models/status.model';
 
 @Component({
   selector: 'app-task-create',

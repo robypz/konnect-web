@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, Signal, signal } from '@angular/core';
 import { Employee } from './employee.model';
-import { config } from '../../../../config';
-import { Pagination } from '../../core/models/pagination.model';
+import { Pagination } from '../../../core/models/pagination.model';
+import { config } from '../../../../../config';
 
 @Injectable({
   providedIn: 'root'

@@ -1,9 +1,9 @@
 import { Component, computed, effect, inject, input } from '@angular/core';
 import { Reaction } from './shared/reaction.model';
-import { AuthService } from '../auth/shared/auth.service';
-import { User } from '../core/models/user.model';
 import { NgClass } from '@angular/common';
 import { PostService } from '../posts/shared/post.service';
+import { AuthService } from '../../core/auth/shared/auth.service';
+import { User } from '../../core/models/user.model';
 
 @Component({
   selector: 'app-reactions',
