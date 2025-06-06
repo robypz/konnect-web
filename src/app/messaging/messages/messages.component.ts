@@ -1,7 +1,7 @@
 import { Component, effect, input, signal } from '@angular/core';
-import { ContactsComponent } from "./contacts/contacts.component";
-import { ChatComponent } from "../chat/chat.component";
 import { Employee } from '../employees/shared/employee.model';
+import { ChatComponent } from '../chats/chat/chat.component';
+import { ContactsComponent } from '../contacts/contacts.component';
 
 @Component({
   selector: 'app-messages',

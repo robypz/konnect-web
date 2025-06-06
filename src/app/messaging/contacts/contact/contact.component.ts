@@ -1,6 +1,7 @@
 import { Component, input, model } from '@angular/core';
-import { Employee } from '../../../employees/shared/employee.model';
-import { config } from '../../../../../config';
+import { Employee } from '../../employees/shared/employee.model';
+import { config } from '../../../../config';
+
 
 @Component({
   selector: 'app-contact',
