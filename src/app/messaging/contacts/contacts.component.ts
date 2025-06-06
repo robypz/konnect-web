@@ -33,10 +33,13 @@ export class ContactsComponent {
   }
 
   search(event : any) {
+    var search = (document.getElementById('contacts') as HTMLElement)
     if (event.target.value.length > 2) {
+      search.classList.toggle('hidden');
       this.employeeService.search(event.target.value);
+    }else{
+      search.classList.toggle('hidden');
     }
-    
   }
 
 

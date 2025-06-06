@@ -6,7 +6,7 @@
     </form>
   </div>
 
-  <div class="mt-3 rounded-md border border-gray-300">
+  <div class="hidden mt-3 rounded-md border border-gray-300" id="contacts">
     <div>
       @for (employee of employees; track employee.id) {
       <app-contact [_employee]="employee" [(selectedEmployee)]="selectedEmployee"></app-contact>
