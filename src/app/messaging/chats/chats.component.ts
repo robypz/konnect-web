@@ -22,9 +22,7 @@ export class ChatsComponent {
 
   constructor() {
     effect(() => {
-      if (this.employee$()) {
-        console.log(this.employee);
-      }
+
     })
   }
 
