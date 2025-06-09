@@ -4,6 +4,7 @@ import { Employee } from '../../work/employees/shared/employee.model';
 import { ChatComponent } from "./chat/chat.component";
 import { ChatService } from './shared/chat.service';
 import { Chat } from './shared/chat.model';
+import { AuthService } from '../../core/auth/shared/auth.service';
 
 @Component({
   selector: 'app-chats',
@@ -12,6 +13,8 @@ import { Chat } from './shared/chat.model';
   styleUrl: './chats.component.scss'
 })
 export class ChatsComponent {
+  private authService = inject(AuthService);
+  private user = computed(()=>this.authService.user());
   private chatService = inject(ChatService);
   private chats$ = computed(()=> this.chatService.chats());
   private employee$ = signal<Employee | null>(null)
@@ -32,7 +35,9 @@ export class ChatsComponent {
 
   constructor() {
     effect(() => {
-
+      if (this.user()) {
+        this.chatService.byEmployee();
+      }
     })
   }
 

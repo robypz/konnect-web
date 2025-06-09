@@ -25,8 +25,8 @@ export class ChatService {
   constructor() {
   }
 
-  byUser(userId: string) {
-    this.http.get<Chat[]>(`${this.apiUrl}/byUser/${userId}`).subscribe({
+  byEmployee() {
+    this.http.get<Chat[]>(`${this.apiUrl}/byEmployee`).subscribe({
       next: (res) => {
         this._chats.set(res);
       },
