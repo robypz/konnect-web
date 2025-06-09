@@ -18,10 +18,10 @@ export class ContactComponent {
   public get employee() : Employee {
     return this._employee() as Employee;
   }
-  
+
   selectEmployee(employee : Employee){
     this.selectedEmployee.set(employee);
   }
-  
-  
+
+
 }

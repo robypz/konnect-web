@@ -23,11 +23,6 @@ export class ContactsComponent implements OnInit{
   }
 
   constructor() {
-    effect(()=>{
-      if (this.selectedEmployee()) {
-        console.log(this.selectedEmployee());
-      }
-    })
   }
 
   ngOnInit(): void {
