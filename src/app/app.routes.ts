@@ -16,6 +16,7 @@ import { SigninComponent } from './core/auth/signin/signin.component';
 import { SignupComponent } from './core/auth/signup/signup.component';
 import { ForgotPasswordComponent } from './core/auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './core/auth/reset-password/reset-password.component';
+import { MessagingComponent } from './messaging/messaging.component';
 
 export const routes: Routes = [
 
@@ -32,7 +33,7 @@ export const routes: Routes = [
         ],*/
       },
 
-      {path:'messages', component: MessagesComponent},
+      {path:'messages', component: MessagingComponent},
       {path: 'tasks', component: TaskIndexComponent},
       {path: 'events', component: EventIndexComponent},
 
