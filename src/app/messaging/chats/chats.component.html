@@ -12,16 +12,13 @@
     <div class="col-span-2">
       <div class="bg-white shadow-md rounded-md p-4 min-h-[82dvh] overflow-y-auto dark:bg-gray-800">
         <app-contacts [(selectedEmployee)]="setEmployee"></app-contacts>
-              <div>
         @for (chat of chats; track chat.id) {
-          <app-chat [chat$]="chat" [user$]="user"></app-chat>
+          <app-chat [chat$]="chat" [user$]="user" [(chatSelected$)]="setSelectedChat"></app-chat>
         }
       </div>
-      </div>
-
     </div>
     <div class="col-span-4">
-      <app-chat></app-chat>
+      <app-chat-show [chat$]="getSelectedChat" [user$]="user"></app-chat-show>
     </div>
   </div>
 </div>
