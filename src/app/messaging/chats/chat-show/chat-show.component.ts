@@ -3,10 +3,11 @@ import { Chat } from '../shared/chat.model';
 import { log } from 'console';
 import { User } from '../../../core/models/user.model';
 import { config } from '../../../../../config';
+import { MessagesComponent } from "../../messages/messages.component";
 
 @Component({
   selector: 'app-chat-show',
-  imports: [],
+  imports: [MessagesComponent],
   templateUrl: './chat-show.component.html',
   styleUrl: './chat-show.component.scss'
 })
