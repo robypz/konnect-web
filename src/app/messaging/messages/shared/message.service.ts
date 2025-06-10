@@ -9,24 +9,24 @@ import { config } from '../../../../../config';
 export class MessageService {
   private http = inject(HttpClient);
   private messages$ = signal<Message[]>([]);
-  private error$ = signal<HttpErrorResponse|null>(null);
+  private error$ = signal<HttpErrorResponse | null>(null);
   private apiUrl = config.API_URL + '/messages';
 
 
   public get messages() {
-    return this.messages$();
+    return this.messages$;
   }
 
-  public get error(){
+  public get error() {
     return this.error$()
   }
 
-  byChat(chatId:string){
+  byChat(chatId: string) {
     this.http.get(`${this.apiUrl}/byChat/${chatId}`).subscribe({
-      next : (res:any)=>{
+      next: (res: any) => {
         this.messages$.set(res.data);
       },
-      error : (err)=>{
+      error: (err) => {
         this.error$.set(err);
       },
     })
