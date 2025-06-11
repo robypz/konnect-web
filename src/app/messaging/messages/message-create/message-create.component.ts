@@ -36,6 +36,8 @@ export class MessageCreateComponent {
   create(){
     if (this.createMessageForm.valid) {
       this.messageService.store(this.createMessageForm.value);
+    }else{
+      console.log('invalido')
     }
   }
 

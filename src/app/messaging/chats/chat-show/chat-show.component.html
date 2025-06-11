@@ -23,7 +23,7 @@
     }
 
   <div class="overflow-y-scroll h-[54dvh]">
-    <app-messages [chatId]="chat.id"></app-messages>
+    <app-messages [chatId]="chat.id" [employeeId$]="user.employee.id"></app-messages>
   </div>
   <app-message-create [chatId]="chat.id" [employeeId]="user.employee.id"></app-message-create>
   }

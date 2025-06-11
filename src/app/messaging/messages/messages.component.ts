@@ -11,6 +11,7 @@ import { MessageComponent } from "./message/message.component";
 })
 export class MessagesComponent {
   public chatId = input<string>();
+  public employeeId$ = input<string>();
   private messageService = inject(MessageService);
   private messages$ = computed(()=> this.messageService.messages());
 
@@ -18,6 +19,11 @@ export class MessagesComponent {
   public get messages() {
     return this.messages$() as Message [];
   }
+
+    public get employeeId() {
+    return this.employeeId$() as string;
+  }
+
 
 
   constructor(){

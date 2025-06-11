@@ -9,4 +9,14 @@ import { Message } from '../shared/message.model';
 })
 export class MessageComponent {
   public message$ = input<Message>();
+  public employeeId$ = input<string>();
+
+  public get message() : Message {
+    return this.message$() as Message;
+  }
+
+    public get employeeId() : string {
+    return this.employeeId$() as string;
+  }
+
 }
