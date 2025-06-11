@@ -1,4 +1,4 @@
-<div class="bg-gray-100 dark:bg-gray-800 shadow-md rounded-md p-4 max-h-[75dvh] overflow-y-auto border border-gray-200 dark:border-gray-700 relative">
+<div class="bg-gray-100 dark:bg-gray-800 shadow-md rounded-md p-2 max-h-[75dvh] overflow-y-auto border border-gray-200 dark:border-gray-700 relative">
   @if (chat && user) {
     @switch (chat.type) {
       @case ('individual') {
@@ -25,6 +25,6 @@
   <div class="overflow-y-scroll h-[54dvh]">
     <app-messages [chatId]="chat.id"></app-messages>
   </div>
-  <app-message-create></app-message-create>
+  <app-message-create [chatId]="chat.id" [employeeId]="user.employee.id"></app-message-create>
   }
 </div>

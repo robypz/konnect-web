@@ -12,6 +12,7 @@ export class MessageService {
   private error$ = signal<HttpErrorResponse | null>(null);
   private apiUrl = config.API_URL + '/messages';
 
+  constructor() { }
 
   public get messages() {
     return this.messages$;
@@ -32,5 +33,16 @@ export class MessageService {
     })
   }
 
-  constructor() { }
+  store(body:any){
+        this.http.post<Message>(`${this.apiUrl}/$`,body).subscribe({
+      next: (message) => {
+        this.messages$.update((messages) => [...messages, message]);
+      },
+      error: (err) => {
+        this.error$.set(err);
+      },
+    })
+  }
+
+
 }
