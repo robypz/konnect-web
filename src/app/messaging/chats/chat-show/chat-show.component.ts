@@ -1,13 +1,13 @@
 import { Component, effect, input } from '@angular/core';
 import { Chat } from '../shared/chat.model';
-import { log } from 'console';
 import { User } from '../../../core/models/user.model';
 import { config } from '../../../../../config';
 import { MessagesComponent } from "../../messages/messages.component";
+import { MessageCreateComponent } from "../../messages/message-create/message-create.component";
 
 @Component({
   selector: 'app-chat-show',
-  imports: [MessagesComponent],
+  imports: [MessagesComponent, MessageCreateComponent],
   templateUrl: './chat-show.component.html',
   styleUrl: './chat-show.component.scss'
 })
