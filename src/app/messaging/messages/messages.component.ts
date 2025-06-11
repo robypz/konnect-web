@@ -1,14 +1,11 @@
 import { Component, computed, effect, inject, input, signal } from '@angular/core';
-import { ChatComponent } from '../chats/chat/chat.component';
-import { ContactsComponent } from '../contacts/contacts.component';
-import { Employee } from '../../work/employees/shared/employee.model';
-import { ChatsComponent } from "../chats/chats.component";
 import { MessageService } from './shared/message.service';
 import { Message } from './shared/message.model';
+import { MessageComponent } from "./message/message.component";
 
 @Component({
   selector: 'app-messages',
-  imports: [],
+  imports: [MessageComponent],
   templateUrl: './messages.component.html',
   styleUrl: './messages.component.scss'
 })
