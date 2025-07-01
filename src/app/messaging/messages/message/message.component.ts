@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, effect, input } from '@angular/core';
 import { Message } from '../shared/message.model';
 
 @Component({
@@ -19,4 +19,11 @@ export class MessageComponent {
     return this.employeeId$() as string;
   }
 
+  constructor(){
+    effect(()=>{
+      if (this.employeeId$() && this.message$()) {
+
+      }
+    })
+  }
 }
