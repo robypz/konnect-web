@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, model, signal } from '@angular/core';
+import { Component, computed, effect, inject, model, OnInit, signal } from '@angular/core';
 import { ContactsComponent } from "../contacts/contacts.component";
 import { Employee } from '../../work/employees/shared/employee.model';
 import { ChatComponent } from "./chat/chat.component";
@@ -7,6 +7,8 @@ import { Chat } from './shared/chat.model';
 import { AuthService } from '../../core/auth/shared/auth.service';
 import { User } from '../../core/models/user.model';
 import { ChatShowComponent } from "./chat-show/chat-show.component";
+import { EchoService } from '../../core/services/echo.service';
+
 
 @Component({
   selector: 'app-chats',
@@ -16,26 +18,28 @@ import { ChatShowComponent } from "./chat-show/chat-show.component";
 })
 export class ChatsComponent {
   private authService = inject(AuthService);
-  private user$ = computed(()=>this.authService.user());
+  private user$ = computed(() => this.authService.user());
   private chatService = inject(ChatService);
-  private chats$ = computed(()=> this.chatService.chats());
+  private chats$ = computed(() => this.chatService.chats());
   private employee$ = signal<Employee | null>(null)
+
+  private echoService = inject(EchoService);
 
   public selectedChat$ = model<Chat>();
 
-  public get chats() : Chat[] {
+  public get chats(): Chat[] {
     return this.chats$() as Chat[];
   }
 
-  public get user() : User {
+  public get user(): User {
     return this.user$() as User;
   }
 
-  public set setSelectedChat(chat : Chat){
+  public set setSelectedChat(chat: Chat) {
     this.selectedChat$.set(chat);
   }
 
-  public get getSelectedChat(){
+  public get getSelectedChat() {
     return this.selectedChat$() as Chat;
   }
 
@@ -51,6 +55,14 @@ export class ChatsComponent {
 
   constructor() {
     this.chatService.byEmployee();
+    effect(() => {
+      if (this.user) {
+        this.echoService.echo.channel(`App.Models.User.${this.user.id}`)
+          .listen('BroadcastNotificationCreated', (e: any) => {
+            console.log('Notificación recibida:', e);
+          });
+      }
+    })
   }
 
 }
