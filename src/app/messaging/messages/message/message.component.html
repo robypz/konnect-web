@@ -1,7 +1,7 @@
 @if (message && employeeId) {
   @if (message.employee_id !== employeeId) {
-    <div class="flex justify-start items-center">
-      <div class="rounded rounded-md bg-blue-900 p-2 max-w-100">
+    <div class="flex justify-start items-center mb-6">
+      <div class="rounded rounded-md bg-blue-800 p-2 max-w-100">
         <p>
           {{message.content}}
         </p>
@@ -10,7 +10,7 @@
   }
   @else {
     <div class="flex justify-end items-center mb-6">
-      <div class="rounded rounded-md bg-blue-300 p-2 max-w-100">
+      <div class="rounded rounded-md bg-blue-400 p-2 max-w-100">
         <p>
           {{message.content}}
         </p>

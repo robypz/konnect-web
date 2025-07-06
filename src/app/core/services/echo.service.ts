@@ -14,7 +14,6 @@ export class EchoService {
   constructor() {
     if (this.token()) {
       this.echo = new Echo({
-        // THIS IS THE KEY CHANGE FOR REVERB
         broadcaster: 'reverb',
         pusher: Pusher,
         key: config.REVERB_APP_KEY, // Your Reverb APP_KEY from .env
@@ -23,7 +22,7 @@ export class EchoService {
         wssPort: config.REVERB_PORT ?? 443,
         forceTLS: true, // true if using HTTPS/SSL
         disableStats: true,
-        authEndpoint: 'https://konnect-api.test/broadcasting/auth',
+        authEndpoint: 'https://konnect-api.test/api/broadcasting/auth',
         // Si necesitas enviar credenciales (cookies, etc.):
         auth: {
           headers: {

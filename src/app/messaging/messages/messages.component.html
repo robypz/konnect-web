@@ -1,5 +1,7 @@
-@if (messages) {
-  @for (message of messages; track message.id) {
-    <app-message [message$]="message" [employeeId$]="employeeId"></app-message>
+<div #messagesContainer class="overflow-y-auto max-h-[74dvh] pb-[80px]">
+  @if (messagesInOrder) {
+    @for (message of messagesInOrder; track message.id) {
+      <app-message [message$]="message" [employeeId$]="employeeId"></app-message>
+    }
   }
-}
+</div>

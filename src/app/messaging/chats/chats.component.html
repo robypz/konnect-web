@@ -10,7 +10,7 @@
   </div>
   <div class="grid grid-cols-6 mt-6 gap-4">
     <div class="col-span-2">
-      <div class="bg-white shadow-md rounded-md p-4 min-h-[75dvh] overflow-y-auto dark:bg-gray-800">
+      <div class="bg-white shadow-md rounded-md p-4 min-h-[85dvh] overflow-y-auto dark:bg-gray-800">
         <app-contacts [(selectedEmployee)]="setEmployee"></app-contacts>
         @for (chat of chats; track chat.id) {
           <app-chat [chat$]="chat" [user$]="user" [(chatSelected$)]="setSelectedChat"></app-chat>
