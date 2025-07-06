@@ -36,7 +36,7 @@ export class MessageService {
   store(body:any){
         this.http.post<Message>(`${this.apiUrl}`,body).subscribe({
       next: (message) => {
-        this.messages$.update((messages) => [...messages, message]);
+        this.messages$.update((messages) => [...messages,message]);
       },
       error: (err) => {
         this.error$.set(err);

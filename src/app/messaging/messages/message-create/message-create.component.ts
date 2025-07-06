@@ -22,6 +22,7 @@ export class MessageCreateComponent {
 
   constructor() {
     effect(() => {
+      console.log('el chat es:'+this.chatId()+', el empleado es:'+this.employeeId());
       if (this.chatId() && this.employeeId()) {
         this.createMessageForm.patchValue(
           {
@@ -36,8 +37,9 @@ export class MessageCreateComponent {
   create(){
     if (this.createMessageForm.valid) {
       this.messageService.store(this.createMessageForm.value);
+      this.createMessageForm.patchValue({content:''});
     }else{
-      console.log('invalido')
+      console.log(this.createMessageForm.value);
     }
   }
 
