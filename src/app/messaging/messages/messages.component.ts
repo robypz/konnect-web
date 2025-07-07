@@ -41,9 +41,7 @@ export class MessagesComponent implements OnInit {
     effect(() => {
       if (this.chatId()) {
         this.messageService.byChat(this.chatId() as string);
-
       }
-      this.scrollToBottom();
     });
   }
   @ViewChild('messagesContainer') messagesContainer!: ElementRef<HTMLDivElement>;
