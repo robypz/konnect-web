@@ -1,9 +1,10 @@
-import { Component, effect, input } from '@angular/core';
+import { Component, computed, effect, inject, input } from '@angular/core';
 import { Chat } from '../shared/chat.model';
 import { User } from '../../../core/models/user.model';
 import { config } from '../../../../../config';
 import { MessagesComponent } from "../../messages/messages.component";
 import { MessageCreateComponent } from "../../messages/message-create/message-create.component";
+import { ChatService } from '../shared/chat.service';
 
 @Component({
   selector: 'app-chat-show',
@@ -12,6 +13,7 @@ import { MessageCreateComponent } from "../../messages/message-create/message-cr
   styleUrl: './chat-show.component.scss'
 })
 export class ChatShowComponent {
+  private chatService = inject(ChatService);
   public chat$ = input<Chat>();
   public user$ = input<User>();
   public apiFilesUrl = config.API_PUBLIC_FILES_URL;
@@ -25,5 +27,7 @@ export class ChatShowComponent {
   public get chat(): Chat {
     return this.chat$() as Chat;
   }
+
+
 
 }

@@ -1,4 +1,4 @@
-<div #messagesContainer class="overflow-y-auto max-h-[74dvh] pb-[80px]">
+<div #messagesContainer class="overflow-y-auto max-h-[74dvh] min-h-[74dvh] pb-[80px]">
   @for (message of messages.reverse(); track message.id) {
     <app-message [message$]="message" [employeeId$]="employeeId"></app-message>
   }

@@ -35,6 +35,6 @@ export class ChatComponent {
   }
 
   selectChat(chat : Chat){
-    this.chatSelected$.set(chat);
+    this.chatSelected$.set({...chat});
   }
 }

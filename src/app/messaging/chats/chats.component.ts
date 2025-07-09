@@ -21,6 +21,7 @@ export class ChatsComponent {
   private user$ = computed(() => this.authService.user());
   private chatService = inject(ChatService);
   private chats$ = computed(() => this.chatService.chats());
+  private chat$ = computed(() => this.chatService.chat());
   private employee$ = signal<Employee | null>(null)
 
   private echoService = inject(EchoService);
@@ -36,7 +37,7 @@ export class ChatsComponent {
   }
 
   public set setSelectedChat(chat: Chat) {
-    this.selectedChat$.set(chat);
+    this.selectedChat$.set({...chat});
   }
 
   public get getSelectedChat() {
@@ -61,6 +62,16 @@ export class ChatsComponent {
           this.chatService.byEmployee();
         });
       }
+      if (this.chat$() && this.selectedChat$() == null) {
+        this.selectedChat$.set({...this.chat$() as Chat});
+      }
+      if (this.employee$() && this.selectedChat$() == null) {
+        this.chatService.store({
+          type: 'individual',
+          employees: [this.employee]
+        })
+      }
+
     })
   }
 

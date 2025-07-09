@@ -40,6 +40,7 @@ export class ChatService {
     this.http.post<Chat>(`${this.apiUrl}`, body).subscribe({
       next: (res) => {
         this._chat.set(res);
+        this._chats.update((chats) => [...chats, res]);
       },
       error: (err: HttpErrorResponse) => {
         this._errors.set(err);

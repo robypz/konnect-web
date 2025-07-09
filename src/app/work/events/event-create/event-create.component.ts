@@ -49,10 +49,10 @@ export class EventCreateComponent {
     }
   }
 
-  openModal(){
+  show(){
     this.modal?.show();
   }
-  closeModal(){
+  hide(){
     this.modal?.hide();
   }
 }
