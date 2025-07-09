@@ -57,9 +57,9 @@ export class ChatsComponent {
     this.chatService.byEmployee();
     effect(() => {
       if (this.user) {
-        /*this.echoService.echo.private('App.Models.User.' + this.user.id).notification((notification: any) => {
+        this.echoService.echo.private('App.Models.User.' + this.user.id).notification((notification: any) => {
           this.chatService.byEmployee();
-        });*/
+        });
       }
     })
   }
