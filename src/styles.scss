@@ -31,3 +31,9 @@
 body{
   @apply dark:text-white dark:bg-gray-950 bg-gray-50;
 }
+
+@theme {
+  --color-twg-blue: #3c94b7;
+  --color-twg-blue-dark: #135875;
+  --color-twg-blue-light: #599cb6;
+}
