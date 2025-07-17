@@ -17,6 +17,7 @@ import { SignupComponent } from './core/auth/signup/signup.component';
 import { ForgotPasswordComponent } from './core/auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './core/auth/reset-password/reset-password.component';
 import { MessagingComponent } from './messaging/messaging.component';
+import { SignoutComponent } from './core/auth/signout/signout.component';
 
 export const routes: Routes = [
 
@@ -48,6 +49,7 @@ export const routes: Routes = [
       {path: '', component: HomeComponent},
       {path: 'signin', component: SigninComponent},
       {path: 'signup', component: SignupComponent},
+      {path: 'signout', component: SignoutComponent},
       {path: 'forgot-password', component: ForgotPasswordComponent},
       {path: 'reset-password', component: ResetPasswordComponent},
     ],

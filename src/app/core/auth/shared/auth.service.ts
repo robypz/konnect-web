@@ -80,6 +80,7 @@ export class AuthService {
     this.http.post<string>(`${this.apiUrl}/signout`, null).subscribe({
       next: (response) => {
         localStorage.removeItem('konnect-token');
+        this._token.set(null);
       },
       error: (error) => {
         this._error.set(error);
