@@ -54,8 +54,7 @@
           <div>
             <a href="#" class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
               <div class="flex-shrink-0">
-                <img class="w-11 h-11 rounded-full" src="{{apiFilesUrl+user?.employee?.profile_photo}}"
-                  alt="Bonnie Green avatar">
+                <img class="w-11 h-11 rounded-full max-h-11" src="{{apiFilesUrl+user?.employee?.profile_photo}}">
                 <div
                   class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 rounded-full border border-white bg-primary-700 dark:border-gray-700">
                   <svg class="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -289,9 +288,12 @@
           class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
           id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
           <span class="sr-only">Open user menu</span>
-          @if (user) {
+          @if (user && user.employee) {
           <img class="rounded-full" src="{{apiFilesUrl+user.employee.profile_photo}}" width="32" height="32"
-            alt="user photo">
+            alt="">
+          }@else {
+                      <img class="rounded-full" src="https://placehold.co/32" width="32" height="32"
+            alt="">
           }
 
         </button>
