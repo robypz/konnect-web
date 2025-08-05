@@ -6,7 +6,6 @@ import { authGuard } from './core/guards/auth.guard';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { ProjectIndexComponent } from './work/projects/project-index/project-index.component';
 import { ProjectShowComponent } from './work/projects/project-show/project-show.component';
-import { MessagesComponent } from './messaging/messages/messages.component';
 import { TaskIndexComponent } from './work/tasks/task-index/task-index.component';
 import { EventIndexComponent } from './work/events/event-index/event-index.component';
 import { EmployeeIndexComponent } from './work/employees/employee-index/employee-index.component';
@@ -18,36 +17,39 @@ import { ForgotPasswordComponent } from './core/auth/forgot-password/forgot-pass
 import { ResetPasswordComponent } from './core/auth/reset-password/reset-password.component';
 import { MessagingComponent } from './messaging/messaging.component';
 import { SignoutComponent } from './core/auth/signout/signout.component';
-import { roleGuard } from './core/guards/role.guard';
 import { anyRoleGuard } from './core/guards/anyRole.guard';
 import { guestGuard } from './core/guards/guest.guard';
 
 export const routes: Routes = [
 
-  {path: 'dashboard', component: DashboardLayoutComponent,
-    children:[
-      {path: '', component: DashboardComponent},
-      {path: 'projects', component: ProjectIndexComponent},
-      {path: 'projects/:id', component: ProjectShowComponent},
+  {
+    path: 'dashboard', component: DashboardLayoutComponent,
+    children: [
+      { path: '', component: DashboardComponent },
+      { path: 'projects', component: ProjectIndexComponent, canActivate: [anyRoleGuard(['root', 'admin'])] },
+      { path: 'projects/:id', component: ProjectShowComponent },
 
-      {path:'messages', component: MessagingComponent},
-      {path: 'tasks', component: TaskIndexComponent,canActivate:[anyRoleGuard(['root','admin'])]},
-      {path: 'events', component: EventIndexComponent},
+      { path: 'messages', component: MessagingComponent },
+      { path: 'tasks', component: TaskIndexComponent, canActivate: [anyRoleGuard(['root', 'admin'])] },
+      { path: 'events', component: EventIndexComponent, canActivate: [anyRoleGuard(['root', 'admin'])] },
 
-      {path: 'employees', component: EmployeeIndexComponent},
-      {path: 'employees/:id', component: EmployeeShowComponent},
+      { path: 'employees', component: EmployeeIndexComponent, canActivate: [anyRoleGuard(['root', 'admin'])] },
+      { path: 'employees/:id', component: EmployeeShowComponent },
     ],
-    canActivate : [authGuard]
+
+    canActivate: [authGuard]
   },
 
-  {path:'',component : GuestLayoutComponent,
-    children:[
-      {path: '', component: HomeComponent},
-      {path: 'signin', component: SigninComponent},
-      {path: 'signup', component: SignupComponent},
-      {path: 'signout', component: SignoutComponent},
-      {path: 'forgot-password', component: ForgotPasswordComponent},
-      {path: 'reset-password', component: ResetPasswordComponent},
-    ], canActivate : [guestGuard]
+  { path: 'signout', component: SignoutComponent,canActivate: [authGuard] },
+
+  {
+    path: '', component: GuestLayoutComponent,
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'signin', component: SigninComponent },
+      { path: 'signup', component: SignupComponent },
+      { path: 'forgot-password', component: ForgotPasswordComponent },
+      { path: 'reset-password', component: ResetPasswordComponent },
+    ], canActivate: [guestGuard]
   },
 ];
