@@ -1,4 +1,5 @@
 import { Employee } from "../../work/employees/shared/employee.model";
+import { Role } from "./role.model";
 
 export interface User {
   id: string; // Unique identifier for the user
@@ -8,4 +9,6 @@ export interface User {
   created_at: Date;
   updated_at: Date;
   employee: Employee;
+  role_ids : string[];
+  roles : Role[];
 }

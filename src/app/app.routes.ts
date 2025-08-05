@@ -18,6 +18,7 @@ import { ForgotPasswordComponent } from './core/auth/forgot-password/forgot-pass
 import { ResetPasswordComponent } from './core/auth/reset-password/reset-password.component';
 import { MessagingComponent } from './messaging/messaging.component';
 import { SignoutComponent } from './core/auth/signout/signout.component';
+import { employeeGuard } from './core/guards/employee.guard';
 
 export const routes: Routes = [
 
@@ -25,17 +26,10 @@ export const routes: Routes = [
     children:[
       {path: '', component: DashboardComponent},
       {path: 'projects', component: ProjectIndexComponent},
-      {path: 'projects/:id', component: ProjectShowComponent,
-        /*children:[
-          {path: 'posts', component: ProjectPostsComponent},
-          {path: 'tasks', component: ProjectTasksComponent},
-          {path: 'team', component: ProjectTeamComponent},
-          {path: 'files', component: ProjectFilesComponent},
-        ],*/
-      },
+      {path: 'projects/:id', component: ProjectShowComponent},
 
       {path:'messages', component: MessagingComponent},
-      {path: 'tasks', component: TaskIndexComponent},
+      {path: 'tasks', component: TaskIndexComponent,canActivate : []},
       {path: 'events', component: EventIndexComponent},
 
       {path: 'employees', component: EmployeeIndexComponent},

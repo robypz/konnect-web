@@ -129,4 +129,8 @@ export class AuthService {
       }
     });
   }
+
+  hasRole(roleName: string): boolean {
+    return (this.user() as User).roles.some(role => role.name === roleName)
+  }
 }
