@@ -18,7 +18,9 @@ import { ForgotPasswordComponent } from './core/auth/forgot-password/forgot-pass
 import { ResetPasswordComponent } from './core/auth/reset-password/reset-password.component';
 import { MessagingComponent } from './messaging/messaging.component';
 import { SignoutComponent } from './core/auth/signout/signout.component';
-import { employeeGuard } from './core/guards/employee.guard';
+import { roleGuard } from './core/guards/role.guard';
+import { anyRoleGuard } from './core/guards/anyRole.guard';
+import { guestGuard } from './core/guards/guest.guard';
 
 export const routes: Routes = [
 
@@ -29,7 +31,7 @@ export const routes: Routes = [
       {path: 'projects/:id', component: ProjectShowComponent},
 
       {path:'messages', component: MessagingComponent},
-      {path: 'tasks', component: TaskIndexComponent,canActivate : []},
+      {path: 'tasks', component: TaskIndexComponent,canActivate:[anyRoleGuard(['root','admin'])]},
       {path: 'events', component: EventIndexComponent},
 
       {path: 'employees', component: EmployeeIndexComponent},
@@ -46,6 +48,6 @@ export const routes: Routes = [
       {path: 'signout', component: SignoutComponent},
       {path: 'forgot-password', component: ForgotPasswordComponent},
       {path: 'reset-password', component: ResetPasswordComponent},
-    ],
-  }
+    ], canActivate : [guestGuard]
+  },
 ];

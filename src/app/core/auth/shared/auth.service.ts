@@ -46,8 +46,10 @@ export class AuthService {
     effect(() => {
       if (this._token()) {
         this._auth.set(true);
+        console.log(this._auth())
       } else {
         this._auth.set(false);
+        console.log(this._auth())
       }
     })
   }
@@ -130,7 +132,13 @@ export class AuthService {
     });
   }
 
-  hasRole(roleName: string): boolean {
-    return (this.user() as User).roles.some(role => role.name === roleName)
+  hasRole(roleNames: string[]): boolean {
+    const userRoles = (this.user() as User).roles.map(role => role.name);
+    return roleNames.every(requiredRole => userRoles.includes(requiredRole));
+  }
+
+  hasAnyRole(roleNames: string[]): boolean {
+    const userRoles = (this.user() as User).roles.map(role => role.name);
+    return roleNames.some(requiredRole => userRoles.includes(requiredRole));
   }
 }
