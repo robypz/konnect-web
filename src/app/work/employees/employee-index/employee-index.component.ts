@@ -15,15 +15,19 @@ export class EmployeeIndexComponent implements OnInit {
   private _employees = computed(() => this.employeeService.employees());
   private _pagination = computed(() => this.employeeService.pagination());
   private _errors = computed(() => this.employeeService.errors());
-  public employees: Employee[] = this._employees();
+
+
+  public get employees() : Employee[] {
+    return this._employees() as Employee[];
+  }
+
 
   constructor() {
-    effect(() => {
+    /*effect(() => {
       if (this._employees() !== this.employees) {
         this.employees = this._employees();
-        console.log(this.employees);
       }
-    });
+    });*/
   }
 
   ngOnInit(): void {

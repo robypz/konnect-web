@@ -2,7 +2,7 @@
   <div class="flex justify-between mb-3">
     <div class="flex">
       <div class="me-2">
-        <img class="w-10 h-10 rounded-full" src="{{apiFilesUrl+employee()?.profile_photo}}" alt="Rounded avatar">
+        <img class="rounded-full" [ngSrc]="apiFilesUrl+employee()?.profile_photo" priority alt="Rounded avatar">
       </div>
       <div>
         <p class="text-m font-semibold">{{employee()?.user?.name+ ' ' +employee()?.user?.last_name}}</p>

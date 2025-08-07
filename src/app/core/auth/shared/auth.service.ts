@@ -138,7 +138,7 @@ export class AuthService {
   }
 
   hasAnyRole(roleNames: string[]): boolean {
-    const userRoles = (this.user() as User).roles.map(role => role.name);
+    const userRoles = (this._user() as User).roles.map(role => role.name);
     return roleNames.some(requiredRole => userRoles.includes(requiredRole));
   }
 }
